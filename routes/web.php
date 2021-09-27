@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\RentalController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\RoomController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -20,7 +23,9 @@ Route::group([
     'middleware' => ['auth', 'admin']
 ],function () {
     Route::resource('user', UserController::class);
-
+    Route::resource('rental', RentalController::class);
+    Route::resource('customer', CustomerController::class);
+    Route::resource('room', RoomController::class);
     // This is needed if you want to separate home of admin and user
     // Route::get('/', [UserController::class. 'index'])->name('home');
 });

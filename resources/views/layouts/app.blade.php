@@ -41,6 +41,15 @@
                             <li class="nav-item">
                                 <a class="nav-link @if(Route::is('user.index')) active @endif" href="{{ route('user.index') }}">{{ __('Users') }}</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link @if(Route::is('customer.index')) active @endif" href="{{ route('customer.index') }}">{{ __('Customers') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link @if(Route::is('room.index')) active @endif" href="{{ route('room.index') }}">{{ __('Rooms') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link @if(Route::is('rental.index')) active @endif" href="{{ route('rental.index') }}">{{ __('Rentals') }}</a>
+                            </li>
                         @endif
                     @endif
                     </ul>
