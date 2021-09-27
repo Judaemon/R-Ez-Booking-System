@@ -30,14 +30,16 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link @if(Route::is('room')) active @endif" href="{{ route('room.index') }}">{{ __('Rooms') }}</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav">
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
@@ -52,6 +54,7 @@
                                 </li>
                             @endif
                         @else
+                        
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
