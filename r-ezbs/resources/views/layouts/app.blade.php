@@ -32,9 +32,15 @@
 
                 <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link @if(Route::is('customers')) active @endif" href="{{ route('customers.index') }}">{{ __('Customers') }}</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link @if(Route::is('room')) active @endif" href="{{ route('room.index') }}">{{ __('Rooms') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @if(Route::is('user')) active @endif" href="{{ route('user.index') }}">{{ __('Users') }}</a>
                         </li>
                     </ul>
 
