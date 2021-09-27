@@ -82,12 +82,6 @@
 </body>
 
 <footer class="footer mt-5">
-    <ul class="social d-flex justify-content-center">
-        <li><a class="facebook" target="_blank" href="https://www.facebook.com">facebook</a></li>
-        <li><a class="instagram" target="_blank" href="https://www.instagram.com">qwe</a></li>
-        <li><a class="twitter" target="_blank" href="https://www.twitter.com">qwe</a></li>
-        <li><a class="pinterest" target="_blank" href="https://www.pinterest.com">qwe</a></li>
-    </ul>
     <p class="text-center">Copyright © 2021 | Judaemon</p>
 </footer>
 
