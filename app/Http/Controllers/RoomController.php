@@ -16,12 +16,15 @@ class RoomController extends Controller
 
     public function create()
     {
-        //
+        
     }
 
     public function store(Request $request)
     {
-        //
+        Room::create($request->all());
+        return response()->json([
+            'code'=>0
+        ]);
     }
 
     public function show()
@@ -42,6 +45,17 @@ class RoomController extends Controller
 
     public function destroy(Room $room)
     {
-        //
+        $query = $room->delete();
+        $room->delete();
+
+        if($query){
+            return response()->json([
+                'message' => 'Data deleted successfully!'
+                ]);
+        }else{
+            return response()->json([
+                'message' => 'Data deleted unsuccessfully!'
+                ]);
+        }
     }
 }
