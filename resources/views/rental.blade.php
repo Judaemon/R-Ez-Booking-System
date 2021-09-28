@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="container">
-      
+
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addRentalModal">
             Add Rental
@@ -59,14 +59,4 @@
 @section('script')
 <script src="{{ asset('js/app.js') }}" defer></script>
 <script src="js/rental.js"></script>
-@extends('layouts.app')
-
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-       
-        </div>
-    </div>
-</div>
 @endsection
