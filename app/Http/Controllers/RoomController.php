@@ -27,7 +27,7 @@ class RoomController extends Controller
     public function show()
     {
         $rooms = DB::table('rooms')->get();
-        return view('components.room.roomsTable', compact('rooms'));
+        return view('components.roomComponents.roomsTable', compact('rooms'));
     }
 
     public function edit(Room $room)

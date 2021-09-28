@@ -13,6 +13,7 @@
 </body>
 @endsection
 
-@section('scripts')
+@section('script')
+<script src="{{ asset('js/app.js') }}" defer></script>
 <script src="js/room.js"></script>
 @endsection
