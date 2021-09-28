@@ -25,8 +25,9 @@
                     <button class="btn btn-danger" style="width: 100px; margin: 2px;" type="submit">Delete</button>
             </form>
             </td>
-
+ 
         </tr>
         @endforeach
     </tbody>
+    
 </table>

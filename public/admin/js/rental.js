@@ -13,6 +13,7 @@ $(function () {
         },
     });
   }
+  
   // Delete Ajax
   $(document).on('submit', '.deleteRental', function (event) {
     event.preventDefault();

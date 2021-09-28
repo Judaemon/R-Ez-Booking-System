@@ -13,6 +13,7 @@ class RentalController extends Controller
         //
         $rental = DB::table('rentals')->get();
         return view('rental',compact('rental'));
+        
     }
 
     public function create()
