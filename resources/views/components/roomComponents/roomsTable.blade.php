@@ -19,7 +19,11 @@
             <td>{{$room->picture}}</td>
             <td>
                 <a href="" class="btn btn-info updateButton" style='width: 100px; margin: 2px;'>Edit</a> 
-                <button class="btn btn-danger" style="width: 100px; margin: 2px;" type="submit">Delete</button>
+                <form method="POST" class="deleteRoom" dataId="{{$room->id}}" action="{{route('room.destroy',$room->id)}}">
+                    @csrf 
+                    @method('DELETE')
+                    <button class="btn btn-danger" style="width: 100px; margin: 2px;" type="submit">Delete</button>
+            </form>
             </td>
 
         </tr>
