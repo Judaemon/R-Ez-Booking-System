@@ -1,16 +1,14 @@
 @extends("layouts.app")
 
 @section('content')
-<body>
-    <h1>TEST YAWA</h1>
 
-        <div class="card">
+    <div class="container">
             <div id="roomTable">
+              {{-- Table Generated from admin.js --}}
+            </div>
+    </div>      
 
-            </div>                 
-        </div>           
 
-</body>
 @endsection
 
 @section('script')
