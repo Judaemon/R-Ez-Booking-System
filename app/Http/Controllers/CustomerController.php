@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 
@@ -9,8 +9,8 @@ class CustomerController extends Controller
 {
     public function index()
     {
-        //
-        return view('customers');
+        // $customer = DB::table('customers')->get();
+        // return view('customers',compact('customer'));
     }
     public function create()
     {
@@ -18,11 +18,15 @@ class CustomerController extends Controller
     }
     public function store(Request $request)
     {
-        //
+        // Customer::create($request->all());
+        // return response()->json([
+        //     'code'=>0
+        // ]);
     }
-    public function show(Customer $customer)
+    public function show()
     {
-        //
+        // $customers = DB::table('customers')->get();
+        // return view('customers', compact('customers'));
     }
     public function edit(Customer $customer)
     {
@@ -34,6 +38,17 @@ class CustomerController extends Controller
     }
     public function destroy(Customer $customer)
     {
-        //
-    }
+    //     $query = $customer->delete();
+    //     $customer->delete();
+
+    //     if($query){
+    //         return response()->json([
+    //             'message' => 'Data deleted successfully!'
+    //             ]);
+    //     }else{
+    //         return response()->json([
+    //             'message' => 'Data deleted unsuccessfully!'
+    //             ]);
+    //     }
+     }
 }

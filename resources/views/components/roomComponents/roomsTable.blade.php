@@ -1,12 +1,12 @@
 <table class="table">
     <thead>
         <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Name</th>
-        <th scope="col">Description</th>
-        <th scope="col">Price</th>
-        <th scope="col">Picture</th>
-        <th scope="col">Action</th>
+        <th class="col-md-2" scope="col">ID</th>
+        <th class="col-md-2" scope="col">Name</th>
+        <th class="col-md-2" scope="col">Description</th>
+        <th class="col-md-2" scope="col">Price</th>
+        <th class="col-md-2" scope="col">Picture</th>
+        <th class="col-md-2" scope="col">Action</th>
         </tr>
     </thead>
     <tbody>

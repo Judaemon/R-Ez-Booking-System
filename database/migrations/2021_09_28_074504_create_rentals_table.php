@@ -20,6 +20,7 @@ class CreateRentalsTable extends Migration
             $table->float('price');
             $table->string('description');
             $table->text('picture');
+            
         });
     }
 
