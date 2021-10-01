@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use Illuminate\Http\Request;
-
 // para magamit yung DB for sql
 use Illuminate\Support\Facades\DB;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -14,7 +14,8 @@ class UserController extends Controller
 
     public function index()
     {
-        return view('user', with(['accountTypes' => $this->accountTypes]));
+        $users = DB::table('users')->get();
+        return view('user', compact('users'), with(['accountTypes' => $this->accountTypes]));
     }
 
     // Show form
@@ -26,17 +27,41 @@ class UserController extends Controller
     // Save 
     public function store(Request $request)
     {
-        //
+        User::create($request->all());
+        return response()->json([
+            'code'=>0
+        ]);
+
+    //    $data = User::make($request, [
+    //         'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+    //         'accountTypes' => ['required', 'string', 'max:255'],
+    //         'username' => ['required', 'string', 'max:255', 'unique:users'],
+    //         'firstname' => ['required', 'string', 'max:255'],
+    //         'lastname' => ['required', 'string', 'max:255'],
+    //         'contact_number' => ['required', 'int', 'max:255', 'unique:users'],
+    //         'password' => ['required', 'string', 'min:8', 'confirmed'],
+    //     ]);
+
+    //     User::create([
+    //         'email' => $data['email'],
+    //         'accountTypes' => $data['accountType'],
+    //         'username' => $data['username'],
+    //         'firstname' => $data['firstname'],
+    //         'lastname' => $data['lastname'],
+    //         'contact_number' => $data['contact_number'],
+    //         'password' => Hash::make($data['password']),
+    //     ]);
     }
 
-    // public function show(User $user)
+    //public function show(User $user)
     public function show()
     {
-        $users = DB::table('users')->get();
         // $users = DB::table('users')->where('preferences->dining->meal', 'salad')->get();
-
         // resources\views\components\adminComponents\userTable.blade.php
+        $users = DB::table('users')->get();
         return view('components.adminComponents.userTable', compact('users'));
+        // $rooms = DB::table('users')->get();
+        // return view('components.roomComponents.roomsTable', compact('users'));
     }
 
     // Show form
@@ -54,6 +79,17 @@ class UserController extends Controller
     // Delete
     public function destroy(User $user)
     {
-        //
+        $query = $user->delete();
+        $user->delete();
+
+        if($query){
+            return response()->json([
+                'message' => 'Data deleted successfully!'
+                ]);
+        }else{
+            return response()->json([
+                'message' => 'Data deleted unsuccessfully!'
+                ]);
+        }
     }
 }
