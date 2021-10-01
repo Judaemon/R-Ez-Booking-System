@@ -1,8 +1,16 @@
+const swalWithBootstrapButtons = Swal.mixin({
+  customClass: {
+      confirmButton: 'btn btn-success mx-2',
+      cancelButton: 'btn btn-danger mx-2'
+      
+  },
+  buttonsStyling: false
+});
+
 $(function () {
     console.log("rental loaded");
     getTable();
   });
-  
   function getTable(page){
       $.ajax({
         type: 'GET',
@@ -13,10 +21,21 @@ $(function () {
         },
     });
   }
-  
+
   // Delete Ajax
   $(document).on('submit', '.deleteRental', function (event) {
     event.preventDefault();
+    swalWithBootstrapButtons.fire({
+      title: 'Are you sure?',
+      text: "This Rental information will be delete from the database!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, Delete it!',
+      cancelButtonText: 'No, Cancel!',
+      reverseButtons: true
+      
+      }).then((result) => {
+      if (result.isConfirmed) {
     console.log("Checking Delete Form");
     const form = this;
 
@@ -32,12 +51,34 @@ $(function () {
         console.log(response);
             getTable();
         }
+        
       });
+    } else if (
+      result.dismiss === Swal.DismissReason.cancel // click ayaw
+      ) {
+      swalWithBootstrapButtons.fire(
+          'Cancelled',
+          'Lets pretend that never happend >:)',
+          'error'
+      )
+  }
+  })
   });
 
   // Add Ajax
   $('#addRentalForm').on('submit', function (event) {
     event.preventDefault();
+    swalWithBootstrapButtons.fire({
+      title: 'Are you sure?',
+      text: "This Rental information will be added from the database!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, Add it!',
+      cancelButtonText: 'No, Cancel!',
+      reverseButtons: true
+      
+      }).then((result) => {
+      if (result.isConfirmed) {
     console.log("Checking Add Form");
     const form = this;
   
@@ -59,4 +100,14 @@ $(function () {
           console.log(response);
         }
       });
+    } else if (
+      result.dismiss === Swal.DismissReason.cancel // click ayaw
+      ) {
+      swalWithBootstrapButtons.fire(
+          'Cancelled',
+          'Lets pretend that never happend >:)',
+          'error'
+      )
+  }
+  })
   });
