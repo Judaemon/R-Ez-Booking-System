@@ -11,7 +11,8 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
-    
+    <!-- SweetAlert2 -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -105,6 +106,7 @@
     </div>
 </body>
 
+            
 <footer class="footer mt-5">
   <p class="text-center">Copyright © 2021 | Judaemon</p>
 </footer>
