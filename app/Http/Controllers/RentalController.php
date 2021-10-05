@@ -2,85 +2,60 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Models\Rental;
 use Illuminate\Http\Request;
 
 class RentalController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         //
-        return view('rental');
+        $rental = DB::table('rentals')->get();
+        return view('rental',compact('rental'));
+        
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
+        
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         //
+        Rental::create($request->all());
+        return response()->json([
+            'code'=>0
+        ]);
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Rental  $rental
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Rental $rental)
+    public function show()
     {
-        //
+        $rentals = DB::table('rentals')->get();
+        return view('components.rentalComponents.rentalsTable', compact('rentals'));
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Rental  $rental
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Rental $rental)
     {
         //
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Rental  $rental
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Rental $rental)
     {
         //
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Rental  $rental
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Rental $rental)
     {
         //
+        $query = $rental->delete();
+        $rental->delete();
+
+        if($query){
+            return response()->json([
+                'message' => 'Data deleted successfully!'
+                ]);
+        }else{
+            return response()->json([
+                'message' => 'Data deleted unsuccessfully!'
+                ]);
+        }
     }
 }
