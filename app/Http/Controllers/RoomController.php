@@ -35,7 +35,7 @@ class RoomController extends Controller
 
     public function edit(Room $room)
     {
-        //
+        return view('components.roomComponents.updateForm',compact('room'));
     }
 
     public function update(Request $request, Room $room)

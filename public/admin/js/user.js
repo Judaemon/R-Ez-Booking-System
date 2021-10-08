@@ -8,26 +8,26 @@ const swalWithBootstrapButtons = Swal.mixin({
 });
 
 $(function () {
-    console.log("rental loaded");
+    //console.log("user loaded");
     getTable();
   });
+  
   function getTable(page){
       $.ajax({
         type: 'GET',
-        url: 'rental/show?page='+page,
+        url: 'user/show?page='+page,
         success:function(response){
-            //console.log("room loaded");
-          $('#rentalTable').html(response);
+            //console.log("user loaded");
+          $('#userTable').html(response);
         },
     });
   }
-
   // Delete Ajax
-  $(document).on('submit', '.deleteRental', function (event) {
+  $(document).on('submit', '.deleteUser', function (event) {
     event.preventDefault();
     swalWithBootstrapButtons.fire({
       title: 'Are you sure?',
-      text: "This Rental information will be delete from the database!",
+      text: "This User will be delete from the database!",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Yes, Delete it!',
@@ -49,9 +49,9 @@ $(function () {
           contentType: false,
         success: function (response){
         console.log(response);
-            getTable();
+            getTable(1);
         }
-        
+
       });
     } else if (
       result.dismiss === Swal.DismissReason.cancel // click ayaw
@@ -66,11 +66,11 @@ $(function () {
   });
 
   // Add Ajax
-  $('#addRentalForm').on('submit', function (event) {
+  $('#addUserForm').on('submit', function (event) {
     event.preventDefault();
     swalWithBootstrapButtons.fire({
       title: 'Are you sure?',
-      text: "This Rental information will be added from the database!",
+      text: "This User will be added from the database!",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Yes, Add it!',
@@ -79,19 +79,18 @@ $(function () {
       
       }).then((result) => {
       if (result.isConfirmed) {
-    console.log("Checking Add Form");
-    const form = this;
+      console.log("Checking Add Form");
+      const form = this;
   
     $.ajax({
           url: $(form).attr('action'),
           method: $(form).attr('method'),
-          type: 'POST',
           dataType: 'JSON',
           data: new FormData(form),
           processData: false,
           contentType: false,
         success: function (response){
-          $('#addRentalModal').modal('hide');
+          $('#addUserModal').modal('hide');
           $('body').removeClass('modal-open');
           $('.modal-backdrop').remove();
           console.log(response);

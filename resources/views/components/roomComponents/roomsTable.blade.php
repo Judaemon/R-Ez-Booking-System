@@ -18,14 +18,16 @@
             <td>{{$room->price}}</td>
             <td>{{$room->picture}}</td>
             <td>
-                <a href="" class="btn btn-info updateButton" style='width: 100px; margin: 2px;'>Edit</a> 
+                {{-- <a id="editRoomButton" class="btn btn-info" style='width: 100px; margin: 2px;'>Edit</a> --}}
+                <button type="button" id="editBtn" dataId="{{$room->id}}" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#editRoomModal" style="width: 100px; margin: 2px;">
+                    Edit
+                </button>
                 <form method="POST" class="deleteRoom" dataId="{{$room->id}}" action="{{route('room.destroy',$room->id)}}">
                     @csrf 
                     @method('DELETE')
-                    <button class="btn btn-danger" style="width: 100px; margin: 2px;" type="submit">Delete</button>
+                    <button type="submit" class="btn btn-danger" style="width: 100px; margin: 2px;" >Delete</button>
             </form>
             </td>
-
         </tr>
         @endforeach
     </tbody>
