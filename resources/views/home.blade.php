@@ -7,7 +7,7 @@
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Beach Hut</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Room</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -62,6 +62,25 @@
                         </div>
                     </div>
                     
+            </div>
+
+            <div style="margin-top: 1rem">
+
+              <div style="margin-top: 1rem; margin-bottom: 1rem">
+                  <div style="border-bottom: 1px solid gray;"></div>
+              </div>
+              <div data-bs-toggle="modal" data-bs-target="#exampleModal" style="cursor: pointer;">
+                  <div class="row">
+                      <div class="col-md-3">
+                          <img src="{{ URL::asset('img\welcome_page\hut.jpg'); }}" alt="" style="width: 100%; border-radius: 10%;">
+                      </div>
+                      <div class="col-md-9">
+                          <p>Villa</p>
+                          <p>Description</p>
+                      </div>
+                  </div>
+              </div>
+              
             </div>
             
         </div>
