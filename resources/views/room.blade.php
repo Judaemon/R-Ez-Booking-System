@@ -1,5 +1,9 @@
 @extends("layouts.app")
 
+@section('script')
+  <script src="{{ asset('js/admin/room.js') }}"></script>
+@endsection
+
 @section('content')
 
     <div class="container">
@@ -7,8 +11,8 @@
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addRoomModal">
             Add Room
         </button>
-            <div id="roomTable">
-              {{-- Table Generated from admin.js --}}
+            <div id="roomTable" class="pt-2">
+              {{-- Table Generated from room.js --}}
             </div>
     </div>
     
@@ -24,23 +28,22 @@
           {{-- Add Form --}}
             <form id="addRoomForm" method="POST" action="{{route('room.store')}}">
                 @csrf
-
-                <div class="form-group">
+                <div class="form-group mb-2">
                     <label>Name</label>
                     <input type="text" class="form-control" name="name" placeholder="Room Name">
                 </div>
 
-                <div class="form-group">
+                <div class="form-group mb-2">
                     <label>Description</label>
                     <input type="text" class="form-control" name="description" placeholder="Room Description">
                 </div>  
 
-                <div class="form-group">
+                <div class="form-group mb-2">
                     <label>Price</label>
                     <input type="number" class="form-control" name="price" placeholder="Room Price">
                 </div>
 
-                <div class="form-group">
+                <div class="form-group mb-2">
                     <label>Picture</label>
                     <input type="text" class="form-control" name="picture" placeholder="Room Price">
                 </div>
@@ -70,9 +73,4 @@
     </div>
   </div>
 
-@endsection
-
-@section('script')
-<script src="{{ asset('js/app.js') }}" defer></script>
-<script src="js/room.js"></script>
 @endsection
