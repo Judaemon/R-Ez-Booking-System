@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RentalController;
-use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\RoomController;
 
 Route::get('/', function () {
@@ -33,6 +32,12 @@ Route::group([
 ],function () {
     Route::resource('user', UserController::class);
     Route::resource('rental', RentalController::class);
-    Route::resource('customer', CustomerController::class);
     Route::resource('room', RoomController::class);
+
+    Route::get('/report', function () {
+        return view('report');
+    });
+
+    Route::view('/transaction', 'transaction')->name('transaction');
+    Route::view('/report', 'report')->name('report');
 });
