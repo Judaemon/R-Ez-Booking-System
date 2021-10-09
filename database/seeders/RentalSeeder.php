@@ -17,12 +17,6 @@ class RentalSeeder extends Seeder
 
         $rentals = [
             [
-                'name' => 'RentalName',
-                'price' => '0.00',
-                'description' => 'RentalDescription',
-                'picture' => 'RentalPicture',
-            ],
-            [
                 'name' => 'ATV Solo',
                 'price' => '800.00',                            //per hour
                 'description' => 'Enjoy the thrilling and adrenaline pumping trails that we have for you.',

@@ -17,12 +17,6 @@ class RoomSeeder extends Seeder
 
         $rooms = [
             [
-                'name' => 'RoomName',
-                'description' => 'RoomDescription',
-                'price' => '0.00',
-                'picture' => 'RoomPicture',
-            ],
-            [
                 'name' => 'Kubo Fan Room',
                 'description' => 'Experience one of what represents the Filipino Culture with our Kubo Room. The kubo which design allows for great airflow enables it to trully allow the sea air breaths throughout the room. 
                 With its bunk beds we made sure that theres enough room for you and up to three other persons.', //Capacity: 2-4 persons
