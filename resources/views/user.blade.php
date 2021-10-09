@@ -1,5 +1,9 @@
 @extends("layouts.app")
 
+@section('script')
+  <script src="{{ asset('js/admin/user.js') }}"></script>
+@endsection
+
 @section('content')
 
     <div class="container">
@@ -7,8 +11,8 @@
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">
             Add User
         </button>
-            <div id="userTable">
-              {{-- Table Generated from admin.js --}}
+            <div id="userTable" class="pt-2">
+              {{-- Table Generated from user.js --}}
             </div>
     </div>
     
@@ -25,37 +29,37 @@
             <form id="addUserForm" method="POST" action="{{route('user.store')}}">
                 @csrf
 
-                <div class="form-group">
+                <div class="form-group mb-2">
                     <label>Email</label>
                     <input type="text" class="form-control" name="email" placeholder="E-mail Address">
                 </div>
                
-                <div class="form-group">
+                <div class="form-group mb-2">
                     <label>Account Type</label>
                     <input type="text" class="form-control" name="account_type" placeholder="Account Type">
                 </div>
 
-                <div class="form-group">
+                <div class="form-group mb-2">
                     <label>Username</label>
                     <input type="text" class="form-control" name="username" placeholder="Username">
                 </div>  
 
-                <div class="form-group">
+                <div class="form-group mb-2">
                     <label>First Name</label>
                     <input type="text" class="form-control" name="firstname" placeholder="First Name">
                 </div>
 
-                <div class="form-group">
+                <div class="form-group mb-2">
                     <label>Last Name</label>
                     <input type="text" class="form-control" name="lastname" placeholder="Last Name">
                 </div>
 
-                <div class="form-group">
+                <div class="form-group mb-2">
                     <label>Contact Number</label>
                     <input type="number" class="form-control" name="contact_number" placeholder="Contact Number">
                 </div>
 
-                <div class="form-group">
+                <div class="form-group mb-2">
                     <label>Password</label>
                     <input type="text" class="form-control" name="password" placeholder="Password">
                 </div>
@@ -68,9 +72,4 @@
     </div>
   </div>
 
-@endsection
-
-@section('script')
-<script src="{{ asset('js/app.js') }}" defer></script>
-<script src="js/user.js"></script>
 @endsection
