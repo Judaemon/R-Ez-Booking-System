@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Rental;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Validator;
+
 class RentalController extends Controller
 {
     public function index()
@@ -21,41 +23,66 @@ class RentalController extends Controller
         //
         
     }
+
     public function store(Request $request)
     {
-        //
+        $validated = Validator::make($request->all(), [
+            'name' => 'required|string|max:255|unique:rentals',
+            'price' => 'required|Numeric',
+            'description' => 'required|string|max:255',
+            'picture' => 'required|string|max:255',
+        ]);
+        
+        if ($validated->fails()) {
+            return response()->json([
+                'status' => 0,
+                'error' => $validated->errors()->toArray()
+            ]);
+        }
+
         Rental::create($request->all());
+
         return response()->json([
-            'code'=>0
+            'status'=> 1,
+            'msg' => "New rental has been successfully created."
         ]);
     }
-    public function show()
+
+    public function show(Rental $rental)
     {
-        $rentals = DB::table('rentals')->get();
-        return view('components.rentalComponents.rentalsTable', compact('rentals'));
+        // 
     }
+
     public function edit(Rental $rental)
     {
         //
     }
+
     public function update(Request $request, Rental $rental)
     {
         //
     }
+
     public function destroy(Rental $rental)
     {
-        //
         $query = $rental->delete();
-        $rental->delete();
 
-        if($query){
+        if(!$query){
             return response()->json([
+                'code' => 0,
                 'message' => 'Data deleted successfully!'
-                ]);
-        }else{
-            return response()->json([
-                'message' => 'Data deleted unsuccessfully!'
-                ]);
+            ]);
         }
+
+        return response()->json([
+            'code' => 1,
+            'message' => 'Data deleted unsuccessfully!'
+        ]);
+    }
+
+    public function showAllRental()
+    {
+        $rentals = DB::table('rentals')->get();
+        return view('components.rentalComponents.rentalsTable', compact('rentals'));
     }
 }

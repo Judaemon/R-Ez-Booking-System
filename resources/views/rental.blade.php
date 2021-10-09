@@ -31,26 +31,34 @@
 
                     <div class="form-group mb-2">
                         <label>Name</label>
-                        <input type="text" class="form-control" name="name" placeholder="Rental Name">
+                        <input type="text" class="form-control" id="input_name" name="name" placeholder="Rental Name">
+                        <span class="invalid-feedback fw-bold error-text name_error" role="alert"></span>
                     </div>
 
                     <div class="form-group mb-2">
                         <label>Price</label>
-                        <input type="number" class="form-control" name="price" placeholder="Rental Price">
+                        <input type="number" class="form-control" id="input_price" name="price"
+                            placeholder="Rental Price">
+                        <span class="invalid-feedback fw-bold error-text price_error" role="alert"></span>
                     </div>
 
                     <div class="form-group mb-2">
                         <label>Description</label>
-                        <input type="text" class="form-control" name="description" placeholder="Rental Description">
+                        <input type="text" class="form-control" id="input_description" name="description"
+                            placeholder="Rental Description">
+                        <span class="invalid-feedback fw-bold error-text description_error" role="alert"></span>
                     </div>
 
                     <div class="form-group mb-2">
                         <label>Picture</label>
-                        <input type="text" class="form-control" name="picture" placeholder="Picture">
+                        <input type="text" class="form-control" id="input_picture" name="picture" placeholder="Picture">
+                        <span class="invalid-feedback fw-bold error-text picture_error" role="alert"></span>
                     </div>
 
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <div class="mt-2">
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
                 </form>
             </div>
         </div>

@@ -40,4 +40,6 @@ Route::group([
 
     Route::view('/transaction', 'transaction')->name('transaction');
     Route::view('/report', 'report')->name('report');
+
+    Route::get('showAllRental', [RentalController::class, 'showAllRental'])->name('showAllRental');
 });
