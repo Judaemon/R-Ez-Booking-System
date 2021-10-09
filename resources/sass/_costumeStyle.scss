@@ -1,0 +1,37 @@
+.myHighlight {
+  color: #ff0000 !important;
+}
+
+a.facebook {
+  background-image: url(/img/social_media/fb.svg);
+}
+
+a.instagram {
+  background-image: url(/img/social_media/nstgrm.svg);
+}
+
+a.pinterest {
+  background-image: url(/img/social_media/pntst.svg);
+}
+
+a.twitter {
+  background-image: url(/img/social_media/twt.svg);
+}
+
+ul.social li {
+  display: block;
+  text-decoration: none;
+  width: 50px;
+  height: 50px;
+  margin: 0 0.5rem;
+}
+
+ul.social li a {
+  display: block;
+  background-repeat: no-repeat;
+  -webkit-background-size: 100% 100%;
+  background-size: 100% 100%;
+  width: 40px;
+  height: 40px;
+  text-indent: -99999px; /* hides text */
+}
