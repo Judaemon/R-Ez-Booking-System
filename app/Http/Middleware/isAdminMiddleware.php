@@ -16,7 +16,7 @@ class isAdminMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->user()->account_type != 'admin') {
+        if (auth()->user()->account_type == 'user') {
             abort(403);
         }
         return $next($request);
