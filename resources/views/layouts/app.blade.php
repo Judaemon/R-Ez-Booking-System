@@ -10,7 +10,9 @@
     <title>{{ config('app.name', 'Bento Box') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    <!-- SweetAlert2 -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -21,7 +23,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-dark bg-primary shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-dark bg-primary shadow-sm py-3">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Bento Box') }}
@@ -37,10 +39,24 @@
                         <li class="nav-item">
                             <a class="nav-link @if(Route::is('home')) active @endif" href="{{ route('home') }}">{{ __('Home') }}</a>
                         </li>
-                        @if (Auth::user()->account_type == 'admin')
+                        @if (Auth::user()->account_type == 'admin' || Auth::user()->account_type == 'employee' )
                             <li class="nav-item">
-                                <a class="nav-link @if(Route::is('user.index')) active @endif" href="{{ route('user.index') }}">{{ __('Users') }}</a>
+                                <a class="nav-link @if(Route::is('transaction')) active @endif" href="{{ route('transaction') }}">{{ __('Transaction') }}</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link @if(Route::is('room.index')) active @endif" href="{{ route('room.index') }}">{{ __('Rooms') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link @if(Route::is('rental.index')) active @endif" href="{{ route('rental.index') }}">{{ __('Rentals') }}</a>
+                            </li>
+                            @if (Auth::user()->account_type == 'admin' )
+                                <li class="nav-item">
+                                    <a class="nav-link @if(Route::is('user.index')) active @endif" href="{{ route('user.index') }}">{{ __('Users') }}</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link @if(Route::is('report')) active @endif" href="{{ route('report') }}">{{ __('Report') }}</a>
+                                </li>
+                            @endif
                         @endif
                     @endif
                     </ul>
@@ -95,8 +111,9 @@
     </div>
 </body>
 
+            
 <footer class="footer mt-5">
-  <p class="text-center">Copyright © 2021 | Judaemon</p>
+  <p class="text-center">Copyright © 2021 | R - Ez Booking System</p>
 </footer>
 
 </html>

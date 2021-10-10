@@ -1,94 +1,85 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+@extends("layouts.app")
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@section('content')
 
-    <title>Laravel</title>
-    <title>{{ config('app.name', 'Bento Box') }}</title>
+<img src="{{ URL::asset('/img/welcome_page/test1.png') }}" alt="" style="width: 100%;margin-top: -24px;">
+<div class="container">
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
-
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
-</head>
-
-<body class="app">
-    <nav class="navbar navbar-expand-md navbar-dark bg-primary shadow-sm">
+    <div class="jumbotron jumbotron-fluid" style="margin-top: 5rem">
         <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name', 'Bento Box') }}
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="{{ __('Toggle navigation') }}">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
-                <ul class="navbar-nav">
-                    @auth
-                    <li class="nav-item">
-                        <a href="{{ url('/home') }}" class="@if(Route::is('home')) active @endif nav-link">Home</a>
-                    </li>
-                    @endauth
-                </ul>
-
-                <ul class="navbar-nav">
-                    @if (Route::has('login'))
-                    @auth
-                    <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{ Auth::user()->username }}
-                        </a>
-
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                            </a>
-
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
-                        </div>
-                    </li>
-                    @else
-                    <li class="nav-item">
-                        <a href="{{ route('login') }}" class="@if(Route::is('login')) active @endif nav-link">Login</a>
-                    </li>
-
-                    @if (Route::has('register'))
-                    <li class="nav-item">
-                        <a href="{{ route('register') }}"
-                            class="@if(Route::is('register')) active @endif nav-link">Register</a>
-                    </li>
-                    @endif
-                    @endauth
-                    @endif
-                </ul>
-            </div>
+          <h1 class="display-4 text-center">Promised land beach resort</h1>
+          <p class="lead text-center">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consectetur deleniti labore recusandae libero earum magnam ipsum dolore? Expedita veritatis, voluptatibus tempore ducimus repudiandae quam deleniti magni animi. Obcaecati, commodi aliquid.</p>
         </div>
-    </nav>
+    </div>
 
-    <div class="container">
-        <h1>hakdog</h1>
+    <div class="row" style="margin-top: 5rem">
+
+            <div class="col-6">
+            <img src="{{ URL::asset('img\welcome_page\room1.png'); }}"  style="width: 100%">
+            <p style="font-size:35px; margin-top:2rem">Beach Hut</p>
+            <p style="font-size:20px;">insert description for the beach hut</p> 
+            </div>
+
+            <div class="col-6">
+            <img src="{{ URL::asset('img\welcome_page\room2.png'); }}"  style="width: 100%">
+            <p style="font-size:35px; margin-top:2rem">Villa</p>
+            <p style="font-size:20px;">insert description for the villa</p>
+            </div>
 
     </div>
-</body>
+</div>
 
-<footer class="footer mt-5">
-    <ul class="social d-flex justify-content-center">
-        <li><a class="facebook" target="_blank" href="https://www.facebook.com">facebook</a></li>
-        <li><a class="instagram" target="_blank" href="https://www.instagram.com">qwe</a></li>
-        <li><a class="twitter" target="_blank" href="https://www.twitter.com">qwe</a></li>
-        <li><a class="pinterest" target="_blank" href="https://www.pinterest.com">qwe</a></li>
-    </ul>
-    <p class="text-center">Copyright © 2021 | Judaemon</p>
-</footer>
+    <div class="row" style="margin-top: 5rem">
+        <img src="{{ URL::asset('img\welcome_page\liwliwa.png'); }}"  style="width: 100%">
+        <h1 class="display-4 text-center" style="font-size:55px; margin-top:2rem">Liwliwa</h1>
+        <p class="text-center" style="font-size:20px;">insert description for the liwliwa</p>
+    </div>
 
-</html>
+<div class="container">
+
+    <div class="row" style="margin-top: 5rem">
+        <div class="col-6">
+            <h1 class="display-4 text-center" style="font-size:55px; margin-top:2rem">About Us</h1>
+            <p class="text-center" style="font-size:20px;">insert description for the resort</p>
+        </div>
+        <div class="col-6">
+            <img src="{{ URL::asset('img\welcome_page\promisedsign.png'); }}"  style="width: 100%">
+        </div>
+    </div> 
+
+</div>
+
+<div class="row d-flex justify-content-center" style="margin-top: 5rem">
+    <div class="col-8">
+        <img src="{{ URL::asset('img\welcome_page\surf.png'); }}"  style="width: 100%">
+    </div>
+    <div class="col-3">
+        <img src="{{ URL::asset('img\welcome_page\wedding.png'); }}"  style="width: 100%">
+    </div>
+        <h1 class="display-4 text-center" style="font-size:55px; margin-top:2rem">Accomodations</h1>
+        <p class="text-center" style="font-size:20px;">weddings and shit</p>
+</div>
+<div class="container">
+    
+    <div class="row" style="margin-top: 5rem">
+        <div class="col-4">
+            <img src="{{ URL::asset('/img/welcome_page/standingpicture.png') }}" alt="" style="width: 100%;margin-top: -24px;">
+            <h1>Gallery?</h1>
+        </div>
+        <div class="col-4">
+            <img src="{{ URL::asset('/img/welcome_page/standingpicture.png') }}" alt="" style="width: 100%;margin-top: -24px;">
+            <h1>Rentals?</h1>
+        </div>
+        <div class="col-4">
+            <img src="{{ URL::asset('/img/welcome_page/standingpicture.png') }}" alt="" style="width: 100%;margin-top: -24px;">
+            <h1>Location?</h1>
+        </div>
+    </div>
+
+</div>
+
+@endsection
+
+@section('script')
+<script src="js/room.js"></script>
+@endsection
