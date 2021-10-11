@@ -15,11 +15,11 @@ class CreateRoomsTable extends Migration
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->char('name');
             $table->text('description');
             $table->float('price');
             $table->text('picture');
+            $table->timestamps();
         });
     }
 
