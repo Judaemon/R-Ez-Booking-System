@@ -19,6 +19,9 @@ Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/admin', [HomeController::class, 'index'])->name('home');
 Route::get('/user', [HomeController::class, 'index'])->name('home');
+//Route::post('/profile', [HomeController::class, 'edit'])->name('profile');
+Route::resource('profile', HomeController::class);
+
 
 Route::group([
     'prefix' => 'user', // for specifying url example admin/user (can be removed)
