@@ -75,14 +75,12 @@ class TransactionsController extends Controller
 
     public function showAllTransaction()
     {
-        $transactions = DB::table('transactions')->get();
-        $rental = Rental::find([1, 2, 3]);
+        $transactions = DB::table('transactions')
+        ->join('users', 'users.id', '=', 'transactions.user_id')
+        ->join('rooms', 'rooms.id', '=', 'transactions.room_id')
+        ->select('users.firstname', 'users.lastname', 'transactions.id', 'transactions.title', 'transactions.payment_status', 'transactions.start', 'transactions.end')
+        ->get();
 
-        return response()->json([
-            'status'=> 1,
-            'rental' => $rental,
-            'transactions' => $transactions
-        ]);
-        // return view('components.transactionComponents.transactionTable', compact('transactions'));
+        return view('components.transactionComponents.transactionTable', compact('transactions'));
     }
 }
