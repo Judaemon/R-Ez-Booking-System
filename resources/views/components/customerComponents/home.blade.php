@@ -47,21 +47,21 @@
 
             <div style="margin-top: 1rem">
 
-                    <div style="margin-top: 1rem; margin-bottom: 1rem">
-                        <div style="border-bottom: 1px solid gray;"></div>
-                    </div>
-                    <div data-bs-toggle="modal" data-bs-target="#exampleModal" style="cursor: pointer;">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <img src="{{ URL::asset('img\welcome_page\hut.jpg'); }}" alt="" style="width: 100%; border-radius: 10%;">
-                            </div>
-                            <div class="col-md-9">
-                                <p>Beach Hut</p>
-                                <p>Description</p>
-                            </div>
-                        </div>
-                    </div>
-                    
+              <div style="margin-top: 1rem; margin-bottom: 1rem">
+                  <div style="border-bottom: 1px solid gray;"></div>
+              </div>
+              <div data-bs-toggle="modal" data-bs-target="#exampleModal" style="cursor: pointer;">
+                  <div class="row">
+                      <div class="col-md-3">
+                          <img src="{{ URL::asset('img\kubo_fan_room\kubo1.jpg'); }}" alt="" style="width: 100%; border-radius: 10%;">
+                      </div>
+                      <div class="col-md-9">
+                          <p>Kubo Fan Room</p>
+                          <p>Description</p>
+                      </div>
+                  </div>
+              </div>
+            
             </div>
 
             <div style="margin-top: 1rem">
@@ -72,7 +72,26 @@
               <div data-bs-toggle="modal" data-bs-target="#exampleModal" style="cursor: pointer;">
                   <div class="row">
                       <div class="col-md-3">
-                          <img src="{{ URL::asset('img\welcome_page\hut.jpg'); }}" alt="" style="width: 100%; border-radius: 10%;">
+                          <img src="{{ URL::asset('img\superior_room\superior1.jpg'); }}" alt="" style="width: 100%; border-radius: 10%;">
+                      </div>
+                      <div class="col-md-9">
+                          <p>Superior Room</p>
+                          <p>Description</p>
+                      </div>
+                  </div>
+              </div>
+              
+            </div>
+
+            <div style="margin-top: 1rem">
+
+              <div style="margin-top: 1rem; margin-bottom: 1rem">
+                  <div style="border-bottom: 1px solid gray;"></div>
+              </div>
+              <div data-bs-toggle="modal" data-bs-target="#exampleModal" style="cursor: pointer;">
+                  <div class="row">
+                      <div class="col-md-3">
+                          <img src="{{ URL::asset('img\villa_room\villa1.jpg'); }}" alt="" style="width: 100%; border-radius: 10%;">
                       </div>
                       <div class="col-md-9">
                           <p>Villa</p>
@@ -80,10 +99,66 @@
                       </div>
                   </div>
               </div>
-              
+            
+            </div>
+
+            <div style="margin-top: 1rem">
+
+              <div style="margin-top: 1rem; margin-bottom: 1rem">
+                  <div style="border-bottom: 1px solid gray;"></div>
+              </div>
+              <div data-bs-toggle="modal" data-bs-target="#exampleModal" style="cursor: pointer;">
+                  <div class="row">
+                      <div class="col-md-3">
+                          <img src="{{ URL::asset('img\couple_bhut\couple1.jpg'); }}" alt="" style="width: 100%; border-radius: 10%;">
+                      </div>
+                      <div class="col-md-9">
+                          <p>Couple Beach Hut</p>
+                          <p>Description</p>
+                      </div>
+                  </div>
+              </div>
+            
+            </div>
+            <div style="margin-top: 1rem">
+
+              <div style="margin-top: 1rem; margin-bottom: 1rem">
+                  <div style="border-bottom: 1px solid gray;"></div>
+              </div>
+              <div data-bs-toggle="modal" data-bs-target="#exampleModal" style="cursor: pointer;">
+                  <div class="row">
+                      <div class="col-md-3">
+                          <img src="{{ URL::asset('img\regular_bhut\regular1.jpg'); }}" alt="" style="width: 100%; border-radius: 10%;">
+                      </div>
+                      <div class="col-md-9">
+                          <p>Regular Beach Hut</p>
+                          <p>Description</p>
+                      </div>
+                  </div>
+              </div>
+            
+            </div>
+            <div style="margin-top: 1rem">
+
+              <div style="margin-top: 1rem; margin-bottom: 1rem">
+                  <div style="border-bottom: 1px solid gray;"></div>
+              </div>
+              <div data-bs-toggle="modal" data-bs-target="#exampleModal" style="cursor: pointer;">
+                  <div class="row">
+                      <div class="col-md-3">
+                          <img src="{{ URL::asset('img\barkada_bhut\barkada1.jpg'); }}" alt="" style="width: 100%; border-radius: 10%;">
+                      </div>
+                      <div class="col-md-9">
+                          <p>Barkada Beach Hut</p>
+                          <p>Description</p>
+                      </div>
+                  </div>
+              </div>
+            
             </div>
             
         </div>
+        
         <div class="col-md-4">
             <div class="card mb-3">
 

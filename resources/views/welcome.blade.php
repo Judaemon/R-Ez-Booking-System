@@ -2,7 +2,7 @@
 
 @section('content')
 
-<img src="{{ URL::asset('/img/welcome_page/test1.png') }}" alt="" style="width: 100%;margin-top: -24px;">
+<img src="{{ URL::asset('/img/welcome_page/welcomecoverphoto.png') }}" style="width: 100%;margin-top: -24px;">
 <div class="container">
 
     <div class="jumbotron jumbotron-fluid" style="margin-top: 5rem">
@@ -63,15 +63,15 @@
     
     <div class="row" style="margin-top: 5rem">
         <div class="col-4">
-            <img src="{{ URL::asset('/img/welcome_page/standingpicture.png') }}" alt="" style="width: 100%;margin-top: -24px;">
+            <img src="{{ URL::asset('/img/welcome_page/standinggallery.png') }}" alt="" style="width: 100%;margin-top: -24px;">
             <h1>Gallery?</h1>
         </div>
         <div class="col-4">
-            <img src="{{ URL::asset('/img/welcome_page/standingpicture.png') }}" alt="" style="width: 100%;margin-top: -24px;">
+            <img src="{{ URL::asset('/img/welcome_page/standingrentals.png') }}" alt="" style="width: 100%;margin-top: -24px;">
             <h1>Rentals?</h1>
         </div>
         <div class="col-4">
-            <img src="{{ URL::asset('/img/welcome_page/standingpicture.png') }}" alt="" style="width: 100%;margin-top: -24px;">
+            <img src="{{ URL::asset('/img/welcome_page/standinglocation.png') }}" alt="" style="width: 100%;margin-top: -24px;">
             <h1>Location?</h1>
         </div>
     </div>
