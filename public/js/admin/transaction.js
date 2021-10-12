@@ -11,8 +11,48 @@ $(function () {
     console.log("Transaction loaded");
     // const event = getEvents()
     // console.log(event);
-    renderCalendar();
+    fetchDishTable();
+    // renderCalendar();
 });
+
+function fetchDishTable() {
+    $.ajax({
+        type: "GET",
+        url: "showAllTransaction",
+        success: function (response) {
+            console.log(response);
+            // console.log("Dish Table Loaded");
+            // $("#dishTableContainer").html(response);
+            // $("#dishTable").DataTable({
+            //     language: {
+            //         search: '',
+            //         searchPlaceholder: "Search..."
+            //     },
+            //     dom: "<'row mb-3'<'col-md-6'f><'col-md-6' <'dishAddBtn'>>>" +
+            //         "<'row'<'col-md-6'l><'col-md-6'i>>" +
+            //         "<'row'<'col-sm-12'tr>>" +
+            //         "<'row'<'col-md-12'p>>",
+            // });
+            // addBtnDishTable();
+        },
+        error: function () {
+            errorNotif();
+        },
+    });
+}
+
+function addBtnDishTable() {
+    const html = `<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addDishModal" style="width: 100%;">Add dish</button>`;
+    $(".dishAddBtn").html(html);
+}
+
+function errorNotif() {
+    swalWithBootstrapButtons.fire(
+        'Error! ',
+        'Something went wrong! Please try agan later.',
+        'error'
+    )
+}
 
 // let events = [{
 //     title: 'Judaya Reservation',

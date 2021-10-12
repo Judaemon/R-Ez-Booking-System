@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Rental;
+
 use App\Models\Transactions;
 use Illuminate\Http\Request;
 
@@ -69,5 +71,18 @@ class TransactionsController extends Controller
             'status'=> 1,
             'transactions' => $transactions
         ]);
+    }
+
+    public function showAllTransaction()
+    {
+        $transactions = DB::table('transactions')->get();
+        $rental = Rental::find([1, 2, 3]);
+
+        return response()->json([
+            'status'=> 1,
+            'rental' => $rental,
+            'transactions' => $transactions
+        ]);
+        // return view('components.transactionComponents.transactionTable', compact('transactions'));
     }
 }
