@@ -1,4 +1,4 @@
-<table class="table">
+<table class="table table-tripped table-hover table-light">
     <thead>
         <tr>
             <th scope="col">ID</th>
@@ -18,13 +18,22 @@
             <td>{{$rental->description}}</td>
             <td>{{$rental->picture}}</td>
             <td>
-                <a href="" class="btn btn-info updateButton" style='width: 100px; margin: 2px;'>Edit</a>
-                <form method="POST" class="deleteRental" dataId="{{$rental->id}}"
-                    action="{{route('rental.destroy',$rental->id)}}">
-                    @csrf
-                    @method('DELETE')
-                    <button class="btn btn-danger" style="width: 100px; margin: 2px;" type="submit">Delete</button>
-                </form>
+                <div class='d-flex justify-content-around'>
+                    <form method="POST" class="deleteRental" dataId="{{$rental->id}}"
+                        action="{{route('rental.destroy',$rental->id)}}">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-danger" style="width: 100px; margin: 2px;" type="submit">Delete</button>
+                    </form>
+    
+                    {{-- div for copying the interaction btn and form above --}}
+                    <div style="display: block; margin-top: 0em; margin-block-end: 1em;">
+                        <button rental_ID="{{$rental->id}}" type='button' class='btn btn-info mx-2 myButton' id='rentalUpdateBtn' data-bs-toggle='modal'
+                        data-bs-target='#updateRentalModal'>Update</button>
+                    </div>
+                </div>
+                {{-- <a href="" class="btn btn-info updateButton" style='width: 100px; margin: 2px;'>Edit</a> --}}
+                
             </td>
         </tr>
         @endforeach

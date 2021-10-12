@@ -24,9 +24,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if (Auth::user()->account_type == 'admin') {
-            return view('components\adminComponents\home');
+        if (Auth::user()->account_type == 'user') {
+            return view('components\customerComponents\home');
         }
-        return view('components\customerComponents\home');
+        
+        return view('components\adminComponents\home');
     }
 }

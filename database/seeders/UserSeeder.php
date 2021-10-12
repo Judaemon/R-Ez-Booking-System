@@ -4,6 +4,9 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
+// for created_at and updated_at column value
+use Carbon\Carbon;
+
 // For sql query
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -25,6 +28,8 @@ class UserSeeder extends Seeder
                 'contact_number' => '0912312312',
                 'email' => 'admin@gmail.com',
                 'password' => Hash::make('admin'),
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
             [
                 'account_type' => 'employee',
@@ -34,6 +39,8 @@ class UserSeeder extends Seeder
                 'contact_number' => '0912312313',
                 'email' => 'employee@gmail.com',
                 'password' => Hash::make('employee'),
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
             [
                 'account_type' => 'user',
@@ -43,6 +50,8 @@ class UserSeeder extends Seeder
                 'contact_number' => '0912312314',
                 'email' => 'user@gmail.com',
                 'password' => Hash::make('user'),
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
         ];
     
