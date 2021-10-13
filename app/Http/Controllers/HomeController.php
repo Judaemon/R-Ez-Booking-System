@@ -35,18 +35,19 @@ class HomeController extends Controller
 
     public function viewProfile(User $user)
     {
-        // $id = $user->input('id');
-        $user =  User::find($user);
+        $user = Auth::user();
 
-        // $profile = DB::table('user')->get();
+        // dd($user); // for testing
+
         return view('profile',compact('user'));
     }
 
+    // if user wants to edit their own information 
     public function edit(Request $user)
     {
-        // $user =  User::find($user);
-        // $user = User::where('id',$user)->first();
-        dump($user);
+        $user = Auth::user();
+
+        // dd($user); // for testing
 
         return view('profile', compact('user'));
     }

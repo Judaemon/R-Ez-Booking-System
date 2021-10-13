@@ -15,14 +15,15 @@ Route::get('/', function () {
 
 Auth::routes();
 
-// paths going to their designated home
+// paths going to home 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/admin', [HomeController::class, 'index'])->name('home');
 Route::get('/user', [HomeController::class, 'index'])->name('home');
-//Route::post('/profile', [HomeController::class, 'edit'])->name('profile');
-Route::resource('profile', HomeController::class);
 
+// profile link
+Route::get('/viewProfile', [HomeController::class, 'viewProfile'])->name('viewProfile');
 
+// for user only links
 Route::group([
     'prefix' => 'user', // for specifying url example admin/user (can be removed)
     'middleware' => ['auth', 'user']
@@ -30,6 +31,7 @@ Route::group([
     // all paths for customer only
 });
 
+// for admin only links
 Route::group([
     'prefix' => 'admin', // for specifying url example admin/user (can be removed)
     'middleware' => ['auth', 'admin']
