@@ -22,6 +22,20 @@ function getTable(page) {
     });
 }
 
+function clearErrorText(formID) {
+    $('#' + formID + ' input').removeClass('is-invalid')
+    $('#' + formID + ' select').removeClass('is-invalid')
+    $(document).find('#' + formID + ' span.error-text').text('');
+}
+
+function errorWarning() {
+    swalWithBootstrapButtons.fire(
+        'Error! ',
+        'Something went wrong! Please try agan later.',
+        'error'
+    )
+}
+
 // Display Edit Form
 $(document).on('click', '#editBtn', function (event) {
     const id = ($(this).attr('dataId'));
@@ -38,7 +52,6 @@ $(document).on('click', '#editBtn', function (event) {
         },
     });
 });
-
 
 // Delete Ajax
 $(document).on('submit', '.deleteRoom', function (event) {
@@ -65,9 +78,22 @@ $(document).on('submit', '.deleteRoom', function (event) {
                 data: new FormData(form),
                 processData: false,
                 contentType: false,
+                // success: function (response) {
+                //     console.log(response);
+                //     getTable();
+                // }
                 success: function (response) {
-                    console.log(response);
-                    getTable();
+                    if (response.code == 0) {
+                        errorWarning();
+                    } else {
+                        getTable();
+
+                        swalWithBootstrapButtons.fire(
+                            'Successful!',
+                            response.msg,
+                            'success'
+                        )
+                    }
                 }
             });
         } else if (
@@ -107,15 +133,40 @@ $('#addRoomForm').on('submit', function (event) {
                 data: new FormData(form),
                 processData: false,
                 contentType: false,
+                // success: function (response) {
+                //     $('#addRoomModal').modal('hide');
+                //     $('body').removeClass('modal-open');
+                //     $('.modal-backdrop').remove();
+                //     console.log(response);
+                //     getTable();
+                // },
+                // error: function (response) {
+                //     console.log(response);
+                // }
+                beforeSend: function () {
+                    clearErrorText('addRoomForm');
+                },
                 success: function (response) {
-                    $('#addRoomModal').modal('hide');
-                    $('body').removeClass('modal-open');
-                    $('.modal-backdrop').remove();
-                    console.log(response);
-                    getTable();
+                    if (response.status == 0) {
+                        $.each(response.error, function (prefix, val) {
+                            $('#addRoomForm #input_' + prefix).addClass('is-invalid')
+                            $('#addRoomForm span.' + prefix + '_error').text(val)
+                        })
+                    }
+
+                    if (response.status == 1) {
+                        $('#addRoomModal').modal('hide');
+                        getTable();
+
+                        swalWithBootstrapButtons.fire(
+                            'Successful!',
+                            response.msg,
+                            'success'
+                        )
+                    }
                 },
                 error: function (response) {
-                    console.log(response);
+                    errorWarning()
                 }
             });
         } else if (
@@ -126,6 +177,6 @@ $('#addRoomForm').on('submit', function (event) {
                 'Lets pretend that never happend >:)',
                 'error'
             )
-        };
-    });
+        }
+    })
 });

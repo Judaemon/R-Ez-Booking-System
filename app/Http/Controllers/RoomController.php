@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Room;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Validator;
+
 class RoomController extends Controller
 {
     public function index()
@@ -21,9 +23,29 @@ class RoomController extends Controller
 
     public function store(Request $request)
     {
+        // Room::create($request->all());
+        // return response()->json([
+        //     'code'=>0
+        // ]);
+        $validated = Validator::make($request->all(), [
+            'name' => 'required|string|max:255|unique:rooms',
+            'description' => 'required|string|max:255',
+            'price' => 'required|Numeric',
+            'picture' => 'required|string|max:255',
+        ]);
+        
+        if ($validated->fails()) {
+            return response()->json([
+                'status' => 0,
+                'error' => $validated->errors()->toArray()
+            ]);
+        }
+
         Room::create($request->all());
+
         return response()->json([
-            'code'=>0
+            'status'=> 1,
+            'msg' => "New rental has been successfully created."
         ]);
     }
 
