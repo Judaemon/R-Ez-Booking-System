@@ -83,6 +83,11 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('viewProfile')}}">
+                                        {{ __('Profile') }}
+                                    </a>
+                                    {{-- <a href="{{route('profile.edit',$user->id)}}" class="btn btn-info updateButton" style='width: 93px; margin: 2px;'>Edit</a>  --}}
+
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -100,9 +105,9 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <div>
             @yield('content')
-        </main>
+        </div>
 
         <div>
             @yield('script')

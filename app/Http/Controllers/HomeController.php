@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,5 +31,24 @@ class HomeController extends Controller
         }
         
         return view('components\adminComponents\home');
+    }
+
+    public function viewProfile(User $user)
+    {
+        $user = Auth::user();
+
+        // dd($user); // for testing
+
+        return view('profile',compact('user'));
+    }
+
+    // if user wants to edit their own information 
+    public function edit(Request $user)
+    {
+        $user = Auth::user();
+
+        // dd($user); // for testing
+
+        return view('profile', compact('user'));
     }
 }
