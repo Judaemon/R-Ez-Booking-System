@@ -1,6 +1,5 @@
-
-<table class="table">
-    <thead>
+<table id="userTable" class="table table-tripped table-hover table-light">
+    <thead class="table-dark text-center">
         <th>ID</th>
         <th>Username</th>
         <th>Role</th>

@@ -1,5 +1,5 @@
-<table class="table">
-    <thead>
+<table id="roomTable" class="table table-tripped table-hover table-light">
+    <thead class="table-dark text-center">
         <tr>
         <th class="col-md-2" scope="col">ID</th>
         <th class="col-md-2" scope="col">Name</th>
@@ -18,15 +18,22 @@
             <td>{{$room->price}}</td>
             <td>{{$room->picture}}</td>
             <td>
-                {{-- <a id="editRoomButton" class="btn btn-info" style='width: 100px; margin: 2px;'>Edit</a> --}}
-                <button type="button" id="editBtn" dataId="{{$room->id}}" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#editRoomModal" style="width: 100px; margin: 2px;">
-                    Edit
-                </button>
-                <form method="POST" class="deleteRoom" dataId="{{$room->id}}" action="{{route('room.destroy',$room->id)}}">
-                    @csrf 
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger" style="width: 100px; margin: 2px;" >Delete</button>
-            </form>
+            <div class='d-flex justify-content-around'>
+                    <form method="POST" class="deleteRoom" dataId="{{$room->id}}"
+                        action="{{route('room.destroy',$room->id)}}">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-danger" style="width: 100px; margin: 2px;" type="submit">Delete</button>
+                    </form>
+    
+                    {{-- div for copying the interaction btn and form above --}}
+                    <div style="display: block; margin-top: 0em; margin-block-end: 1em;">
+                        <button room_ID="{{$room->id}}" type='button' class='btn btn-info mx-2 myButton' id='roomUpdateBtn' data-bs-toggle='modal'
+                        data-bs-target='#updateRoomModal'>Update</button>
+                    </div>
+                </div>
+                {{-- <a href="" class="btn btn-info updateButton" style='width: 100px; margin: 2px;'>Edit</a> --}}
+                
             </td>
         </tr>
         @endforeach

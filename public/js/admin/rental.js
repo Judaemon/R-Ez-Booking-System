@@ -155,6 +155,7 @@ $('#addRentalForm').on('submit', function (event) {
                     if (response.status == 1) {
                         $('#addRentalModal').modal('hide');
                         getRentalTable();
+                        $(form)[0].reset();
 
                         swalWithBootstrapButtons.fire(
                             'Successful!',

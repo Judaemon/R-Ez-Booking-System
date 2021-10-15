@@ -70,16 +70,19 @@ class RoomController extends Controller
         $query = $room->delete();
         $room->delete();
 
-        if($query){
+        if(!$query){
             return response()->json([
+                'code' => 0,
                 'message' => 'Data deleted successfully!'
-                ]);
-        }else{
-            return response()->json([
-                'message' => 'Data deleted unsuccessfully!'
-                ]);
+            ]);
         }
+
+        return response()->json([
+            'code' => 1,
+            'message' => 'Data deleted unsuccessfully!'
+        ]);
     }
+    
     public function showAllRoom()
     {
         $rooms = DB::table('rooms')->get();
