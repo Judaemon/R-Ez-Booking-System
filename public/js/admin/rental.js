@@ -15,11 +15,40 @@ $(function () {
 function getRentalTable(page) {
     $.ajax({
         type: 'GET',
-        url: 'showAllRental?page=' + page,
+        url: 'showAllRental',
         success: function (response) {
-            $('#rentalTable').html(response);
+            console.log(response);
+            console.log("Rental Table Loaded");
+            $('#rentalTableContainer').html(response);
+            $("#rentalTable").DataTable({
+                language: {
+                    search: '',
+                    searchPlaceholder: "Search..."
+                },
+                dom: "<'row mb-3'<'col-md-6'f><'col-md-6' <'RentalAddBtn'>>>" +
+                    "<'row'<'col-md-6'l><'col-md-6'i>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row'<'col-md-12'p>>",
+            });
+            addBtnRentalTable();
+        },
+        error: function () {
+            errorNotif();
         },
     });
+}
+
+function addBtnRentalTable() {
+    const html = `<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addRentalModal" style="width: 100%;">Add Rental</button>`;
+    $(".RentalAddBtn").html(html);
+}
+
+function errorNotif() {
+    swalWithBootstrapButtons.fire(
+        'Error! ',
+        'Something went wrong! Please try agan later.',
+        'error'
+    )
 }
 
 function clearErrorText(formID) {

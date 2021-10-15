@@ -51,8 +51,8 @@ class RoomController extends Controller
 
     public function show()
     {
-        $rooms = DB::table('rooms')->get();
-        return view('components.roomComponents.roomsTable', compact('rooms'));
+        // $rooms = DB::table('rooms')->get();
+        // return view('components.roomComponents.roomsTable', compact('rooms'));
     }
 
     public function edit(Room $room)
@@ -79,5 +79,10 @@ class RoomController extends Controller
                 'message' => 'Data deleted unsuccessfully!'
                 ]);
         }
+    }
+    public function showAllRoom()
+    {
+        $rooms = DB::table('rooms')->get();
+        return view('components.roomComponents.roomsTable', compact('rooms'));
     }
 }

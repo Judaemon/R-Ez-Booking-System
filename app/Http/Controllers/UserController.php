@@ -86,8 +86,7 @@ class UserController extends Controller
     {
         // $users = DB::table('users')->where('preferences->dining->meal', 'salad')->get();
         // resources\views\components\adminComponents\userTable.blade.php
-        $users = DB::table('users')->get();
-        return view('components.adminComponents.userTable', compact('users'));
+        
         // $rooms = DB::table('users')->get();
         // return view('components.roomComponents.roomsTable', compact('users'));
     }
@@ -119,5 +118,10 @@ class UserController extends Controller
                 'message' => 'Data deleted unsuccessfully!'
                 ]);
         }
+    }
+    public function showAllUser()
+    {
+        $users = DB::table('users')->get();
+        return view('components.adminComponents.userTable', compact('users'));
     }
 }

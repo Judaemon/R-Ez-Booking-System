@@ -1,5 +1,5 @@
-<table class="table table-tripped table-hover table-light">
-    <thead>
+<table id="rentalTable" class="table table-tripped table-hover table-light">
+    <thead class="table-dark text-center">
         <tr>
             <th scope="col">ID</th>
             <th scope="col">Name</th>

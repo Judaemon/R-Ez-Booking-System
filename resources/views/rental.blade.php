@@ -2,20 +2,57 @@
 
 @section('script')
 <script src="{{ asset('js/admin/rental.js') }}"></script>
+
+<link href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" rel="stylesheet">
 @endsection
 
 @section('content')
+<style>
+    table.dataTable>thead .sorting:before,
+    table.dataTable>thead .sorting_asc:before,
+    table.dataTable>thead .sorting_desc:before,
+    table.dataTable>thead .sorting_asc_disabled:before,
+    table.dataTable>thead .sorting_desc_disabled:before {
+        top: 1.6em;
+        right: 1em;
+        content: "↑";
+    }
 
+    table.dataTable>thead .sorting:after,
+    table.dataTable>thead .sorting_asc:after,
+    table.dataTable>thead .sorting_desc:after,
+    table.dataTable>thead .sorting_asc_disabled:after,
+    table.dataTable>thead .sorting_desc_disabled:after {
+        top: 1.7em;
+        right: .5em;
+        content: "↓";
+    }
+
+    div.dataTables_wrapper div.dataTables_paginate ul.pagination {
+        margin: 2px 0;
+        white-space: nowrap;
+        justify-content: flex-start !important;
+    }
+
+    div.dataTables_wrapper div.dataTables_info {
+        justify-content: flex-end !important;
+        text-align: end !important;
+        padding-top: 0em !important;
+    }
+
+    div.dataTables_wrapper div.dataTables_filter {
+        text-align: left !important;
+    }
+
+    div.dataTables_wrapper div.dataTables_filter label,
+    input {
+        width: 100% !important;
+    }
+
+</style>
 <div class="container">
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addRentalModal">
-        Add Rental
-    </button>
-    <div id="rentalTable" class="pt-2">
-        {{-- Table Generated from rental.js --}}
-    </div>
+    <h1>Rentals</h1>
 </div>
-
 <!-- Modal -->
 <div class="modal fade" id="addRentalModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -64,5 +101,6 @@
         </div>
     </div>
 </div>
-
+<div id="rentalTableContainer" class="container">
+</div>
 @endsection
