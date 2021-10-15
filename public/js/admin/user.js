@@ -22,6 +22,21 @@ $(function () {
         },
     });
   }
+
+  function clearErrorText(formID) {
+    $('#' + formID + ' input').removeClass('is-invalid')
+    $('#' + formID + ' select').removeClass('is-invalid')
+    $(document).find('#' + formID + ' span.error-text').text('');
+}
+
+function errorWarning() {
+    swalWithBootstrapButtons.fire(
+        'Error! ',
+        'Something went wrong! Please try agan later.',
+        'error'
+    )
+}
+
   // Delete Ajax
   $(document).on('submit', '.deleteUser', function (event) {
     event.preventDefault();
@@ -47,11 +62,23 @@ $(function () {
           data: new FormData(form),
           processData: false,
           contentType: false,
-        success: function (response){
-        console.log(response);
-            getTable(1);
-        }
+        // success: function (response){
+        // console.log(response);
+        //     getTable(1);
+        // }
+            success: function (response) {
+              if (response.code == 0) {
+                  errorWarning();
+              } else {
+                  getTable(1);
 
+                  swalWithBootstrapButtons.fire(
+                      'Successful!',
+                      response.msg,
+                      'success'
+                  )
+              }
+          }
       });
     } else if (
       result.dismiss === Swal.DismissReason.cancel // click ayaw
@@ -89,24 +116,49 @@ $(function () {
           data: new FormData(form),
           processData: false,
           contentType: false,
-        success: function (response){
-          $('#addUserModal').modal('hide');
-          $('body').removeClass('modal-open');
-          $('.modal-backdrop').remove();
-          console.log(response);
-          getTable();
-        },error: function(response){
-          console.log(response);
-        }
+        // success: function (response){
+        //   $('#addUserModal').modal('hide');
+        //   $('body').removeClass('modal-open');
+        //   $('.modal-backdrop').remove();
+        //   console.log(response);
+        //   getTable();
+        // },error: function(response){
+        //   console.log(response);
+        // }
+            beforeSend: function () {
+              clearErrorText('addUserForm');
+          },
+          success: function (response) {
+              if (response.status == 0) {
+                  $.each(response.error, function (prefix, val) {
+                      $('#addUserForm #input_' + prefix).addClass('is-invalid')
+                      $('#addUserForm span.' + prefix + '_error').text(val)
+                  })
+              }
+
+              if (response.status == 1) {
+                  $('#addUserModal').modal('hide');
+                  getTable();
+
+                  swalWithBootstrapButtons.fire(
+                      'Successful!',
+                      response.msg,
+                      'success'
+                  )
+              }
+          },
+          error: function (response) {
+              errorWarning()
+          }
       });
     } else if (
       result.dismiss === Swal.DismissReason.cancel // click ayaw
       ) {
-      swalWithBootstrapButtons.fire(
-          'Cancelled',
-          'Lets pretend that never happend >:)',
-          'error'
-      )
-  }
-  })
+            swalWithBootstrapButtons.fire(
+               'Cancelled',
+               'Lets pretend that never happend >:)',
+               'error'
+           )
+        }
+      })
   });

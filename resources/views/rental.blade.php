@@ -56,8 +56,8 @@
                     </div>
 
                     <div class="mt-2">
-                        <button type="submit" class="btn btn-primary">Save changes</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Add New Rental</button>
                     </div>
                 </form>
             </div>

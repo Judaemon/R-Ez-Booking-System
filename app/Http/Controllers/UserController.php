@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -27,10 +28,36 @@ class UserController extends Controller
     // Save 
     public function store(Request $request)
     {
-        User::create($request->all());
-        return response()->json([
-            'code'=>0
+        $validated = Validator::make($request->all(), [
+            'username' => 'required|string|max:255|unique:users',
+            'account_type' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
+            'contact_number' => 'required|Numeric',
+            // 'contact_number' => 'required|regex:/^[(][0-9]{2}[)][\s][0-9]{3}[-][0-9]{4}$/',
+            'firstname' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
+            'password' => 'required|string|min:8|max:255',
+
         ]);
+        
+        if ($validated->fails()) {
+            return response()->json([
+                'status' => 0,
+                'error' => $validated->errors()->toArray()
+            ]);
+        }
+
+        User::create($request->all());
+
+        return response()->json([
+            'status'=> 1,
+            'msg' => "New rental has been successfully created."
+        ]);
+
+        // User::create($request->all());
+        // return response()->json([
+        //     'code'=>0
+        // ]);
 
     //    $data = User::make($request, [
     //         'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -51,6 +78,7 @@ class UserController extends Controller
     //         'contact_number' => $data['contact_number'],
     //         'password' => Hash::make($data['password']),
     //     ]);
+
     }
 
     //public function show(User $user)

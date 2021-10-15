@@ -31,41 +31,48 @@
 
                 <div class="form-group mb-2">
                     <label>Email</label>
-                    <input type="text" class="form-control" name="email" placeholder="E-mail Address">
+                    <input type="text" class="form-control" id="input_email" name="email" placeholder="E-mail Address">
+                    <span class="invalid-feedback fw-bold error-text email_error" role="alert"></span>
                 </div>
                
                 <div class="form-group mb-2">
                     <label>Account Type</label>
-                    <input type="text" class="form-control" name="account_type" placeholder="Account Type">
+                    <input type="text" class="form-control" id="input_account_type" name="account_type" placeholder="Account Type">
+                    <span class="invalid-feedback fw-bold error-text account_type_error" role="alert"></span>
                 </div>
 
                 <div class="form-group mb-2">
                     <label>Username</label>
-                    <input type="text" class="form-control" name="username" placeholder="Username">
+                    <input type="text" class="form-control" id="input_username" name="username" placeholder="Username">
+                    <span class="invalid-feedback fw-bold error-text username_error" role="alert"></span>
                 </div>  
 
                 <div class="form-group mb-2">
                     <label>First Name</label>
-                    <input type="text" class="form-control" name="firstname" placeholder="First Name">
+                    <input type="text" class="form-control" id="input_firstname" name="firstname" placeholder="First Name">
+                    <span class="invalid-feedback fw-bold error-text firstname_error" role="alert"></span>
                 </div>
 
                 <div class="form-group mb-2">
                     <label>Last Name</label>
-                    <input type="text" class="form-control" name="lastname" placeholder="Last Name">
+                    <input type="text" class="form-control" id="input_lastname" name="lastname" placeholder="Last Name">
+                    <span class="invalid-feedback fw-bold error-text lastname_error" role="alert"></span>
                 </div>
 
                 <div class="form-group mb-2">
                     <label>Contact Number</label>
-                    <input type="number" class="form-control" name="contact_number" placeholder="Contact Number">
+                    <input type="text" class="form-control" id="input_contact_number" name="contact_number" placeholder="Contact Number">
+                    <span class="invalid-feedback fw-bold error-text contact_number_error" role="alert"></span>
                 </div>
 
                 <div class="form-group mb-2">
                     <label>Password</label>
-                    <input type="text" class="form-control" name="password" placeholder="Password">
+                    <input type="text" class="form-control" id="input_password" name="password" placeholder="Password">
+                    <span class="invalid-feedback fw-bold error-text password_error" role="alert"></span>
                 </div>
 
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save changes</button>
+                <button type="submit" class="btn btn-primary">Add New User</button>
             </form>
         </div>
       </div>
