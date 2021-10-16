@@ -62,7 +62,11 @@ class RoomController extends Controller
 
     public function update(Request $request, Room $room)
     {
-        //
+        $room->update($request->all());
+        return response()->json([
+            'code' => 1,
+            'message' => 'Data Updated successfully!'
+        ]);
     }
 
     public function destroy(Room $room)

@@ -16,8 +16,8 @@ function getRoomTable(page) {
         type: 'GET',
         url: 'showAllRoom',
         success: function (response) {
-            console.log(response);
-            console.log("Room Table Loaded");
+            //console.log(response);
+            //console.log("Room Table Loaded");
             $('#roomTableContainer').html(response);
             $("#roomTable").DataTable({
                 language: {
@@ -65,8 +65,8 @@ function errorWarning() {
 }
 
 // Display Edit Form
-$(document).on('click', '#editBtn', function (event) {
-    const id = ($(this).attr('dataId'));
+$(document).on('click', '#roomUpdateBtn', function (event) {
+    const id = ($(this).attr('room_id'));
     console.log(id);
     const form = this;
     $.ajax({
@@ -75,9 +75,30 @@ $(document).on('click', '#editBtn', function (event) {
         processData: false,
         contentType: false,
         success: function (response) {
-            console.log(response);
+            //console.log(response);
             $('#editRoomForm').html(response);
         },
+    });
+});
+
+// Update Ajax
+$(document).on('submit', '#updateRoomForm', function (event) {
+    event.preventDefault();
+    console.log("update btn test");
+    const form = this;
+    $.ajax({
+        url: $(form).attr('action'),
+        method: $(form).attr('method'),
+        dataType: 'JSON',
+        data: new FormData(form),
+        processData: false,
+        contentType: false,
+        success: function (response) {
+            //console.log(response);
+            $('#updateRoomModal').modal('hide');
+            getRoomTable();
+        },
+    
     });
 });
 
@@ -95,7 +116,7 @@ $(document).on('submit', '.deleteRoom', function (event) {
 
     }).then((result) => {
         if (result.isConfirmed) {
-            console.log("Checking Delete Form");
+            //console.log("Checking Delete Form");
             const form = this;
 
             $.ajax({
@@ -150,7 +171,7 @@ $('#addRoomForm').on('submit', function (event) {
 
     }).then((result) => {
         if (result.isConfirmed) {
-            console.log("Checking Add Form");
+            //console.log("Checking Add Form");
             const form = this;
 
             $.ajax({

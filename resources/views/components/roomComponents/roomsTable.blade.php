@@ -28,7 +28,7 @@
     
                     {{-- div for copying the interaction btn and form above --}}
                     <div style="display: block; margin-top: 0em; margin-block-end: 1em;">
-                        <button room_ID="{{$room->id}}" type='button' class='btn btn-info mx-2 myButton' id='roomUpdateBtn' data-bs-toggle='modal'
+                        <button room_id="{{$room->id}}" type='button' class='btn btn-info mx-2 myButton' id='roomUpdateBtn' data-bs-toggle='modal'
                         data-bs-target='#updateRoomModal'>Update</button>
                     </div>
                 </div>
