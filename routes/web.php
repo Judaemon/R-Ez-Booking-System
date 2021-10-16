@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\RentalController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\TransactionsController;
@@ -22,6 +23,8 @@ Route::get('/user', [HomeController::class, 'index'])->name('home');
 
 // profile link
 Route::get('/viewProfile', [HomeController::class, 'viewProfile'])->name('viewProfile');
+Route::get('/editProfile', [HomeController::class, 'editProfile'])->name('editProfile');
+Route::post('/updateProfile', [HomeController::class, 'updateProfile'])->name('updateProfile');
 
 // for user only links
 Route::group([
