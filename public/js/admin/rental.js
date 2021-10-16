@@ -8,7 +8,7 @@ const swalWithBootstrapButtons = Swal.mixin({
 });
 
 $(function () {
-    console.log("rental loaded");
+    //console.log("rental loaded");
     getRentalTable();
 });
 
@@ -17,8 +17,8 @@ function getRentalTable(page) {
         type: 'GET',
         url: 'showAllRental',
         success: function (response) {
-            console.log(response);
-            console.log("Rental Table Loaded");
+            //console.log(response);
+            //console.log("Rental Table Loaded");
             $('#rentalTableContainer').html(response);
             $("#rentalTable").DataTable({
                 language: {
@@ -178,4 +178,41 @@ $('#addRentalForm').on('submit', function (event) {
             )
         }
     })
+});
+
+// Display Edit Form
+$(document).on('click', '#rentalUpdateBtn', function (event) {
+    const id = ($(this).attr('room_id'));
+    console.log(id);
+    const form = this;
+    $.ajax({
+        method: 'GET',
+        url: 'rental/' + id + '/edit/',
+        processData: false,
+        contentType: false,
+        success: function (response) {
+            //console.log(response);
+            $('#editRentalForm').html(response);
+        },
+    });
+});
+
+// Update Ajax
+$(document).on('submit', '#updateRentalForm', function (event) {
+    event.preventDefault();
+    //console.log("update btn test");
+    const form = this;
+    $.ajax({
+        url: $(form).attr('action'),
+        method: $(form).attr('method'),
+        dataType: 'JSON',
+        data: new FormData(form),
+        processData: false,
+        contentType: false,
+        success: function (response) {
+            //console.log(response);
+            $('#updateRentalModal').modal('hide');
+            getRentalTable();
+        },
+    });
 });

@@ -1,5 +1,6 @@
-<form id="updateRoomForm" method="GET" action="{{route('room.update',$room->id)}}">
+<form id="updateRoomForm" method="POST" action="{{route('room.update',$room->id)}}">
     @csrf
+    @method('PUT')
     <div class="form-group">
         <label>Name</label>
         <input type="text" class="form-control" name="name" value="{{$room->name}}" >
@@ -17,7 +18,7 @@
 
     <div class="form-group">
         <label>Picture</label>
-        <input type="text" class="form-control" name="picture"value="{{$room->number}}" >
+        <input type="text" class="form-control" name="picture" value="{{$room->picture}}" >
     </div>
 
     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
