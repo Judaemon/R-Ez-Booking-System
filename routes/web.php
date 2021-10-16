@@ -48,6 +48,9 @@ Route::group([
 
     // Dapat ma move yung mga route ng tables sa ganto kasi mali yung pag gamit ng show method
     Route::get('showAllRental', [RentalController::class, 'showAllRental'])->name('showAllRental');
+    Route::get('showAllUser', [UserController::class, 'showAllUser'])->name('showAllUser');
+    Route::get('showAllRoom', [RoomController::class, 'showAllRoom'])->name('showAllRoom');
+
     Route::get('showAllTransaction', [TransactionsController::class, 'showAllTransaction'])->name('showAllTransaction');
     
     Route::get('getAllTransaction', [TransactionsController::class, 'getAllTransaction'])->name('getAllTransaction');

@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Room;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Validator;
+
 class RoomController extends Controller
 {
     public function index()
@@ -21,16 +23,36 @@ class RoomController extends Controller
 
     public function store(Request $request)
     {
+        // Room::create($request->all());
+        // return response()->json([
+        //     'code'=>0
+        // ]);
+        $validated = Validator::make($request->all(), [
+            'name' => 'required|string|max:255|unique:rooms',
+            'description' => 'required|string|max:255',
+            'price' => 'required|Numeric',
+            'picture' => 'required|string|max:255',
+        ]);
+        
+        if ($validated->fails()) {
+            return response()->json([
+                'status' => 0,
+                'error' => $validated->errors()->toArray()
+            ]);
+        }
+
         Room::create($request->all());
+
         return response()->json([
-            'code'=>0
+            'status'=> 1,
+            'msg' => "New rental has been successfully created."
         ]);
     }
 
     public function show()
     {
-        $rooms = DB::table('rooms')->get();
-        return view('components.roomComponents.roomsTable', compact('rooms'));
+        // $rooms = DB::table('rooms')->get();
+        // return view('components.roomComponents.roomsTable', compact('rooms'));
     }
 
     public function edit(Room $room)
@@ -40,7 +62,11 @@ class RoomController extends Controller
 
     public function update(Request $request, Room $room)
     {
-        //
+        $room->update($request->all());
+        return response()->json([
+            'code' => 1,
+            'message' => 'Data Updated successfully!'
+        ]);
     }
 
     public function destroy(Room $room)
@@ -48,14 +74,22 @@ class RoomController extends Controller
         $query = $room->delete();
         $room->delete();
 
-        if($query){
+        if(!$query){
             return response()->json([
+                'code' => 0,
                 'message' => 'Data deleted successfully!'
-                ]);
-        }else{
-            return response()->json([
-                'message' => 'Data deleted unsuccessfully!'
-                ]);
+            ]);
         }
+
+        return response()->json([
+            'code' => 1,
+            'message' => 'Data deleted unsuccessfully!'
+        ]);
+    }
+    
+    public function showAllRoom()
+    {
+        $rooms = DB::table('rooms')->get();
+        return view('components.roomComponents.roomsTable', compact('rooms'));
     }
 }

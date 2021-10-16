@@ -11,17 +11,17 @@ $(function () {
     console.log("Transaction loaded");
     // const event = getEvents()
     // console.log(event);
-    fetchDishTable();
+    fetchTransactionTable();
     // renderCalendar();
 });
 
-function fetchDishTable() {
+function fetchTransactionTable() {
     $.ajax({
         type: "GET",
         url: "showAllTransaction",
         success: function (response) {
             console.log(response);
-            console.log("Dish Table Loaded");
+            console.log("Transaction Table Loaded");
             $("#transactionTableContainer").html(response);
             $("#transactionTable").DataTable({
                 language: {
@@ -33,7 +33,7 @@ function fetchDishTable() {
                     "<'row'<'col-sm-12'tr>>" +
                     "<'row'<'col-md-12'p>>",
             });
-            addBtnDishTable();
+            addBtnTransactionTable();
         },
         error: function () {
             errorNotif();
@@ -41,7 +41,7 @@ function fetchDishTable() {
     });
 }
 
-function addBtnDishTable() {
+function addBtnTransactionTable() {
     const html = `<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTransactionModal" style="width: 100%;">Add Transaction</button>`;
     $(".transactionAddBtn").html(html);
 }
