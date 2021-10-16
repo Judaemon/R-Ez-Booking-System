@@ -17,8 +17,8 @@ $(function () {
         type: 'GET',
         url: 'showAllUser',
         success: function (response) {
-          console.log(response);
-          console.log("User Table Loaded");
+          //console.log(response);
+          //console.log("User Table Loaded");
           $('#userTableContainer').html(response);
           $("#userTable").DataTable({
               language: {
@@ -79,7 +79,7 @@ function errorWarning() {
       
       }).then((result) => {
       if (result.isConfirmed) {
-    console.log("Checking Delete Form");
+    //console.log("Checking Delete Form");
     const form = this;
 
     $.ajax({
@@ -134,7 +134,7 @@ function errorWarning() {
       
       }).then((result) => {
       if (result.isConfirmed) {
-      console.log("Checking Add Form");
+      //console.log("Checking Add Form");
       const form = this;
   
     $.ajax({
@@ -190,3 +190,40 @@ function errorWarning() {
         }
       })
   });
+
+// Display Edit Form
+$(document).on('click', '#userUpdateBtn', function (event) {
+  const id = ($(this).attr('user_id'));
+  //console.log("test edit btn");
+  //const form = this;
+  $.ajax({
+      method: 'GET',
+      url: 'user/' + id + '/edit/',
+      processData: false,
+      contentType: false,
+      success: function (response) {
+          //console.log(response);
+          $('#editUserForm').html(response);
+      },
+  });
+});
+
+// Update Ajax
+$(document).on('submit', '#updateUserForm', function (event) {
+  event.preventDefault();
+  //console.log("update btn test");
+  const form = this;
+  $.ajax({
+      url: $(form).attr('action'),
+      method: $(form).attr('method'),
+      dataType: 'JSON',
+      data: new FormData(form),
+      processData: false,
+      contentType: false,
+      success: function (response) {
+          //console.log(response);
+          $('#updateUserModal').modal('hide');
+          getTable();
+      },
+  });
+});

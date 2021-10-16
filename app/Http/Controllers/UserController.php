@@ -94,13 +94,17 @@ class UserController extends Controller
     // Show form
     public function edit(User $user)
     {
-        //
+        return view('components.userComponents.updateUserForm',compact('user'));
     }
 
     // Update
     public function update(Request $request, User $user)
     {
-        //
+        $user->update($request->all());
+        return response()->json([
+            'code' => 1,
+            'message' => 'Data Updated successfully!'
+        ]);
     }
 
     // Delete
@@ -122,6 +126,6 @@ class UserController extends Controller
     public function showAllUser()
     {
         $users = DB::table('users')->get();
-        return view('components.adminComponents.userTable', compact('users'));
+        return view('components.userComponents.userTable', compact('users'));
     }
 }
