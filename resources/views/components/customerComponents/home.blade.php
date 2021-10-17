@@ -1,18 +1,41 @@
 @extends('layouts.app')
 
 @section('script')
-    <script src="{{ asset('js/customer/customer.js') }}"></script>
+<script src="{{ asset('js/transaction.js') }}"></script>
+
+{{-- <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"
+    integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
+    integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+    $(function () {
+        // $('#datepicker').datepicker();
+
+        var nowDate = new Date();
+        var today = new Date(nowDate.getFullYear(), nowDate.getMonth(),
+            nowDate.getDate(), 0, 0, 0, 0);
+
+        $('.input-daterange input').each(function () {
+            console.log("asd");
+            $(this).datepicker({
+                format: 'yyyy-mm-dd',
+                todayHighlight: true,
+                startDate: today,
+                // beforeShowDay: unavailable,
+            });
+        });
+    })
+
+</script> --}}
 @endsection
 
 <style>
-    .myBorder {
-        border: 2px solid red;
-    }
-
     #test {
-
         background: url('{{ URL::asset('/img/welcome_page/welcomecoverphoto.png') }}') no-repeat center center fixed;
-        /* background: url('https://source.unsplash.com/twukN12EN7c/1920x1080') no-repeat center center fixed; */
         -webkit-background-size: cover;
         -moz-background-size: cover;
         background-size: cover;
@@ -23,7 +46,7 @@
 
 @section('content')
 <div id="test" class="">
-    <div class="row justify-content-center p-5 m-0">
+    <div class="row justify-content-center p-2 p-md-5 m-0">
         <div class="border border-white rounded-2 border-3 row bg-primary mx-2 w-100 ">
             <form class="text-white">
                 <div class="row">
@@ -35,17 +58,19 @@
 
                             <span class="invalid-feedback fw-bold error-text title_error"></span>
                         </div>
+
                         <div class="row">
-                            <div class="form-group col-12 col-md-6">
+                            <div class="form-group col-12 col-md-6 ">
                                 <label for="start" class="col-md-5 col-form-label">Check In</label>
-                                <input id="start" type="date" class="m-0 form-control" name="start"
-                                    placeholder="dd/mm/yy">
+                                <input id="start" type="date" min class="m-0 form-control" name="start"
+                                    placeholder="yyyy/mm/dd">
 
                                 <span class="invalid-feedback fw-bold error-text start_error"></span>
                             </div>
-                            <div class="form-group col-12 col-md-6">
+                            <div class="form-group col-12 col-md-6 ">
                                 <label for="end" class="col-md-5 col-form-label">Check Out</label>
-                                <input id="end" type="date" class="m-0 form-control" name="end" placeholder="dd/mm/yy">
+                                <input id="end" type="date" min="2021-10-17" class="m-0 form-control" name="end"
+                                    placeholder="yyyy/mm/dd">
 
                                 <span class="invalid-feedback fw-bold error-text end_error"></span>
                             </div>
@@ -78,23 +103,49 @@
                     <div class="col-12 col-md-5">
                         <div id="menu">
                             <div class="panel list-group">
-                                <a href="#" class="col-md-12" data-bs-toggle="collapse"
-                                    data-bs-target="#roomsContainer" data-bs-parent="#menu" aria-expanded="true">
+                                <a href="#" class="col-md-12" data-bs-toggle="collapse" data-bs-target="#roomsContainer"
+                                    data-bs-parent="#menu" aria-expanded="true">
                                     <label for="description" class="col-md-5 col-form-label text-white">Select
                                         Rooms</label>
                                     <i class="bi bi-house-fill"></i>
                                     <span class="glyphicon glyphicon-envelope pull-right"></span>
                                 </a>
                                 <div id="roomsContainer" class="sublinks collapse show">
-                                    <a href="#" class="list-group-item small"><span
-                                            class="glyphicon glyphicon-chevron-right"></span>
-                                        inbox</a>
-                                    <a class="list-group-item small "><span
-                                            class="glyphicon glyphicon-chevron-right"></span> sent</a>
+                                    {{-- <div class="bg-light text-black p-2 row">
+                                        <div class="col-12 col-md-9" data-bs-toggle="modal" data-bs-target="#viewRoomInfoModal">
+                                            Room type (min to max people)
+                                        </div>
+                                        <div class="col-12 col-md-3">
+                                            <button class="btn btn-primary selectRoomBtn h-100">Book</button> 
+                                        </div>
+                                    </div>
+                                    <div class="modal fade " id="viewRoomInfoModal" tabindex="-1" aria-labelledby="viewRoomInfoModal" aria-hidden="true">
+                                        <div class="modal-dialog modal-xl modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="viewRoomInfoModal">Room Information</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body row text-black">
+                                                    <div class="col-12 col-md-4">
+                                                        <img class="w-75" src="{{ URL::asset('img\superior_room\superior1.jpg'); }}" alt="">
+                                                    </div>
+                                                    <div class="col-12 col-md-8">
+                                                        <h3>name</h3>
+                                                        <p class="my-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, corrupti dignissimos. Enim, cupiditate earum quas dolores, obcaecati inventore, odit cum doloribus atque quaerat ut exercitationem eum accusantium autem veritatis harum.</p>
+                                                        <div class="d-flex justify-content-between">
+                                                            <div class="col-12 col-md-6">capacity</div>
+                                                            <div class="col-12 col-md-6 text-right">price</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> --}}
                                 </div>
 
-                                <a href="#" class="col-md-12" data-bs-toggle="collapse"
-                                    data-bs-target="#sl" data-bs-parent="#menu">
+                                <a href="#" class="col-md-12" data-bs-toggle="collapse" data-bs-target="#sl"
+                                    data-bs-parent="#menu">
                                     <label for="description" class="col-md-5 col-form-label text-white">Select
                                         Rentals</label>
                                     <i class="bi bi-house-fill"></i>
@@ -115,69 +166,4 @@
         </div>
     </div>
 </div>
-
-{{-- <div class="bg-image" style="background-image: url('https://mdbootstrap.com/img/new/standard/city/041.jpg'); height: 400px;">
-    </div> --}}
-{{-- <div class="border border-primary rounded-2 border-3 row">
-        <div class="col-md-7">
-            <div class="myBorder">
-                <h1>booking details</h1>
-            </div>
-            <div class="myBorder">
-                <h1>Extra information</h1>
-            </div>
-        </div>
-        <div class="col-md-5">
-            <div class="myBorder ">
-                <h1>Items Container</h1>
-            </div>
-        </div>
-    </div> --}}
-{{-- <div>
-        <div class="list-group" id="myTab" role="tablist">
-            <a class="list-group-item list-group-item-action active" data-bs-toggle="list" href="#home"
-                role="tab">Home</a>
-            <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#profile"
-                role="tab">Profile</a>
-            <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#messages"
-                role="tab">Messages</a>
-            <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#settings"
-                role="tab">Settings</a>
-        </div>
-
-        <div class="tab-content">
-            <div class="tab-pane active" id="home" role="tabpanel">...</div>
-            <div class="tab-pane" id="profile" role="tabpanel">...</div>
-            <div class="tab-pane" id="messages" role="tabpanel">...</div>
-            <div class="tab-pane" id="settings" role="tabpanel">...</div>
-        </div>
-
-        <script>
-            var firstTabEl = document.querySelector('#myTab a:last-child')
-            var firstTab = new bootstrap.Tab(firstTabEl)
-
-            firstTab.show()
-
-        </script>
-    </div> --}}
-{{-- <div id="menu">
-        <div class="panel list-group">
-            <a href="#" class="list-group-item" data-bs-toggle="collapse" data-bs-target="#roomsConateiner"
-                data-bs-parent="#menu">Select Rooms
-                <i class="bi bi-house-fill"></i>
-                <span class="glyphicon glyphicon-envelope pull-right"></span></a>
-            <div id="roomsConateiner" class="sublinks collapse">
-                <a href="#" class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span>
-                    inbox</a>
-                <a class="list-group-item small "><span class="glyphicon glyphicon-chevron-right"></span> sent</a>
-            </div>
-            <a href="#" class="list-group-item" data-bs-toggle="collapse" data-bs-target="#sl"
-                data-bs-parent="#menu">TASKS <span class="glyphicon glyphicon-tag pull-right"></span></a>
-            <div id="sl" class="sublinks collapse">
-                <a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span> saved tasks</a>
-                <a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span> add new
-                    task</a>
-            </div>
-        </div>
-    </div> --}}
 @endsection

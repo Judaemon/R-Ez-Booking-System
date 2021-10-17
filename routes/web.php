@@ -8,6 +8,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\RentalController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\TransactionsController;
+use App\Http\Controllers\CustomerController;
+use App\Models\Transactions;
 
 Route::get('/', function () {
     return view('welcome');
@@ -23,12 +25,19 @@ Route::get('/user', [HomeController::class, 'index'])->name('home');
 // profile link
 Route::get('/viewProfile', [HomeController::class, 'viewProfile'])->name('viewProfile');
 
+// Booking links
+Route::post('getAvailableRooms', [TransactionsController::class, 'getAvailableRooms'])->name('getAvailableRooms');
+
+// Transactions links
+// Route::get('showAllTransaction', [TransactionsController::class, 'showAllTransaction'])->name('showAllTransaction');
+
 // for user only links
 Route::group([
     'prefix' => 'user', // for specifying url example admin/user (can be removed)
     'middleware' => ['auth', 'user']
 ],function () {
     // all paths for customer only
+    Route::resource('customer', customerController::class);
 });
 
 // for admin only links
