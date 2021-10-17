@@ -55,12 +55,16 @@ class RentalController extends Controller
 
     public function edit(Rental $rental)
     {
-        //
+        return view('components.rentalComponents.updateRentalForm',compact('rental'));
     }
 
     public function update(Request $request, Rental $rental)
     {
-        //
+        $rental->update($request->all());
+        return response()->json([
+            'code' => 1,
+            'message' => 'Data Updated successfully!'
+        ]);
     }
 
     public function destroy(Rental $rental)

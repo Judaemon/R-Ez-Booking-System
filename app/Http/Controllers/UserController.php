@@ -86,8 +86,7 @@ class UserController extends Controller
     {
         // $users = DB::table('users')->where('preferences->dining->meal', 'salad')->get();
         // resources\views\components\adminComponents\userTable.blade.php
-        $users = DB::table('users')->get();
-        return view('components.adminComponents.userTable', compact('users'));
+        
         // $rooms = DB::table('users')->get();
         // return view('components.roomComponents.roomsTable', compact('users'));
     }
@@ -95,13 +94,17 @@ class UserController extends Controller
     // Show form
     public function edit(User $user)
     {
-        //
+        return view('components.userComponents.updateUserForm',compact('user'));
     }
 
     // Update
     public function update(Request $request, User $user)
     {
-        //
+        $user->update($request->all());
+        return response()->json([
+            'code' => 1,
+            'message' => 'Data Updated successfully!'
+        ]);
     }
 
     // Delete
@@ -119,5 +122,10 @@ class UserController extends Controller
                 'message' => 'Data deleted unsuccessfully!'
                 ]);
         }
+    }
+    public function showAllUser()
+    {
+        $users = DB::table('users')->get();
+        return view('components.userComponents.userTable', compact('users'));
     }
 }

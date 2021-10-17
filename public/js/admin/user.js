@@ -15,13 +15,41 @@ $(function () {
   function getTable(page){
       $.ajax({
         type: 'GET',
-        url: 'user/show?page='+page,
-        success:function(response){
-            //console.log("user loaded");
-          $('#userTable').html(response);
+        url: 'showAllUser',
+        success: function (response) {
+          //console.log(response);
+          //console.log("User Table Loaded");
+          $('#userTableContainer').html(response);
+          $("#userTable").DataTable({
+              language: {
+                  search: '',
+                  searchPlaceholder: "Search..."
+              },
+              dom: "<'row mb-3'<'col-md-6'f><'col-md-6' <'UserAddBtn'>>>" +
+                  "<'row'<'col-md-6'l><'col-md-6'i>>" +
+                  "<'row'<'col-sm-12'tr>>" +
+                  "<'row'<'col-md-12'p>>",
+          });
+          addBtnUserTable();
+      },
+      error: function () {
+          errorNotif();
         },
     });
   }
+
+function addBtnUserTable() {
+    const html = `<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal" style="width: 100%;">Add User</button>`;
+    $(".UserAddBtn").html(html);
+}
+
+function errorNotif() {
+    swalWithBootstrapButtons.fire(
+        'Error! ',
+        'Something went wrong! Please try agan later.',
+        'error'
+    )
+}
 
   function clearErrorText(formID) {
     $('#' + formID + ' input').removeClass('is-invalid')
@@ -51,7 +79,7 @@ function errorWarning() {
       
       }).then((result) => {
       if (result.isConfirmed) {
-    console.log("Checking Delete Form");
+    //console.log("Checking Delete Form");
     const form = this;
 
     $.ajax({
@@ -106,7 +134,7 @@ function errorWarning() {
       
       }).then((result) => {
       if (result.isConfirmed) {
-      console.log("Checking Add Form");
+      //console.log("Checking Add Form");
       const form = this;
   
     $.ajax({
@@ -139,7 +167,7 @@ function errorWarning() {
               if (response.status == 1) {
                   $('#addUserModal').modal('hide');
                   getTable();
-
+                  $(form)[0].reset();
                   swalWithBootstrapButtons.fire(
                       'Successful!',
                       response.msg,
@@ -162,3 +190,40 @@ function errorWarning() {
         }
       })
   });
+
+// Display Edit Form
+$(document).on('click', '#userUpdateBtn', function (event) {
+  const id = ($(this).attr('user_id'));
+  //console.log("test edit btn");
+  //const form = this;
+  $.ajax({
+      method: 'GET',
+      url: 'user/' + id + '/edit/',
+      processData: false,
+      contentType: false,
+      success: function (response) {
+          //console.log(response);
+          $('#editUserForm').html(response);
+      },
+  });
+});
+
+// Update Ajax
+$(document).on('submit', '#updateUserForm', function (event) {
+  event.preventDefault();
+  //console.log("update btn test");
+  const form = this;
+  $.ajax({
+      url: $(form).attr('action'),
+      method: $(form).attr('method'),
+      dataType: 'JSON',
+      data: new FormData(form),
+      processData: false,
+      contentType: false,
+      success: function (response) {
+          //console.log(response);
+          $('#updateUserModal').modal('hide');
+          getTable();
+      },
+  });
+});

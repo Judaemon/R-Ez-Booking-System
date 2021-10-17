@@ -33,7 +33,7 @@ class HomeController extends Controller
         return view('components\adminComponents\home');
     }
 
-    public function viewProfile(User $user)
+    public function viewProfile()
     {
         $user = Auth::user();
 
@@ -43,12 +43,19 @@ class HomeController extends Controller
     }
 
     // if user wants to edit their own information 
-    public function edit(Request $user)
+    public function editProfile()
     {
-        $user = Auth::user();
-
-        // dd($user); // for testing
-
-        return view('profile', compact('user'));
+        $profile = Auth::user();
+        return view('components.profileComponents.profileEdit', compact('profile'));
     }
+
+    public function updateProfile(Request $request, User $user)
+    {
+        dd($request);
+        $user->update($request->all());
+        // $user = Auth::user();
+        return redirect()->route('viewProfile', compact('user'));
+    }
+
+
 }
