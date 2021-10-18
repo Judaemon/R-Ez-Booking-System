@@ -2,21 +2,167 @@
 
 @section('content')
 
-<form method="POST" action="{{route('updateProfile',$profile->id)}}">
-    {{-- @method('PUT') --}}
-    @csrf
-    <h1>{{$profile->username}}</h1>
-    <h1>{{$profile->id}}</h1>
-    <input type="text" type="hidden" class="form-control" name="id" value="{{$profile['id']}}">
-    <input type="text" class="form-control" name="account_type" value="{{$profile['account_type']}}">
-    <input type="text" class="form-control" name="username" value="{{$profile->username}}">
-    <input type="text" class="form-control" name="firstname" value="{{$profile->firstname}}">
-    <input type="text" class="form-control" name="lastname" value="{{$profile->lastname}}">
-    <input type="text" class="form-control" name="contact_number" value="{{$profile->contact_number}}">
-    <input type="text" class="form-control" name="address" value="{{$profile->address}}">
-    <input type="text" class="form-control" name="email" value="{{$profile->email}}">
-    <input type="text" class="form-control" name="password" value="{{$profile->password}}">
+<div class="container p-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">{{ __('Update') }}</div>
 
-    <button type="submit" class="btn btn-primary">Update</button>
-</form>
-@endsection 
+                <div class="card-body">
+                    <form method="POST" action="{{route('updateProfile',$profile->id)}}">
+                        @csrf
+                        <input type="text" type="hidden" name="id" value="{{$profile['id']}}" hidden>
+
+                        {{-- First name and Last name --}}
+                        <div class="row">
+                            <div class="form-group col-12 col-md-6">
+                                <label for="firstname" class="col-md-5 col-form-label">{{ __('First Name') }}</label>
+
+                                <div class="col-md-12">
+                                    <input id="firstname" type="text"
+                                        class="m-0 form-control @error('firstname') is-invalid @enderror"
+                                        name="firstname" value="{{$profile->firstname}}" autofocus>
+
+                                    @error('firstname')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group col-12 col-md-6">
+                                <label for="lastname" class="col-md-5 col-form-label">{{ __('Last Name') }}</label>
+
+                                <div class="col-md-12">
+                                    <input id="lastname" type="text"
+                                        class="m-0 form-control @error('lastname') is-invalid @enderror" name="lastname"
+                                        value="{{$profile->lastname}}">
+
+                                    @error('lastname')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- Username and Email --}}
+                        <div class="row">
+                            <div class="form-group col-12 col-md-6">
+                                <label for="username" class="col-md-5 col-form-label">{{ __('Username') }}</label>
+
+                                <div class="col-md-12">
+                                    <input id="username" type="text"
+                                        class="m-0 form-control @error('username') is-invalid @enderror" name="username"
+                                        value="{{$profile->username}}" readonly>
+
+                                    @error('username')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group col-12 col-md-6">
+                                <label for="email" class="col-md-7 col-form-label">{{ __('E-Mail Address') }}</label>
+
+                                <div class="col-md-12">
+                                    <input id="email" type="email"
+                                        class="m-0 form-control @error('email') is-invalid @enderror" name="email"
+                                        value="{{$profile->email}}">
+
+                                    @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group col-12 col-md-6">
+                                <label for="contact_number"
+                                    class="col-md-7 col-form-label">{{ __('Contact Number') }}</label>
+
+                                <div class="col-md-12">
+                                    <input id="contact_number" type="number"
+                                        class="m-0 form-control @error('contact_number') is-invalid @enderror"
+                                        name="contact_number" value="{{$profile->contact_number}}">
+
+                                    @error('contact_number')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group col-12 col-md-6">
+                                <label for="address" class="col-md-5 col-form-label">{{ __('Address') }}</label>
+
+                                <div class="col-md-12">
+                                    <input id="address" type="text"
+                                        class="m-0 form-control @error('address') is-invalid @enderror" name="address"
+                                        value="{{$profile->address}}">
+
+                                    @error('address')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- Password --}}
+                        <div class="row">
+                            <div class="form-group col-12 col-md-6">
+                                <label for="password" class="col-md-4 col-form-label">{{ __('Password') }}</label>
+
+                                <div class="col-md-12">
+                                    <input id="password" type="password"
+                                        class="m-0 form-control @error('password') is-invalid @enderror"
+                                        name="password">
+
+                                    @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group col-12 col-md-6">
+                                <label for="password_confirmation"
+                                    class="col-md-7 col-form-label">{{ __('Confirm Password') }}</label>
+
+                                <div class="col-md-12">
+                                    <input id="password_confirmation" type="password"
+                                        class="m-0 form-control @error('password_confirmation') is-invalid @enderror"
+                                        name="password_confirmation">
+
+                                    @error('password_confirmation')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row mt-3">
+                            <div class="col-md-12 text-right">
+                                <button type="submit" class="mr-3 btn btn-primary">
+                                    Update
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

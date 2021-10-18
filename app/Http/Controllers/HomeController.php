@@ -6,6 +6,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class HomeController extends Controller
 {
@@ -51,20 +53,33 @@ class HomeController extends Controller
 
     public function updateProfile(Request $request)
     {
-        // //dd($request->all());
-        // $user->update($request->all());
-        // //$user = $request->all();
-        // // $user = Auth::user();
-        // return redirect()->route('viewProfile', compact('user'));
+        //  $validated = Validator::make($request, [
+        //     'firstname' => ['required', 'string', 'max:255'],
+        //     'lastname' => ['required', 'string', 'max:255'],
+        //     'username' => ['required', 'string', 'max:255', 'unique:users'],
+        //     'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+        //     'contact_number' => ['required', 'string', 'max:255', 'unique:users', 'regex:/^(09)[0-9]{9}$/'],
+        //     'address' => ['required','string', 'max:255'],
+        //     'password' => ['required', 'string', 'min:8', 'confirmed'],
+        //     'password_confirmation'=> ['required', 'string', 'min:8'],
+        // ]);
+        $validated = $request->validate([
+            'firstname' => ['required', 'string', 'max:255'],
+            'lastname' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'contact_number' => ['required', 'string', 'max:255'],
+            'address' => ['required','string', 'max:255'],
+            'password' => ['nullable', 'string', 'min:8', 'confirmed'],
+            'password_confirmation'=> ['nullable', 'string', 'min:8'],
+        ]);
+        
         $data = User::find($request->id);
-        $data->account_type=$request->account_type;
-        $data->username=$request->username;
         $data->firstname=$request->firstname;
         $data->lastname=$request->lastname;
+        $data->email=$request->email;
         $data->contact_number=$request->contact_number;
         $data->address=$request->address;
-        $data->email=$request->email;
-        $data->email=$request->email;
+        $data->password= Hash::make($request->password);
         $data->save();
         return redirect()->route('viewProfile');
     }
