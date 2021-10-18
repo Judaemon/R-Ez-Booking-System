@@ -82,7 +82,7 @@
                             </div>
 
                             <div class="form-group col-12 col-md-6">
-                                <label for="contact_number" class="col-md-7 col-form-label">{{ __('Contact Numer') }}</label>
+                                <label for="contact_number" class="col-md-7 col-form-label">{{ __('Contact Number') }}</label>
 
                                 <div class="col-md-12">
                                     <input id="contact_number" type="number"
@@ -96,8 +96,24 @@
                                     @enderror
                                 </div>
                             </div>
-                        </div>
 
+                                <div class="form-group col-12 col-md-6">
+                                    <label for="address" class="col-md-5 col-form-label">{{ __('Address') }}</label>
+
+                                    <div class="col-md-12">
+                                        <input id="address" type="text"
+                                            class="m-0 form-control @error('address') is-invalid @enderror" name="address"
+                                            value="{{ old('address') }}" required autocomplete="address">
+
+                                        @error('address')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                        </div>          
+                        
                         {{-- Password --}}
                         <div class="row">
                             <div class="form-group col-12 col-md-6">
