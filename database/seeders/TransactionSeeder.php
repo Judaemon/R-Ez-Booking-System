@@ -40,8 +40,8 @@ class TransactionSeeder extends Seeder
                 'total_price' => '2',
                 'status' => 'Transaction Status',
                 'title' => 'Transaction Title',
-                'start' => '2021-25-10',
-                'end' => '2021-28-10',
+                'start' => '2021-10-25',
+                'end' => '2021-10-28',
                 'description' => 'Transaction Description',
             ],
             [
@@ -52,8 +52,8 @@ class TransactionSeeder extends Seeder
                 'total_price' => '3',
                 'status' => 'Transaction Status',
                 'title' => 'Transaction Title',
-                'start' => '2021-29-10',
-                'end' => '2021-1-11',
+                'start' => '2021-10-29',
+                'end' => '2021-11-1',
                 'description' => 'Transaction Description',
             ],
             [
@@ -64,8 +64,8 @@ class TransactionSeeder extends Seeder
                 'total_price' => '4',
                 'status' => 'Transaction Status',
                 'title' => 'Transaction Title',
-                'start' => '2021-5-11',
-                'end' => '2021-8-11',
+                'start' => '2021-11-5',
+                'end' => '2021-11-8',
                 'description' => 'Transaction Description',
             ],
         ];
