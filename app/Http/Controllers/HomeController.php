@@ -49,12 +49,24 @@ class HomeController extends Controller
         return view('components.profileComponents.profileEdit', compact('profile'));
     }
 
-    public function updateProfile(Request $request, User $user)
+    public function updateProfile(Request $request)
     {
-        dd($request);
-        $user->update($request->all());
-        // $user = Auth::user();
-        return redirect()->route('viewProfile', compact('user'));
+        // //dd($request->all());
+        // $user->update($request->all());
+        // //$user = $request->all();
+        // // $user = Auth::user();
+        // return redirect()->route('viewProfile', compact('user'));
+        $data = User::find($request->id);
+        $data->account_type=$request->account_type;
+        $data->username=$request->username;
+        $data->firstname=$request->firstname;
+        $data->lastname=$request->lastname;
+        $data->contact_number=$request->contact_number;
+        $data->address=$request->address;
+        $data->email=$request->email;
+        $data->email=$request->email;
+        $data->save();
+        return redirect()->route('viewProfile');
     }
 
 
