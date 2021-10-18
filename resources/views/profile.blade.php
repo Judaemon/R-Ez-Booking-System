@@ -6,7 +6,7 @@
 
 @section('content')
 
-    <div class="container">
+    <div class="container p-3">
         <div class="main-body">
         
               <div class="row gutters-sm">
