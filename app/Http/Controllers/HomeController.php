@@ -79,7 +79,9 @@ class HomeController extends Controller
         $data->email=$request->email;
         $data->contact_number=$request->contact_number;
         $data->address=$request->address;
-        $data->password= Hash::make($request->password);
+        if ($request->password != null) {
+            $data->password= Hash::make($request->password);
+        }
         $data->save();
         return redirect()->route('viewProfile');
     }
