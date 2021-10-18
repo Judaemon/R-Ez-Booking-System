@@ -51,7 +51,7 @@
 
 </style>
 
-<div class="container">
+<div class="container p-3">
     <h1>Rooms</h1>
 </div>
 
