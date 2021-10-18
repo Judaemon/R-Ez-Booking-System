@@ -26,6 +26,13 @@ Route::get('/viewProfile', [HomeController::class, 'viewProfile'])->name('viewPr
 Route::get('/editProfile', [HomeController::class, 'editProfile'])->name('editProfile');
 Route::post('/updateProfile', [HomeController::class, 'updateProfile'])->name('updateProfile');
 
+// welcome page paths
+Route::view('/gallery', 'gallery')->name('gallery');
+Route::view('/activities', 'activities')->name('activities');
+Route::view('/contact', 'contact')->name('contact');
+
+
+
 // for user only links
 Route::group([
     'prefix' => 'user', // for specifying url example admin/user (can be removed)
