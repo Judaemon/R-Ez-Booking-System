@@ -11,34 +11,35 @@ $(function () {
     console.log("Transaction loaded");
     // const event = getEvents()
     // console.log(event);
-    fetchTransactionTable();
-    // renderCalendar();
+    //fetchTransactionTable();
+    renderCalendar();
 });
 
 function fetchTransactionTable() {
-    $.ajax({
-        type: "GET",
-        url: "showAllTransaction",
-        success: function (response) {
-            console.log(response);
-            console.log("Transaction Table Loaded");
-            $("#transactionTableContainer").html(response);
-            $("#transactionTable").DataTable({
-                language: {
-                    search: '',
-                    searchPlaceholder: "Search..."
-                },
-                dom: "<'row mb-3'<'col-md-6'f><'col-md-6' <'transactionAddBtn'>>>" +
-                    "<'row'<'col-md-6'l><'col-md-6'i>>" +
-                    "<'row'<'col-sm-12'tr>>" +
-                    "<'row'<'col-md-12'p>>",
-            });
-            addBtnTransactionTable();
-        },
-        error: function () {
-            errorNotif();
-        },
-    });
+    
+    // $.ajax({
+    //     type: "GET",
+    //     url: "showAllTransaction",
+    //     success: function (response) {
+    //         console.log(response);
+    //         console.log("Transaction Table Loaded");
+    //         $("#transactionTableContainer").html(response);
+    //         $("#transactionTable").DataTable({
+    //             language: {
+    //                 search: '',
+    //                 searchPlaceholder: "Search..."
+    //             },
+    //             dom: "<'row mb-3'<'col-md-6'f><'col-md-6' <'transactionAddBtn'>>>" +
+    //                 "<'row'<'col-md-6'l><'col-md-6'i>>" +
+    //                 "<'row'<'col-sm-12'tr>>" +
+    //                 "<'row'<'col-md-12'p>>",
+    //         });
+    //         addBtnTransactionTable();
+    //     },
+    //     error: function () {
+    //         errorNotif();
+    //     },
+    // });
 }
 
 function addBtnTransactionTable() {
@@ -54,29 +55,29 @@ function errorNotif() {
     )
 }
 
-// let events = [{
-//     title: 'Judaya Reservation',
-//     extraParams: {
-//         info: 'Premuim, 5 people',
-//     },
-//     start: '2021-04-01',
-//     end: '2021-04-02'
-// },
-// {
-//     title: 'Ej Bithday Reservation',
-//     start: '2021-04-01',
-//     end: '2021-04-05'
-// },
-// {
-//     groupId: '999',
-//     title: 'Receiving Guest',
-//     start: '2021-04-05T06:00:00'
-// },
-// {
-//     groupId: '999',
-//     title: 'Sending Guest',
-//     start: '2021-04-05T07:00:00'
-// }
+let events = [{
+    title: 'Judaya Reservation',
+    extraParams: {
+        info: 'Premuim, 5 people',
+    },
+    start: '2021-04-01',
+    end: '2021-04-02'
+},
+{
+    title: 'Ej Bithday Reservation',
+    start: '2021-04-01',
+    end: '2021-04-05'
+},
+{
+    groupId: '999',
+    title: 'Receiving Guest',
+    start: '2021-04-05T06:00:00'
+},
+{
+    groupId: '999',
+    title: 'Sending Guest',
+    start: '2021-04-05T07:00:00'
+}]
 
 async function getEvents() {
     let events = [{
@@ -109,7 +110,7 @@ async function getEvents() {
             type: 'GET',
             url: 'admin/getAllTransaction',
             success: (response) => {
-                console.log("idk how this works but yeah");
+                //console.log("idk how this works but yeah");
                 
                 // events = [{
                 //     title: response.Transaction[0].title
@@ -142,18 +143,18 @@ function renderCalendar() {
             right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
         },
         selectable: true,
-        // eventClick: function (info) {
-        //     info.jsEvent.preventDefault();
+        eventClick: function (info) {
+            info.jsEvent.preventDefault();
 
-        //     // console.log(info.event.extendedProps.extraParams.info);
-        //     Swal.fire(
-        //         info.event.title,
-        //         'Start: ' + info.event.start + '<br>Info: ' + info.event.extendedProps
-        //         .extraParams.info,
-        //         'question')
-        // },
-        // events: events
-        events: "admin/getAllTransaction",
+            // console.log(info.event.extendedProps.extraParams.info);
+            Swal.fire(
+                info.event.title,
+                'Start: ' + info.event.start + '<br>Info: ' + info.event.extendedProps
+                .extraParams.info,
+                'question')
+        },
+        events: events
+        //events: "admin/getAllTransaction",
 
     });
 

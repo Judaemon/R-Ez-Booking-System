@@ -9,6 +9,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\RentalController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\TransactionsController;
+use App\Http\Controllers\CustomerController;
+use App\Models\Transactions;
 
 Route::get('/', function () {
     return view('welcome');
@@ -32,6 +34,11 @@ Route::view('/activities', 'activities')->name('activities');
 Route::view('/contact', 'contact')->name('contact');
 
 
+// Booking links
+Route::post('getAvailableRooms', [TransactionsController::class, 'getAvailableRooms'])->name('getAvailableRooms');
+
+// Transactions links
+// Route::get('showAllTransaction', [TransactionsController::class, 'showAllTransaction'])->name('showAllTransaction');
 
 // for user only links
 Route::group([
@@ -39,6 +46,7 @@ Route::group([
     'middleware' => ['auth', 'user']
 ],function () {
     // all paths for customer only
+    Route::resource('customer', customerController::class);
 });
 
 // for admin only links

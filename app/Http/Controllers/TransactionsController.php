@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Rental;
-
 use App\Models\Transactions;
 use Illuminate\Http\Request;
 
@@ -82,5 +80,26 @@ class TransactionsController extends Controller
         ->get();
 
         return view('components.transactionComponents.transactionTable', compact('transactions'));
+    }
+
+    public function getAvailableRooms(Request $request)
+    {
+        $checkIn = $request->input('checkIn');
+        $checkOut = $request->input('checkIn');
+        
+        $rooms = DB::table('rooms')
+        ->leftJoin('transactions', 'rooms.id', '=', 'transactions.room_id')
+        ->select('rooms.name', 'rooms.id', 'transactions.start', 'transactions.end')
+        ->orwhere(function($q)use ($checkOut) {
+            $q->whereDate('transactions.start', '>', $checkOut)
+            ->orwhereNull('transactions.start');
+        })
+        ->orwhere(function($q) use ($checkIn) {
+            $q->whereDate('transactions.end', '<', $checkIn)   
+            ->orwhereNull('transactions.end');
+        })
+        ->get();
+
+        return view('components.transactionComponents.roomList', compact('rooms'));
     }
 }
