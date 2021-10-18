@@ -10,7 +10,7 @@
 @endsection
 
 @section('content')
-<div class="container">
+<div class="container p-3">
     <h1>transactions</h1>
 </div>
 <style>
