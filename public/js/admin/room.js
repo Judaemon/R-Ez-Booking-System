@@ -84,22 +84,69 @@ $(document).on('click', '#roomUpdateBtn', function (event) {
 // Update Ajax
 $(document).on('submit', '#updateRoomForm', function (event) {
     event.preventDefault();
-    console.log("update btn test");
-    const form = this;
-    $.ajax({
-        url: $(form).attr('action'),
-        method: $(form).attr('method'),
-        dataType: 'JSON',
-        data: new FormData(form),
-        processData: false,
-        contentType: false,
-        success: function (response) {
-            //console.log(response);
-            $('#updateRoomModal').modal('hide');
-            getRoomTable();
-        },
-    
-    });
+    //console.log("update btn test");
+    swalWithBootstrapButtons.fire({
+        title: 'Are you sure?',
+        text: "This Room information will be updated from the database!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, Update it!',
+        cancelButtonText: 'No, Cancel!',
+        reverseButtons: true
+        
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const form = this;
+           
+            $.ajax({
+                url: $(form).attr('action'),
+                method: $(form).attr('method'),
+                dataType: 'JSON',
+                data: new FormData(form),
+                processData: false,
+                contentType: false,
+                // success: function (response) {
+                //     //console.log(response);
+                //     $('#updateRoomModal').modal('hide');
+                //     getRoomTable();
+                // },
+                beforeSend: function () {
+                    clearErrorText('updateRoomForm');
+                },
+                success: function (response) {
+                    if (response.status == 0) {
+                        $.each(response.error, function (prefix, val) {
+                            $('#updateRoomForm #input_' + prefix).addClass('is-invalid')
+                            $('#updateRoomForm span.' + prefix + '_error').text(val)
+                        })
+                    }
+
+                    if (response.status == 1) {
+                        $('#updateRoomModal').modal('hide');
+                        getRoomTable();
+                        $(form)[0].reset();
+
+                        swalWithBootstrapButtons.fire(
+                            'Successful!',
+                            response.msg,
+                            'success'
+                        )
+                    }
+                },
+                error: function (response) {
+                    errorWarning()
+                }
+            });
+        } else if (
+            result.dismiss === Swal.DismissReason.cancel // click ayaw
+        ) {
+            swalWithBootstrapButtons.fire(
+                'Cancelled',
+                'Lets pretend that never happend >:)',
+                'error'
+            )
+        }
+    })
 });
 
 // Delete Ajax
@@ -196,6 +243,7 @@ $('#addRoomForm').on('submit', function (event) {
                     clearErrorText('addRoomForm');
                 },
                 success: function (response) {
+                    console.log(response);
                     if (response.status == 0) {
                         $.each(response.error, function (prefix, val) {
                             $('#addRoomForm #input_' + prefix).addClass('is-invalid')

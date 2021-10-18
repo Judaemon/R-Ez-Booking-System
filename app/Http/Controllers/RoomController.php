@@ -29,8 +29,9 @@ class RoomController extends Controller
         // ]);
         $validated = Validator::make($request->all(), [
             'name' => 'required|string|max:255|unique:rooms',
-            'description' => 'required|string|max:255',
+            'description' => 'required|string',
             'price' => 'required|Numeric',
+            'recommended_capacity' => 'required|Numeric',
             'picture' => 'required|string|max:255',
         ]);
         
@@ -62,9 +63,24 @@ class RoomController extends Controller
 
     public function update(Request $request, Room $room)
     {
+        $validated = Validator::make($request->all(), [
+            'name' => 'required|string|max:255|unique:rooms,name,'.$room->id,
+            'description' => 'required|string',
+            'price' => 'required|Numeric',
+            'recommended_capacity' => 'required|Numeric',
+            'picture' => 'required|string|max:255',
+        ]);
+        
+        if ($validated->fails()) {
+            return response()->json([
+                'status' => 0,
+                'error' => $validated->errors()->toArray()
+            ]);
+        }
+
         $room->update($request->all());
         return response()->json([
-            'code' => 1,
+            'status' => 1,
             'message' => 'Data Updated successfully!'
         ]);
     }
