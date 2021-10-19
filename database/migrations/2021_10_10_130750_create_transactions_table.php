@@ -13,9 +13,9 @@ class CreateTransactionsTable extends Migration
             $table->integer('user_id');
             $table->string('room_id');
             $table->string('rental_id');
-            $table->string('payment_status');
+            $table->string('payment_method');
             $table->float('total_price');
-            $table->String('status');
+            $table->String('transaction_status');
             $table->String('title');
             $table->Date('start');
             $table->Date('end');

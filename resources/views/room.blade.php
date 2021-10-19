@@ -65,7 +65,7 @@
             </div>
             <div class="modal-body">
                 {{-- Add Form --}}
-                <form id="addRoomForm" method="POST" action="{{route('room.store')}}">
+                <form id="addRoomForm" method="POST" enctype="multipart/form-data" action="{{route('room.store')}}">
                     @csrf
                     <div class="form-group mb-2">
                         <label>Name</label>
@@ -87,11 +87,24 @@
                         <span class="invalid-feedback fw-bold error-text price_error" role="alert"></span>
                     </div>
 
-                    <div class="form-group mb-2">
+                    <div class="form-group">
+                        <label>Recommended Capacity</label>
+                        <input type="number" class="form-control" id="input_recommended_capacity" name="recommended_capacity"
+                        placeholder="Recommended Capacity">
+                        <span class="invalid-feedback fw-bold error-text recommended_capacity_error" role="alert"></span>
+                     </div>
+
+                    <!-- <div class="form-group mb-2">
                         <label>Picture</label>
                         <input type="text" class="form-control" id="input_picture" name="picture"
                             placeholder="Room Price">
                         <span class="invalid-feedback fw-bold error-text picture_error" role="alert"></span>
+                    </div> -->
+                    
+                    <div class="form-group mb-2">
+                        <label>image</label>
+                        <input type="file" class="form-control" id="input_image" name="image">
+                        <span class="invalid-feedback fw-bold error-text image_error" role="alert"></span>
                     </div>
 
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

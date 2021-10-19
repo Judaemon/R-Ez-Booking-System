@@ -27,21 +27,39 @@ class RoomController extends Controller
         // return response()->json([
         //     'code'=>0
         // ]);
+        
+
         $validated = Validator::make($request->all(), [
             'name' => 'required|string|max:255|unique:rooms',
-            'description' => 'required|string|max:255',
+            'description' => 'required|string',
             'price' => 'required|Numeric',
-            'picture' => 'required|string|max:255',
+            'recommended_capacity' => 'required|Numeric',
+            //'picture' => 'required|mimes:jpg,png,jpeg|max:5048',
+            'image' => 'required|mimes:jpg,png,jpeg|max:5048', //old- 'required|string|max:255'
         ]);
         
+      
         if ($validated->fails()) {
             return response()->json([
                 'status' => 0,
                 'error' => $validated->errors()->toArray()
             ]);
         }
+        
+        $newImageName = 'uploaded/' . time() . '-' . $request->name . '.' . 
+        $request->image->extension();
 
-        Room::create($request->all());
+        $request->image->move(public_path('img/uploaded'), $newImageName);
+
+        //Room::create($request->all());
+        Room::create([
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'price' => $request->input('price'),
+            'recommended_capacity' =>$request->input('recommended_capacity'),
+            'image_path' => $newImageName,
+           // 'picture' => $request->input('name'),
+        ]);
 
         return response()->json([
             'status'=> 1,
@@ -62,9 +80,25 @@ class RoomController extends Controller
 
     public function update(Request $request, Room $room)
     {
+        $validated = Validator::make($request->all(), [
+            'name' => 'required|string|max:255|unique:rooms,name,'.$room->id,
+            'description' => 'required|string',
+            'price' => 'required|Numeric',
+            'recommended_capacity' => 'required|Numeric',
+            //'picture' => 'required|string|max:255',
+            'image_path' => 'required|mimes:jpg,png,jpeg|max:5048',
+        ]);
+        
+        if ($validated->fails()) {
+            return response()->json([
+                'status' => 0,
+                'error' => $validated->errors()->toArray()
+            ]);
+        }
+
         $room->update($request->all());
         return response()->json([
-            'code' => 1,
+            'status' => 1,
             'message' => 'Data Updated successfully!'
         ]);
     }
