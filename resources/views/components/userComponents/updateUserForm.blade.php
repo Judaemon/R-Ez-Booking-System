@@ -6,11 +6,21 @@
         <input type="text" class="form-control" id="input_email" name="email" value="{{$user->email}}" >
         <span class="invalid-feedback fw-bold error-text email_error" role="alert"></span>
     </div>
-    <div class="form-group">
+    <!-- <div class="form-group">
         <label>Account Type</label>
         <input type="text" class="form-control" id="input_account_type" name="account_type" value="{{$user->account_type}}" >
         <span class="invalid-feedback fw-bold error-text account_type_error" role="alert"></span>
-    </div>
+    </div> -->
+    <div class="form-group mb-2">
+                    <label for="account_type">Account Type</label>
+                    </select>
+                    <select type="text" class="form-control" id="input_account_type" name="account_type" placeholder="Account Type">
+                    <option value="">Choose Account Type...</option>
+                    <option value="admin">Admin</option>
+                    <option value="employee">Employee</option>
+                    <option value="user">User</option></select>
+                    <span class="invalid-feedback fw-bold error-text account_type_error" role="alert"></span>
+                </div>
     <div class="form-group">
         <label>Username</label>
         <input type="text" class="form-control" id="input_username" name="username" value="{{$user->username}}" >
@@ -30,6 +40,11 @@
         <label>Contact Number</label>
         <input type="text" class="form-control" id="input_contact_number" name="contact_number" value="{{$user->contact_number}}" >
         <span class="invalid-feedback fw-bold error-text contact_number_error" role="alert"></span>
+    </div>
+    <div class="form-group">
+        <label>Address</label>
+        <input type="text" class="form-control" id="input_address" name="address" value="{{$user->address}}" >
+        <span class="invalid-feedback fw-bold error-text address_error" role="alert"></span>
     </div>
     <div class="form-group">
         <label>Password</label>

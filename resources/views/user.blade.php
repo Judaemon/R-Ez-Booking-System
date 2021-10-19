@@ -73,12 +73,23 @@
                     <span class="invalid-feedback fw-bold error-text email_error" role="alert"></span>
                 </div>
                
-                <div class="form-group mb-2">
+                <!-- <div class="form-group mb-2">
                     <label>Account Type</label>
                     <input type="text" class="form-control" id="input_account_type" name="account_type" placeholder="Account Type">
                     <span class="invalid-feedback fw-bold error-text account_type_error" role="alert"></span>
-                </div>
+                </div> -->
 
+                <div class="form-group mb-2">
+                    <label for="account_type">Account Type</label>
+                    </select>
+                    <select type="text" class="form-control" id="input_account_type" name="account_type" placeholder="Account Type">
+                    <option value="">Choose Account Type...</option>
+                    <option value="admin">Admin</option>
+                    <option value="employee">Employee</option>
+                    <option value="user">User</option></select>
+                    <span class="invalid-feedback fw-bold error-text account_type_error" role="alert"></span>
+                </div>
+                
                 <div class="form-group mb-2">
                     <label>Username</label>
                     <input type="text" class="form-control" id="input_username" name="username" placeholder="Username">
@@ -101,6 +112,12 @@
                     <label>Contact Number</label>
                     <input type="text" class="form-control" id="input_contact_number" name="contact_number" placeholder="Contact Number">
                     <span class="invalid-feedback fw-bold error-text contact_number_error" role="alert"></span>
+                </div>
+
+                <div class="form-group">
+                    <label>Address</label>
+                    <input type="text" class="form-control" id="input_address" name="address" placeholder="Address">
+                    <span class="invalid-feedback fw-bold error-text address_error" role="alert"></span>
                 </div>
 
                 <div class="form-group mb-2">
