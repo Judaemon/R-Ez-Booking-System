@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\RentalController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\TransactionsController;
 use App\Http\Controllers\CustomerController;
@@ -59,7 +60,11 @@ Route::group([
     Route::resource('room', RoomController::class);
 
     Route::view('/transaction', 'transaction')->name('transaction');
+
+    // report paths
     Route::view('/report', 'report')->name('report');
+    Route::get('/getGraphData', [ReportController::class, 'getGraphData'])->name('getGraphData');
+
 
     // Dapat ma move yung mga route ng tables sa ganto kasi mali yung pag gamit ng show method
     Route::get('showAllRental', [RentalController::class, 'showAllRental'])->name('showAllRental');
