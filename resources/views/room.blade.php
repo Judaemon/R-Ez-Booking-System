@@ -103,7 +103,7 @@
                     
                     <div class="form-group mb-2">
                         <label>image</label>
-                        <input type="file" class="form-control" id="input_image" name="image">
+                        <input type="file" class="form-control" id="input_image" name="image_path">
                         <span class="invalid-feedback fw-bold error-text image_error" role="alert"></span>
                     </div>
 

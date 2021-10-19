@@ -35,7 +35,7 @@ class RoomController extends Controller
             'price' => 'required|Numeric',
             'recommended_capacity' => 'required|Numeric',
             //'picture' => 'required|mimes:jpg,png,jpeg|max:5048',
-            'image' => 'required|mimes:jpg,png,jpeg|max:5048', //old- 'required|string|max:255'
+            'image_path' => 'required|mimes:jpg,png,jpeg|max:5048', //old- 'required|string|max:255'
         ]);
         
       
@@ -47,9 +47,9 @@ class RoomController extends Controller
         }
         
         $newImageName = 'uploaded/' . time() . '-' . $request->name . '.' . 
-        $request->image->extension();
+        $request->image_path->extension();
 
-        $request->image->move(public_path('img/uploaded'), $newImageName);
+        $request->image_path->move(public_path('img/uploaded'), $newImageName);
 
         //Room::create($request->all());
         Room::create([
@@ -96,7 +96,21 @@ class RoomController extends Controller
             ]);
         }
 
-        $room->update($request->all());
+        $newImageName = 'uploaded/' . time() . '-' . $request->name . '.' . 
+        $request->image_path->extension();
+
+        $request->image_path->move(public_path('img/uploaded'), $newImageName);
+
+        //$room->update($request->all());
+        $room->update([
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'price' => $request->input('price'),
+            'recommended_capacity' =>$request->input('recommended_capacity'),
+            'image_path' => $newImageName,
+        ]);
+        
+
         return response()->json([
             'status' => 1,
             'message' => 'Data Updated successfully!'
