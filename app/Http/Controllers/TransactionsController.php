@@ -85,21 +85,42 @@ class TransactionsController extends Controller
     public function getAvailableRooms(Request $request)
     {
         $checkIn = $request->input('checkIn');
-        $checkOut = $request->input('checkIn');
+        $checkOut = $request->input('checkOut');
         
         $rooms = DB::table('rooms')
         ->leftJoin('transactions', 'rooms.id', '=', 'transactions.room_id')
-        ->select('rooms.name', 'rooms.id', 'transactions.start', 'transactions.end')
+        ->select('rooms.name', 'rooms.description', 'rooms.price', 'rooms.recommended_capacity', 'rooms.image_path', 'rooms.id', 'transactions.start', 'transactions.end')
         ->orwhere(function($q)use ($checkOut) {
             $q->whereDate('transactions.start', '>', $checkOut)
             ->orwhereNull('transactions.start');
         })
         ->orwhere(function($q) use ($checkIn) {
-            $q->whereDate('transactions.end', '<', $checkIn)   
+            $q->whereDate('transactions.end', '<', $checkIn)
             ->orwhereNull('transactions.end');
         })
         ->get();
 
         return view('components.transactionComponents.roomList', compact('rooms'));
+    }
+
+    public function getAvailableRentals(Request $request)
+    {
+        $checkIn = $request->input('checkIn');
+        $checkOut = $request->input('checkOut');
+        
+        $rentals = DB::table('rentals')
+        ->leftJoin('transactions', 'rentals.id', '=', 'transactions.rental_id')
+        ->select('rentals.name', 'rentals.description', 'rentals.price', 'rentals.image_path', 'rentals.id', 'transactions.start', 'transactions.end')
+        ->orwhere(function($q)use ($checkOut) {
+            $q->whereDate('transactions.start', '>', $checkOut)
+            ->orwhereNull('transactions.start');
+        })
+        ->orwhere(function($q) use ($checkIn) {
+            $q->whereDate('transactions.end', '<', $checkIn)
+            ->orwhereNull('transactions.end');
+        })
+        ->get();
+
+        return view('components.transactionComponents.rentalList', compact('rentals'));
     }
 }
