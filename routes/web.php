@@ -37,6 +37,7 @@ Route::view('/contact', 'contact')->name('contact');
 
 // Booking links
 Route::post('getAvailableRooms', [TransactionsController::class, 'getAvailableRooms'])->name('getAvailableRooms');
+Route::post('getAvailableRentals', [TransactionsController::class, 'getAvailableRentals'])->name('getAvailableRentals');
 
 // Transactions links
 // Route::get('showAllTransaction', [TransactionsController::class, 'showAllTransaction'])->name('showAllTransaction');

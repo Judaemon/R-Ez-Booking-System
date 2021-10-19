@@ -38,8 +38,8 @@ function errorNotif() {
 }
 
 function fetchAvailableRooms() {
-    const checkIn = $('#start').val();
-    const checkOut = $('#end').val();
+    let checkIn = $('#start').val();
+    let checkOut = $('#end').val();
 
     $.ajax({
         type: "POST",
@@ -50,9 +50,26 @@ function fetchAvailableRooms() {
         },
         success: function (response) {
             $('#roomsContainer').html(response);
+        },
+        error: function () {
+            errorNotif();
+        },
+    });
+}
 
-            // console.log(rooms);
-            // rentals = response.rentals
+function fetchAvailableRentals() {
+    let checkIn = $('#start').val();
+    let checkOut = $('#end').val();
+
+    $.ajax({
+        type: "POST",
+        url: "getAvailableRentals",
+        data: {
+            checkIn: checkIn,
+            checkOut: checkOut
+        },
+        success: function (response) {
+            $('#rentalContainer').html(response);
         },
         error: function () {
             errorNotif();
@@ -63,14 +80,88 @@ function fetchAvailableRooms() {
 $(document).on('change', '#start', function (event) {
     const checkIn = $('#start').val();
 
-    $('#end').val(checkIn);
+    if (new Date(checkIn) > new Date($('#end').val()) || !$('#end').val()) {
+        $('#end').val(checkIn);
+    }
 
     setMinDate("end", checkIn)
 
     fetchAvailableRooms()
+    fetchAvailableRentals()
 
 })
 
 $(document).on('change', '#end', function (event) {
-    fetchAvailableRooms()
+    // console.log($('#start').val());
+    if ($('#start').val()) {
+        fetchAvailableRooms()
+        fetchAvailableRentals()
+    }
 })
+
+let SelectedRoomList = new Array
+let SelectedRentalList = new Array
+
+$(document).on('click', '.selectRoomBtn', function (event) {
+    let room_id = $(this).attr('room_id')
+    let room_name = $(this).attr('room_name')
+    
+    if ($.inArray(room_id, $.map(SelectedRoomList, function(v) { return v[0]; })) > -1) {
+        swalWithBootstrapButtons.fire(
+            'Error! ',
+            'Already Selected!',
+            'error'
+        )
+    }else{
+        SelectedRoomList.push([room_id, room_name]);
+    }
+
+    updateBookedRoomList()
+})
+
+function updateBookedRoomList() {
+    let htmlCode = ""
+
+    $.each(SelectedRoomList, function(key1, value1) {
+        htmlCode += `<div class="form-group col-12 d-flex justify-content-between my-1">
+        <input id="room_id`+value1[0]+`" type="text" class="m-0 form-control" name="room_id"`+value1[0]+`
+            placeholder="0" value="`+value1[1]+`">
+        <a href="#" class="btn btn-danger selectRoomBtn w-25 selectRoomBtn">Remove</a>
+    </div>`
+        // console.log(value1[0]);
+        // console.log(value1[1]);
+    });
+
+    $('#bookedRoomsContainer').html(htmlCode);
+}
+
+$(document).on('click', '.selectRentalBtn', function (event) {
+    let rental_id = $(this).attr('rental_id')
+    let rental_name = $(this).attr('rental_name')
+    
+    if ($.inArray(rental_id, $.map(SelectedRentalList, function(v) { return v[0]; })) > -1) {
+        swalWithBootstrapButtons.fire(
+            'Error! ',
+            'Already Selected!',
+            'error'
+        )
+    }else{
+        SelectedRentalList.push([rental_id, rental_name]);
+    }
+
+    updateRentalRoomList()
+})
+
+function updateRentalRoomList() {
+    let htmlCode = ""
+
+    $.each(SelectedRentalList, function(key1, value1) {
+        htmlCode += `<div class="form-group col-12 d-flex justify-content-between my-1">
+        <input id="room_id`+value1[0]+`" type="text" class="m-0 form-control" name="room_id"`+value1[0]+`
+            placeholder="0" value="`+value1[1]+`">
+        <a href="#" class="btn btn-danger selectRoomBtn w-25 selectRoomBtn">Remove</a>
+    </div>`
+    });
+
+    $('#reservedRentalContainer').html(htmlCode);
+}
