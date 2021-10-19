@@ -27,22 +27,39 @@ class RoomController extends Controller
         // return response()->json([
         //     'code'=>0
         // ]);
+        
+
         $validated = Validator::make($request->all(), [
             'name' => 'required|string|max:255|unique:rooms',
             'description' => 'required|string',
             'price' => 'required|Numeric',
             'recommended_capacity' => 'required|Numeric',
-            'picture' => 'required|string|max:255',
+            //'picture' => 'required|mimes:jpg,png,jpeg|max:5048',
+            'image' => 'required|mimes:jpg,png,jpeg|max:5048', //old- 'required|string|max:255'
         ]);
         
+      
         if ($validated->fails()) {
             return response()->json([
                 'status' => 0,
                 'error' => $validated->errors()->toArray()
             ]);
         }
+        
+        $newImageName = 'uploaded/' . time() . '-' . $request->name . '.' . 
+        $request->image->extension();
 
-        Room::create($request->all());
+        $request->image->move(public_path('img/uploaded'), $newImageName);
+
+        //Room::create($request->all());
+        Room::create([
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'price' => $request->input('price'),
+            'recommended_capacity' =>$request->input('recommended_capacity'),
+            'image_path' => $newImageName,
+           // 'picture' => $request->input('name'),
+        ]);
 
         return response()->json([
             'status'=> 1,
@@ -68,7 +85,8 @@ class RoomController extends Controller
             'description' => 'required|string',
             'price' => 'required|Numeric',
             'recommended_capacity' => 'required|Numeric',
-            'picture' => 'required|string|max:255',
+            //'picture' => 'required|string|max:255',
+            'image_path' => 'required|mimes:jpg,png,jpeg|max:5048',
         ]);
         
         if ($validated->fails()) {

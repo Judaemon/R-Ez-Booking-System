@@ -13,6 +13,7 @@ class Room extends Model
         'description',
         'price',
         'recommended_capacity',
-        'picture',
+        //'picture',
+        'image_path',
     ];
 }
