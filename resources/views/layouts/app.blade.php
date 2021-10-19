@@ -37,9 +37,13 @@
                     <ul class="navbar-nav">
                     @if (Auth::check())
                         <li class="nav-item">
-                            <a class="nav-link @if(Route::is('home')) active @endif" href="{{ route('home') }}">{{ __('Home') }}</a>
+                            <a class="nav-link @if(Route::is('scheduler')) active @endif" href="{{ route('scheduler') }}">{{ __('Dashboard') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @if(Route::is('home')) active @endif" href="{{ route('home') }}">{{ __('Scheduler') }}</a>
                         </li>
                         @if (Auth::user()->account_type == 'admin' || Auth::user()->account_type == 'employee' )
+                            
                             <li class="nav-item">
                                 <a class="nav-link @if(Route::is('transaction')) active @endif" href="{{ route('transaction') }}">{{ __('Transaction') }}</a>
                             </li>
@@ -49,6 +53,7 @@
                             <li class="nav-item">
                                 <a class="nav-link @if(Route::is('rental.index')) active @endif" href="{{ route('rental.index') }}">{{ __('Rentals') }}</a>
                             </li>
+                            
                             @if (Auth::user()->account_type == 'admin' )
                                 <li class="nav-item">
                                     <a class="nav-link @if(Route::is('user.index')) active @endif" href="{{ route('user.index') }}">{{ __('Users') }}</a>
