@@ -108,9 +108,6 @@ class TransactionsController extends Controller
         $checkIn = $request->input('checkIn');
         $checkOut = $request->input('checkOut');
         
-        // $checkIn = '2021-30-10';
-        // $checkOut = '2021-30-10';
-        
         $rentals = DB::table('rentals')
         ->leftJoin('transactions', 'rentals.id', '=', 'transactions.rental_id')
         ->select('rentals.name', 'rentals.description', 'rentals.price', 'rentals.image_path', 'rentals.id', 'transactions.start', 'transactions.end')
@@ -123,11 +120,6 @@ class TransactionsController extends Controller
             ->orwhereNull('transactions.end');
         })
         ->get();
-
-        // return response()->json([
-        //     'status'=> 1,
-        //     'rentals' => $rentals
-        // ]);
 
         return view('components.transactionComponents.rentalList', compact('rentals'));
     }

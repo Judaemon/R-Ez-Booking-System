@@ -131,6 +131,11 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-12 col-md-7 mt-2">
+                        <button type="submit" class="float-end w-25 btn btn-primary bg-white text-black">
+                            Submit
+                        </button>
+                    </div>
                 </div>
             </form>
         </div>
