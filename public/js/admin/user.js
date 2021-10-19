@@ -212,18 +212,66 @@ $(document).on('click', '#userUpdateBtn', function (event) {
 $(document).on('submit', '#updateUserForm', function (event) {
   event.preventDefault();
   //console.log("update btn test");
-  const form = this;
-  $.ajax({
-      url: $(form).attr('action'),
-      method: $(form).attr('method'),
-      dataType: 'JSON',
-      data: new FormData(form),
-      processData: false,
-      contentType: false,
-      success: function (response) {
-          //console.log(response);
-          $('#updateUserModal').modal('hide');
-          getTable();
-      },
-  });
-});
+  swalWithBootstrapButtons.fire({
+    title: 'Are you sure?',
+    text: "This User information will be updated from the database!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Yes, Update it!',
+    cancelButtonText: 'No, Cancel!',
+    reverseButtons: true
+    
+  }).then((result) => {
+      if (result.isConfirmed) {
+          const form = this;
+  
+      $.ajax({
+          url: $(form).attr('action'),
+          method: $(form).attr('method'),
+          dataType: 'JSON',
+          data: new FormData(form),
+          processData: false,
+          contentType: false,
+          // success: function (response) {
+          //     //console.log(response);
+          //     $('#updateUserModal').modal('hide');
+          //     getTable();
+          // },
+          beforeSend: function () {
+            clearErrorText('updateUserForm');
+          },
+          success: function (response) {
+              if (response.status == 0) {
+                  $.each(response.error, function (prefix, val) {
+                      $('#updateUserForm #input_' + prefix).addClass('is-invalid')
+                      $('#updateUserForm span.' + prefix + '_error').text(val)
+                  })
+              }
+
+                  if (response.status == 1) {
+                      $('#updateUserModal').modal('hide');
+                      getTable();
+                      $(form)[0].reset();
+
+                      swalWithBootstrapButtons.fire(
+                          'Successful!',
+                          response.msg,
+                          'success'
+                      )
+                  }
+               },
+                error: function (response) {
+                    errorWarning()
+                }
+            });
+         } else if (
+             result.dismiss === Swal.DismissReason.cancel // click ayaw
+          ) {
+              swalWithBootstrapButtons.fire(
+                  'Cancelled',
+                  'Lets pretend that never happend >:)',
+                  'error'
+              )
+           }
+        })
+    });

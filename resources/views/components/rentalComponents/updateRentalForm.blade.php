@@ -3,22 +3,26 @@
     @method('PUT')
     <div class="form-group">
         <label>Name</label>
-        <input type="text" class="form-control" name="name" value="{{$rental->name}}" >
+        <input type="text" class="form-control" id="input_name" name="name" value="{{$rental->name}}" >
+        <span class="invalid-feedback fw-bold error-text name_error" role="alert"></span>
     </div>
 
     <div class="form-group">
         <label>Description</label>
-        <input type="text" class="form-control" name="description" value="{{$rental->description}}">
+        <input type="text" class="form-control" id="input_description" name="description" value="{{$rental->description}}">
+        <span class="invalid-feedback fw-bold error-text description_error" role="alert"></span>
     </div>  
 
     <div class="form-group">
         <label>Price</label>
-        <input type="number" class="form-control" name="price" value="{{$rental->price}}">
+        <input type="number" class="form-control" id="input_price" name="price" value="{{$rental->price}}">
+        <span class="invalid-feedback fw-bold error-text price_error" role="alert"></span>
     </div>
 
     <div class="form-group">
         <label>Picture</label>
-        <input type="text" class="form-control" name="picture" value="{{$rental->picture}}" >
+        <input type="text" class="form-control" id="input_picture" name="picture" value="{{$rental->picture}}" >
+        <span class="invalid-feedback fw-bold error-text picture_error" role="alert"></span>
     </div>
 
     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

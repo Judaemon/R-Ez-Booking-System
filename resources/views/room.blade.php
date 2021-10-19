@@ -87,6 +87,13 @@
                         <span class="invalid-feedback fw-bold error-text price_error" role="alert"></span>
                     </div>
 
+                    <div class="form-group">
+                        <label>Recommended Capacity</label>
+                        <input type="number" class="form-control" id="input_recommended_capacity" name="recommended_capacity"
+                        placeholder="Recommended Capacity">
+                        <span class="invalid-feedback fw-bold error-text recommended_capacity_error" role="alert"></span>
+                     </div>
+
                     <div class="form-group mb-2">
                         <label>Picture</label>
                         <input type="text" class="form-control" id="input_picture" name="picture"

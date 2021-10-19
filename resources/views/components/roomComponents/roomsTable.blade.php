@@ -5,6 +5,7 @@
         <th class="col-md-2" scope="col">Name</th>
         <th class="col-md-2" scope="col">Description</th>
         <th class="col-md-2" scope="col">Price</th>
+        <th class="col-md-2" scope="col">Recommended Capacity</th>
         <th class="col-md-2" scope="col">Picture</th>
         <th class="col-md-2" scope="col">Action</th>
         </tr>
@@ -16,6 +17,7 @@
             <td>{{$room->name}}</td>
             <td>{{$room->description}}</td>
             <td>{{$room->price}}</td>
+            <td>{{$room->recommended_capacity}}</td>
             <td>{{$room->picture}}</td>
             <td>
             <div class='d-flex justify-content-around'>

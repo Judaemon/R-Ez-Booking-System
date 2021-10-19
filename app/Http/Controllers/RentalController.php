@@ -60,9 +60,23 @@ class RentalController extends Controller
 
     public function update(Request $request, Rental $rental)
     {
+        $validated = Validator::make($request->all(), [
+            'name' => 'required|string|max:255|unique:rentals,name,'.$rental->id,
+            'price' => 'required|Numeric',
+            'description' => 'required|string|max:255',
+            'picture' => 'required|string|max:255',
+        ]);
+        
+        if ($validated->fails()) {
+            return response()->json([
+                'status' => 0,
+                'error' => $validated->errors()->toArray()
+            ]);
+        }
+        
         $rental->update($request->all());
         return response()->json([
-            'code' => 1,
+            'status' => 1,
             'message' => 'Data Updated successfully!'
         ]);
     }

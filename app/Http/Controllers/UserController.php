@@ -100,9 +100,28 @@ class UserController extends Controller
     // Update
     public function update(Request $request, User $user)
     {
+        $validated = Validator::make($request->all(), [
+            'username' => 'required|string|max:255|unique:users,username,'.$user->id,
+            'account_type' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
+            'contact_number' => 'required|Numeric',
+            // 'contact_number' => 'required|regex:/^[(][0-9]{2}[)][\s][0-9]{3}[-][0-9]{4}$/',
+            'firstname' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
+            'password' => 'required|string|min:8|max:255',
+
+        ]);
+        
+        if ($validated->fails()) {
+            return response()->json([
+                'status' => 0,
+                'error' => $validated->errors()->toArray()
+            ]);
+        }
+
         $user->update($request->all());
         return response()->json([
-            'code' => 1,
+            'status' => 1,
             'message' => 'Data Updated successfully!'
         ]);
     }
