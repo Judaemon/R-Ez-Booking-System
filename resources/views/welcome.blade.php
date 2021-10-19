@@ -65,7 +65,7 @@
         {{-- <div class="row" style="margin-top: 5rem">
             <div class="col-6">
                 <h1 class="display-4 text-center" style="margin-top:2rem">About Us</h1>
-                <p class="text-center" style="">insert description for the resort</p>
+                <p class="text-center">insert description for the resort</p>
             </div>
             <div class="col-6">
                 <img src="{{ URL::asset('img\welcome_page\promisedsign.png'); }}"  style="width: 100%">
