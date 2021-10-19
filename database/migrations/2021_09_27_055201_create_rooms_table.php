@@ -14,7 +14,7 @@ class CreateRoomsTable extends Migration
             $table->text('description');
             $table->float('price');
             $table->integer('recommended_capacity');
-            $table->text('picture');
+            $table->text('image_path');
             $table->timestamps();
         });
     }
