@@ -1,4 +1,4 @@
-<form id="updateRentalForm" method="POST" action="{{route('rental.update',$rental->id)}}">
+<form id="updateRentalForm" method="POST" enctype="multipart/form-data" action="{{route('rental.update',$rental->id)}}">
     @csrf
     @method('PUT')
     <div class="form-group">
@@ -19,12 +19,18 @@
         <span class="invalid-feedback fw-bold error-text price_error" role="alert"></span>
     </div>
 
-    <div class="form-group">
+    <!-- <div class="form-group">
         <label>Picture</label>
         <input type="text" class="form-control" id="input_picture" name="picture" value="{{$rental->picture}}" >
         <span class="invalid-feedback fw-bold error-text picture_error" role="alert"></span>
-    </div>
+    </div> -->
 
+    <div class="form-group mb-2">
+        <label>image</label>
+        <input type="file" class="form-control" id="input_image" name="image_path">
+        <span class="invalid-feedback fw-bold error-text image_error" role="alert"></span>
+    </div>
+    
     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
     <button type="submit" class="btn btn-primary">Save changes</button>
 </form>

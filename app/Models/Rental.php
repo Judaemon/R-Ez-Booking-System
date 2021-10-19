@@ -13,6 +13,6 @@ class Rental extends Model
         'name',
         'price',
         'description',
-        'picture'
+        'image_path'
     ];
 }
