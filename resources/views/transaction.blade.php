@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('script')
-{{-- <script src="{{ asset('js/app.js') }}"></script> --}}
 
 <link href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" rel="stylesheet">
 
