@@ -61,6 +61,7 @@ Route::group([
     Route::resource('room', RoomController::class);
 
     Route::view('/transaction', 'transaction')->name('transaction');
+    Route::view('/scheduler', 'scheduler')->name('scheduler');
 
     // report paths
     Route::view('/report', 'report')->name('report');
@@ -71,6 +72,9 @@ Route::group([
     Route::get('showAllRental', [RentalController::class, 'showAllRental'])->name('showAllRental');
     Route::get('showAllUser', [UserController::class, 'showAllUser'])->name('showAllUser');
     Route::get('showAllRoom', [RoomController::class, 'showAllRoom'])->name('showAllRoom');
+    Route::get('/getGraphData', [ReportController::class, 'getGraphData'])->name('getGraphData');
+
+    
 
     Route::get('showAllTransaction', [TransactionsController::class, 'showAllTransaction'])->name('showAllTransaction');
     
