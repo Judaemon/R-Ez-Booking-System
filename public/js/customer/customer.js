@@ -38,10 +38,3 @@ function errorNotif() {
         'error'
     )
 }
-
-function roomList() {
-    let roomListHTML = ""
-    rooms.forEach(room => {
-        
-    });
-}

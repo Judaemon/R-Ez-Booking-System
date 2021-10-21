@@ -18,7 +18,7 @@ class CreateRentalsTable extends Migration
             $table->char('name');
             $table->float('price');
             $table->string('description');
-            $table->text('picture');
+            $table->text('image_path');
             $table->timestamps();
         });
     }

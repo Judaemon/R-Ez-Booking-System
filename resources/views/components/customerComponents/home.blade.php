@@ -2,35 +2,6 @@
 
 @section('script')
 <script src="{{ asset('js/transaction.js') }}"></script>
-
-{{-- <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"
-    integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
-    integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-<script>
-    $(function () {
-        // $('#datepicker').datepicker();
-
-        var nowDate = new Date();
-        var today = new Date(nowDate.getFullYear(), nowDate.getMonth(),
-            nowDate.getDate(), 0, 0, 0, 0);
-
-        $('.input-daterange input').each(function () {
-            console.log("asd");
-            $(this).datepicker({
-                format: 'yyyy-mm-dd',
-                todayHighlight: true,
-                startDate: today,
-                // beforeShowDay: unavailable,
-            });
-        });
-    })
-
-</script> --}}
 @endsection
 
 <style>
@@ -42,6 +13,9 @@
         -o-background-size: cover;
     }
 
+    .myPointer {
+        cursor: pointer;
+    }
 </style>
 
 @section('content')
@@ -52,7 +26,7 @@
                 <div class="row">
                     <div class="col-12 col-md-7">
                         <div class="form-group col-12">
-                            <label for="title" class="col-md-5 col-form-label">Title</label>
+                            <label for="title" class="col-md-5 col-form-label">Name of reservation</label>
                             <input id="title" type="text" class="m-0 form-control" name="title" autocomplete="title"
                                 placeholder="Title..." autofocus>
 
@@ -98,68 +72,72 @@
 
                             <span class="invalid-feedback fw-bold error-text description_error"></span>
                         </div>
-                    </div>
 
-                    <div class="col-12 col-md-5">
-                        <div id="menu">
-                            <div class="panel list-group">
-                                <a href="#" class="col-md-12" data-bs-toggle="collapse" data-bs-target="#roomsContainer"
-                                    data-bs-parent="#menu" aria-expanded="true">
-                                    <label for="description" class="col-md-5 col-form-label text-white">Select
-                                        Rooms</label>
-                                    <i class="bi bi-house-fill"></i>
-                                    <span class="glyphicon glyphicon-envelope pull-right"></span>
-                                </a>
-                                <div id="roomsContainer" class="sublinks collapse show">
-                                    {{-- <div class="bg-light text-black p-2 row">
-                                        <div class="col-12 col-md-9" data-bs-toggle="modal" data-bs-target="#viewRoomInfoModal">
-                                            Room type (min to max people)
-                                        </div>
-                                        <div class="col-12 col-md-3">
-                                            <button class="btn btn-primary selectRoomBtn h-100">Book</button> 
-                                        </div>
-                                    </div>
-                                    <div class="modal fade " id="viewRoomInfoModal" tabindex="-1" aria-labelledby="viewRoomInfoModal" aria-hidden="true">
-                                        <div class="modal-dialog modal-xl modal-dialog modal-dialog-centered">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="viewRoomInfoModal">Room Information</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body row text-black">
-                                                    <div class="col-12 col-md-4">
-                                                        <img class="w-75" src="{{ URL::asset('img\superior_room\superior1.jpg'); }}" alt="">
-                                                    </div>
-                                                    <div class="col-12 col-md-8">
-                                                        <h3>name</h3>
-                                                        <p class="my-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, corrupti dignissimos. Enim, cupiditate earum quas dolores, obcaecati inventore, odit cum doloribus atque quaerat ut exercitationem eum accusantium autem veritatis harum.</p>
-                                                        <div class="d-flex justify-content-between">
-                                                            <div class="col-12 col-md-6">capacity</div>
-                                                            <div class="col-12 col-md-6 text-right">price</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> --}}
-                                </div>
+                        {{-- href of btn here for easy viewing of btn --}}
+                        <span id="viewingRental"></span>
 
-                                <a href="#" class="col-md-12" data-bs-toggle="collapse" data-bs-target="#sl"
-                                    data-bs-parent="#menu">
-                                    <label for="description" class="col-md-5 col-form-label text-white">Select
-                                        Rentals</label>
-                                    <i class="bi bi-house-fill"></i>
-                                    <span class="glyphicon glyphicon-envelope pull-right"></span>
-                                </a>
-                                <div id="sl" class="sublinks collapse">
-                                    <a class="list-group-item small"><span
-                                            class="glyphicon glyphicon-chevron-right"></span> saved tasks</a>
-                                    <a class="list-group-item small"><span
-                                            class="glyphicon glyphicon-chevron-right"></span> add new
-                                        task</a>
+                        {{-- BOOKED ITEMS --}}
+                        <div class="col-12">
+                            <label for="description" class="col-md-5 col-form-label pb-0">Rooms Booked</label>
+                            
+                            <div id="bookedRoomsContainer">
+                                <div class="form-group col-12 d-flex justify-content-between my-1 text-center">
+                                    <p class="m-0 form-control p-2"> No rooms booked </p>
                                 </div>
                             </div>
                         </div>
+
+                        {{-- RESERVED RENTALS --}}
+                        <div class="col-12">
+                            <label for="description" class="col-md-5 col-form-label pb-0">Reserved Rentals</label>
+                            
+                            <div id="reservedRentalContainer">
+                                <div class="form-group col-12 d-flex justify-content-between my-1 text-center">
+                                    <p class="m-0 form-control p-2"> No rentals reserved </p>
+                                </div>
+                            </div>
+                            {{-- <div class="form-group col-12 d-flex justify-content-between my-1">
+                                <input id="room_id" type="text" class="m-0 form-control" name="room_id"
+                                    placeholder="0" value="name of room">
+                                <a href="#" class="btn btn-danger selectRoomBtn w-25 selectRoomBtn">Remove</a>
+                            </div> --}}
+                        </div>
+                    </div>
+
+                    {{-- LEFT SIDE --}}
+                    <div class="col-12 col-md-5">
+                        <div id="menu">
+                            <div class="panel list-group">
+                                <a href="#" class="col-md-12 myPointer" data-bs-toggle="collapse" data-bs-target="#roomsContainer"
+                                    data-bs-parent="#menu" aria-expanded="true">
+                                    <label class="col-form-label text-white myPointer">Rooms List</label>
+                                    <span class="m-2 bi bi-house-fill text-white"></span>
+                                </a>
+                                <div id="roomsContainer" class="sublinks collapse show">
+                                    <div class="bg-light col-12 text-black p-2 text-center">
+                                        Select Check-in and Check-out dates
+                                    </div>
+                                </div>
+
+                                <a href="#" class="col-md-12" data-bs-toggle="collapse" data-bs-target="#rentalContainer"
+                                    data-bs-parent="#menu">
+                                    <label class="col-form-label text-white">Select
+                                        Rentals</label>
+                                    <span class="m-2 bi bi-bucket-fill text-white"></span>
+
+                                </a>
+                                <div id="rentalContainer" class="sublinks collapse show">
+                                    <div class="bg-light col-12 text-black p-2 text-center">
+                                        Select Check-in and Check-out dates
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-7 mt-2">
+                        <button type="submit" class="float-end w-25 btn btn-primary bg-white text-black">
+                            Submit
+                        </button>
                     </div>
                 </div>
             </form>
