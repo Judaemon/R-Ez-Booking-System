@@ -4,7 +4,7 @@
             ({{$room->id}}) {{$room->name}}
         </div>
         <div class="col-12 col-md-3">
-            <a href="#bookedRoomsContainer" room_id="{{$room->id}}" room_name="{{$room->name}}" class="btn btn-primary selectRoomBtn w-100 selectRoomBtn">Book</a> 
+            <a href="#viewingRental" room_id="{{$room->id}}" room_name="{{$room->name}}" class="btn btn-primary selectRoomBtn w-100 selectRoomBtn">Book</a> 
         </div>
     </div>
     <div class="modal fade " id="viewRoomInfoModal{{$room->id}}" tabindex="-1" aria-labelledby="viewRoomInfoModal" aria-hidden="true">

@@ -5,7 +5,7 @@
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.9.0/main.min.js"></script>
 
 {{-- <script src="{{ asset('js/admin/scheduler.js') }}"></script> --}}
-<script src="{{ asset('js/admin/transaction.js') }}"></script>
+<script src="{{ asset('js/admin/scheduler.js') }}"></script>
 @endsection
 
 <style>
@@ -16,7 +16,7 @@
 </style>
 
 @section('content')
-<div class="container">
+<div class="container pt-3">
 
     <div id='calendar'></div>
 

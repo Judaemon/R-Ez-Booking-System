@@ -26,7 +26,7 @@
                 <div class="row">
                     <div class="col-12 col-md-7">
                         <div class="form-group col-12">
-                            <label for="title" class="col-md-5 col-form-label">Title</label>
+                            <label for="title" class="col-md-5 col-form-label">Name of reservation</label>
                             <input id="title" type="text" class="m-0 form-control" name="title" autocomplete="title"
                                 placeholder="Title..." autofocus>
 
@@ -72,6 +72,9 @@
 
                             <span class="invalid-feedback fw-bold error-text description_error"></span>
                         </div>
+
+                        {{-- href of btn here for easy viewing of btn --}}
+                        <span id="viewingRental"></span>
 
                         {{-- BOOKED ITEMS --}}
                         <div class="col-12">

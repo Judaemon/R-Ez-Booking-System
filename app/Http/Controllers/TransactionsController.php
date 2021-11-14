@@ -47,8 +47,39 @@ class TransactionsController extends Controller
     public function getAllTransaction()
     {
         $transactions = DB::table('transactions')->get();
-        
-        $events = [];
+        $color = '#000';
+        //dd($transactions);
+        // if ($transactions->-items->id == 4) {
+        //     $color = "#FFFF00";
+        // }
+ //        created_at->format('Y-m-d')
+          foreach ($transactions as $transaction)
+          {
+            if ($transaction->transaction_status == "Booked") {
+                $color = "#FFA500";
+            }else if ($transaction->transaction_status == "On-going"){
+                $color = "#0000FF";
+            }else if ($transaction->transaction_status == "Finished"){
+                $color = "#00FF00";
+            }else if ($transaction->transaction_status == "Cancelled"){
+                $color = "#FF0000";
+            }
+           $events[] = [
+            'id'=>$transaction->id,
+            'user_id'=>$transaction->user_id,
+            'room_id'=>$transaction->room_id,
+            'rental_id'=>$transaction->rental_id,
+            'payment_method'=>$transaction->payment_method,
+            'total_price'=>$transaction->total_price,
+            'transaction_status'=>$transaction->transaction_status,
+            'title'=>$transaction->title,
+            'start'=>$transaction->start,
+            'end'=>$transaction->end,
+            'description'=>$transaction->description,
+            'color'=>$color
+           ];
+        }
+       return $events;
 
         // $events[] = [
         //     'title' => trim($source['prefix'] . " " . $model->{$source['field']}
@@ -62,13 +93,13 @@ class TransactionsController extends Controller
 
         // }
 
-        return response()->json($transactions);
-        // $events->toJson(JSON_PRETTY_PRINT);
+        // return response()->json($transactions);
+        // // $events->toJson(JSON_PRETTY_PRINT);
 
-        return response()->json([
-            'status'=> 1,
-            'transactions' => $transactions
-        ]);
+        // return response()->json([
+        //     'status'=> 1,
+        //     'transactions' => $transactions
+        // ]);
     }
 
     public function showAllTransaction()

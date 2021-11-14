@@ -85,6 +85,14 @@ $(document).on('change', '#start', function (event) {
     }
 
     setMinDate("end", checkIn)
+    
+    if (SelectedRoomList != [] || SelectedRentalList != []) {
+        SelectedRoomList = []
+        SelectedRentalList = []
+
+        updateRentalList()
+        updateBookedRoomList()
+    }
 
     fetchAvailableRooms()
     fetchAvailableRentals()
@@ -119,6 +127,31 @@ $(document).on('click', '.selectRoomBtn', function (event) {
     updateBookedRoomList()
 })
 
+$(document).on('click', '.removeRoomBtn', function (event) {
+    let room_id = $(this).attr('room_id')
+    
+    // removes item sa array
+    SelectedRoomList = removeItemFromArray(SelectedRoomList, room_id)
+
+    updateBookedRoomList()
+})
+
+$(document).on('click', '.removeRentalBtn', function (event) {
+    let rental_id = $(this).attr('rental_id')
+    
+    // removes item sa array
+    console.log(rental_id);
+    SelectedRentalList = removeItemFromArray(SelectedRentalList, rental_id)
+    console.log(SelectedRentalList);
+
+    updateRentalList()
+})
+
+function removeItemFromArray(array, item_id) {
+    return array.filter(function(item){ return item[0] != item_id }) 
+}
+
+
 function updateBookedRoomList() {
     let htmlCode = ""
 
@@ -126,11 +159,17 @@ function updateBookedRoomList() {
         htmlCode += `<div class="form-group col-12 d-flex justify-content-between my-1">
         <input id="room_id`+value1[0]+`" type="text" class="m-0 form-control" name="room_id"`+value1[0]+`
             placeholder="0" value="`+value1[1]+`">
-        <a href="#" class="btn btn-danger selectRoomBtn w-25 selectRoomBtn">Remove</a>
+        <a href="#viewingRental" room_id="`+value1[0]+`" room_name="`+value1[1]+`" class="btn btn-danger w-25 removeRoomBtn">Remove</a>
     </div>`
-        // console.log(value1[0]);
-        // console.log(value1[1]);
     });
+
+    if (SelectedRoomList === undefined || SelectedRoomList.length == 0)  {
+        htmlCode = `<div id="bookedRoomsContainer">
+                        <div class="form-group col-12 d-flex justify-content-between my-1 text-center">
+                            <p class="m-0 form-control p-2"> No rooms booked </p>
+                        </div>
+                    </div>`
+    }
 
     $('#bookedRoomsContainer').html(htmlCode);
 }
@@ -149,19 +188,30 @@ $(document).on('click', '.selectRentalBtn', function (event) {
         SelectedRentalList.push([rental_id, rental_name]);
     }
 
-    updateRentalRoomList()
+    console.log(SelectedRentalList);
+
+    updateRentalList()
 })
 
-function updateRentalRoomList() {
+function updateRentalList() {
     let htmlCode = ""
 
     $.each(SelectedRentalList, function(key1, value1) {
         htmlCode += `<div class="form-group col-12 d-flex justify-content-between my-1">
-        <input id="room_id`+value1[0]+`" type="text" class="m-0 form-control" name="room_id"`+value1[0]+`
-            placeholder="0" value="`+value1[1]+`">
-        <a href="#" class="btn btn-danger selectRoomBtn w-25 selectRoomBtn">Remove</a>
-    </div>`
+                        <input id="rental_id`+value1[0]+`" type="text" class="m-0 form-control" name="room_id"`+value1[0]+`
+                            placeholder="0" value="`+value1[1]+`">
+                        <a href="#viewingRental" rental_id="`+value1[0]+`" rental_name="`+value1[1]+`" class="btn btn-danger w-25 removeRentalBtn">Remove</a>
+                    </div>`
     });
+    
+    if (SelectedRentalList === undefined || SelectedRentalList.length == 0)  {
+
+        htmlCode = `<div id="reservedRentalContainer">
+                        <div class="form-group col-12 d-flex justify-content-between my-1 text-center">
+                            <p class="m-0 form-control p-2"> No rentals reserved </p>
+                        </div>
+                    </div>`
+    }
 
     $('#reservedRentalContainer').html(htmlCode);
 }
