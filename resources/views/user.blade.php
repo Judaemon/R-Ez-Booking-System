@@ -108,12 +108,6 @@
                     <span class="invalid-feedback fw-bold error-text contact_number_error" role="alert"></span>
                 </div>
 
-                <div class="form-group">
-                    <label>Address</label>
-                    <input type="text" class="form-control" id="input_address" name="address" placeholder="Address">
-                    <span class="invalid-feedback fw-bold error-text address_error" role="alert"></span>
-                </div>
-
                 <div class="form-group mb-2">
                     <label>Password</label>
                     <input type="text" class="form-control" id="input_password" name="password" placeholder="Password">
