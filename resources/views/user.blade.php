@@ -91,12 +91,6 @@
                 </div>
                 
                 <div class="form-group mb-2">
-                    <label>Username</label>
-                    <input type="text" class="form-control" id="input_username" name="username" placeholder="Username">
-                    <span class="invalid-feedback fw-bold error-text username_error" role="alert"></span>
-                </div>  
-
-                <div class="form-group mb-2">
                     <label>First Name</label>
                     <input type="text" class="form-control" id="input_firstname" name="firstname" placeholder="First Name">
                     <span class="invalid-feedback fw-bold error-text firstname_error" role="alert"></span>

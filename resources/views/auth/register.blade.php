@@ -46,24 +46,8 @@
                             </div>
                         </div>
 
-                        {{-- Username and Email --}}
+                        {{-- Email --}}
                         <div class="row">
-                            <div class="form-group col-12 col-md-6">
-                                <label for="username" class="col-md-5 col-form-label">{{ __('Username') }}</label>
-
-                                <div class="col-md-12">
-                                    <input id="username" type="text"
-                                        class="m-0 form-control @error('username') is-invalid @enderror" name="username"
-                                        value="{{ old('username') }}">
-
-                                    @error('username')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-
                             <div class="form-group col-12 col-md-6">
                                 <label for="email" class="col-md-7 col-form-label">{{ __('E-Mail Address') }}</label>
 

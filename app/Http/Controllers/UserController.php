@@ -29,7 +29,6 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $validated = Validator::make($request->all(), [
-            'username' => 'required|string|max:255|unique:users',
             'account_type' => 'required|string|max:255',
             'email' => 'required|string|email|max:255',
             'contact_number' => 'required|Numeric',
@@ -63,7 +62,6 @@ class UserController extends Controller
     //    $data = User::make($request, [
     //         'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
     //         'accountTypes' => ['required', 'string', 'max:255'],
-    //         'username' => ['required', 'string', 'max:255', 'unique:users'],
     //         'firstname' => ['required', 'string', 'max:255'],
     //         'lastname' => ['required', 'string', 'max:255'],
     //         'contact_number' => ['required', 'int', 'max:255', 'unique:users'],
@@ -73,7 +71,6 @@ class UserController extends Controller
     //     User::create([
     //         'email' => $data['email'],
     //         'accountTypes' => $data['accountType'],
-    //         'username' => $data['username'],
     //         'firstname' => $data['firstname'],
     //         'lastname' => $data['lastname'],
     //         'contact_number' => $data['contact_number'],
@@ -102,9 +99,8 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $validated = Validator::make($request->all(), [
-            'username' => 'required|string|max:255|unique:users,username,'.$user->id,
             'account_type' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email'.$user->id,
             'contact_number' => 'required|Numeric',
             'address' => 'required|string|max:255',
             // 'contact_number' => 'required|regex:/^[(][0-9]{2}[)][\s][0-9]{3}[-][0-9]{4}$/',
