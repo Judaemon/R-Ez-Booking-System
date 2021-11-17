@@ -45,44 +45,27 @@
 
     <form method="post" action="{{url('file')}}" enctype="multipart/form-data">
         @csrf
-        
-        {{-- <div class="input-group realprocode control-group lst increment" >
-            
-        </div> --}}
+
         <div id="imgInputs">
-            <div class="row">
+            <div class="row" id="imageInput0">
+                <div class="col-9">
+                    <input type="file" name="image_paths[]" class="form-control">
+                </div>
+                <div class="col-3">
+                    <button class="btn btn-success w-100" id='addImageBtn' type="button">Add</button>
+                </div>
+            </div>
+            
+            {{-- <div class="row" id="imageInput2">
                 <div class="col-8">
                     <input type="file" name="image_paths[]" class="form-control">
                 </div>
                 <div class="col-4">
-                    <button class="btn btn-success" id='addImageBtn' type="button">Add</button>
+                    <button class="btn btn-danger removeImageInputBtn" inputContainer="imageInput2" inputContainerID=2 type="button">Remove</button>     
                 </div>
-            </div>
-            
-            <div id="additionalImageInput">
-                {{-- <div class="row">
-                    <div class="col-8">
-                        <input type="file" name="image_paths[]" class="form-control">
-                    </div>
-                    <div class="col-4">
-                        <button class="btn btn-success" id='rmvImageBtn' type="button">Add</button>     
-                    </div>
-                </div> --}}
-            </div>
+            </div> --}}
             
         </div>
-        
-
-        {{-- <div class="clone hide">
-          <div class="realprocode control-group lst input-group" style="margin-top:10px">
-            <input type="file" name="image_paths[]" class=" form-control">
-            <div class="input-group-btn"> 
-              <button class="btn btn-danger" id='rmvImageBtn' type="button"><i class="fldemo glyphicon glyphicon-remove"></i> Remove</button>
-            </div>
-          </div>
-        </div> --}}
-      
-        <button type="submit" class="btn btn-success" style="margin-top:10px">Submit</button> 
     </form>   
 
     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

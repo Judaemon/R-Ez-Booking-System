@@ -7,18 +7,50 @@ const swalWithBootstrapButtons = Swal.mixin({
     buttonsStyling: false
 });
 
+let imageInputArray = [0]
+
 $(function () {
-    //console.log("rental loaded");
     getRentalTable();
-    $(document).on('click', '#addImageBtn', function (event) {
-        var lsthmtl = $(".clone").html();
-        $(".increment").after(lsthmtl);
-    });
-    $(document).on('click', '#rmvImageBtn', function (event) {
-        $(this).parents(".realprocode").remove();
-    });
 });
 
+//////////////////////////////////////////////
+
+$(document).on('click', '#addImageBtn', function (event) {
+    imageInputArray.push((imageInputArray.length))
+
+    addImageInput()
+});
+
+$(document).on('click', '.removeImageInputBtn', function (event) {
+    const inputContainer = $(this).attr('inputContainer')
+    const inputContainerID = $(this).attr('inputContainerID')
+
+    imageInputArray.splice( $.inArray(inputContainerID, imageInputArray), 1 );
+
+    $("#"+inputContainer).remove();
+});
+
+function addImageInput() {
+    const latestInputImageID = imageInputArray[imageInputArray.length-1]
+
+    $(imageInput(latestInputImageID)).insertAfter("#imageInput"+(latestInputImageID-1));
+}
+
+function imageInput(id) {
+    const imageInputHTML = 
+    `<div class="row" id="imageInput`+id+`">
+        <div class="col-9">
+            <input type="file" name="image_paths[]" class="form-control">
+        </div>
+        <div class="col-3">
+            <button class="btn btn-danger w-100 removeImageInputBtn" inputContainer="imageInput`+id+`" inputContainerID=`+id+` type="button">Remove</button>     
+        </div>
+    </div>`
+
+    return imageInputHTML
+}
+
+///////////////////////////////////////////////
 function getRentalTable(page) {
     $.ajax({
         type: 'GET',
@@ -190,7 +222,6 @@ function errorWarning() {
 // Display Edit Form
 $(document).on('click', '#rentalUpdateBtn', function (event) {
     const id = ($(this).attr('room_id'));
-    console.log(id);
     const form = this;
     $.ajax({
         method: 'GET',
