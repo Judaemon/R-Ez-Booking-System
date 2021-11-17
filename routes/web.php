@@ -5,13 +5,11 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\AdminController;
 use App\Http\Controllers\RentalController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\RoomController;
-use App\Http\Controllers\TransactionsController;
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CustomerController;
-use App\Models\Transactions;
 
 Route::get('/', function () {
     return view('welcome');
@@ -36,11 +34,11 @@ Route::view('/contact', 'contact')->name('contact');
 
 
 // Booking links
-Route::post('getAvailableRooms', [TransactionsController::class, 'getAvailableRooms'])->name('getAvailableRooms');
-Route::post('getAvailableRentals', [TransactionsController::class, 'getAvailableRentals'])->name('getAvailableRentals');
+Route::post('getAvailableRooms', [BookingController::class, 'getAvailableRooms'])->name('getAvailableRooms');
+Route::post('getAvailableRentals', [BookingController::class, 'getAvailableRentals'])->name('getAvailableRentals');
 
-// Transactions links
-// Route::get('showAllTransaction', [TransactionsController::class, 'showAllTransaction'])->name('showAllTransaction');
+// Booking links
+// Route::get('showAllBooking', [BookingController::class, 'showAllBooking'])->name('showAllBooking');
 
 // for user only links
 Route::group([
@@ -60,7 +58,7 @@ Route::group([
     Route::resource('rental', RentalController::class);
     Route::resource('room', RoomController::class);
 
-    Route::view('/transaction', 'transaction')->name('transaction');
+    Route::view('/booking', 'booking')->name('booking');
     Route::view('/scheduler', 'scheduler')->name('scheduler');
 
     // report paths
@@ -76,7 +74,7 @@ Route::group([
 
     
 
-    Route::get('showAllTransaction', [TransactionsController::class, 'showAllTransaction'])->name('showAllTransaction');
+    Route::get('showAllBooking', [BookingController::class, 'showAllBooking'])->name('showAllBooking');
     
-    Route::get('getAllTransaction', [TransactionsController::class, 'getAllTransaction'])->name('getAllTransaction');
+    Route::get('getAllBooking', [BookingController::class, 'getAllBooking'])->name('getAllBooking');
 });

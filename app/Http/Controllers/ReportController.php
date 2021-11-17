@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Transactions;
+use App\Models\Booking;
 use Illuminate\Support\Facades\DB;
 
 

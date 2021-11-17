@@ -25,6 +25,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'contact_number',
         'address',
         'email',
+        'image_path',
         'password',
     ];
 
@@ -42,7 +43,7 @@ class User extends Authenticatable implements MustVerifyEmail
       return "{$this->first_name} {$this->last_name}";
   }
   
-    public function transactions()
+    public function bookings()
     {
         return $this->hasMany('App\Transaction');
     }
