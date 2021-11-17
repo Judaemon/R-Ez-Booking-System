@@ -16,4 +16,9 @@ class Rental extends Model
         'description',
         'image_path',
     ];
+
+    public function bookings() 
+    {
+        return $this->belongsToMany(Booking::class);
+    }
 }
