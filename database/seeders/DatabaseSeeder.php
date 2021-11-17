@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Transactions;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,7 +12,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             RoomSeeder::class,
             RentalSeeder::class,
-            TransactionSeeder::class,
+            BookingSeeder::class,
         ]);
     }
 }

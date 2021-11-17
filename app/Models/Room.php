@@ -13,7 +13,9 @@ class Room extends Model
         'description',
         'price',
         'recommended_capacity',
-        //'picture',
+    ];
+
+    protected $casts = [
         'image_path',
     ];
 }

@@ -9,7 +9,7 @@
         <th>Actions</th>
     </thead>
     <tbody>
-        @foreach ($transactions as $transaction)
+        @foreach ($bookings as $booking)
         <tr>
             <td> {{$transaction->id}} </td>
             <td> {{$transaction->firstname}} {{$transaction->lastname}}</td>

@@ -5,17 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Transactions extends Model
+class Booking extends Model
 {
     use HasFactory;
     protected $fillable=[
         'user_id',
-        'room_id',
-        'rental_id',
         'payment_method',
+        'amount_paid',
         'total_price',
-        'transaction_status',
-        'title',
+        'booking_status',
         'start',
         'end',
         'description',

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Transactions;
 use App\Models\Room;
 
+use App\Models\Booking;
 use Illuminate\Support\Facades\DB;
 
 
@@ -73,7 +74,7 @@ class ReportController extends Controller
 
             $yeet .= $this->countData($value);
 
-            $graphData = Transactions::where('transaction_status', '=', "$yeet")->count().", ";
+            //$graphData = Transactions::where('transaction_status', '=', "$yeet")->count().", ";
             
             // $graphData = $yeet->count().", ";
             // $graphData .= $this->countData($value).", ";
@@ -82,7 +83,7 @@ class ReportController extends Controller
     
         return response()->json([
             'status'=> 1,
-            'graphData' => $graphData,
+            //'graphData' => $graphData,
             'yeet' => $yeet,
             'value' => $value
         ]);
