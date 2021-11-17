@@ -14,6 +14,9 @@ class Rental extends Model
         'rental_count',
         'price',
         'description',
-        'image_path',
+        'image_paths',
     ];
+    public function setFilenamesAttribute($value){
+        $this->attributes['image_paths'] = json_encode($value);
+    }
 }

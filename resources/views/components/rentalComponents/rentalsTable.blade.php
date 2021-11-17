@@ -2,7 +2,7 @@
     <thead class="table-dark text-center">
         <tr>
             <th scope="col">ID</th>
-            <th scope="col">Name</th>
+            <th scope="col">Type</th>
             <th scope="col">Count</th>
             <th scope="col">Price</th>
             <th scope="col">Description</th>
@@ -18,11 +18,12 @@
             <td>{{$rental->rental_count}}</td>
             <td>{{$rental->price}}</td>
             <td>{{$rental->description}}</td>
-            {{-- <td> 
-            <img 
-                src="{{ asset('img/' . $rental->image_path) }}"
-                alt="wow" height="200" width="200">
-            </td> --}}
+            <td> 
+            {{-- <img 
+                src="{{ asset('img/' . $picture) }}"
+                alt="wow" height="200" width="200"> --}}
+                {{-- {{json_decode($rental->image_paths)}} --}}
+            </td>
             <td>
                 <div class='d-flex justify-content-around'>
                     <form method="POST" class="deleteRental" dataId="{{$rental->id}}"
@@ -31,7 +32,6 @@
                         @method('DELETE')
                         <button class="btn btn-danger" style="width: 100px; margin: 2px;" type="submit">Delete</button>
                     </form>
-    
                     {{-- div for copying the interaction btn and form above --}}
                     <div style="display: block; margin-top: 0em; margin-block-end: 1em;">
                         <button room_id="{{$rental->id}}" type='button' class='btn btn-info mx-2 myButton' id='rentalUpdateBtn' data-bs-toggle='modal'
