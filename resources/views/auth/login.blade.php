@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container p-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -19,7 +19,7 @@
                             <div class="col-md-6">
                                 <input id="login" type="text"
                                     class="form-control{{ $errors->has('username') || $errors->has('email') ? ' is-invalid' : '' }}"
-                                    name="login" value="{{ old('username') ?: old('email') }}" required autofocus placeholder="Username or Email...">
+                                    name="login" value="{{ old('username') ?: old('email') }}"  autofocus placeholder="Username or Email...">
 
                                 @if ($errors->has('username') || $errors->has('email'))
                                 <span class="invalid-feedback">
@@ -36,7 +36,7 @@
                             <div class="col-md-6">
                                 <input id="password" type="password"
                                     class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Password..."
-                                    required autocomplete="current-password">
+                                     autocomplete="current-password">
 
                                 @error('password')
                                 <span class="invalid-feedback" role="alert">

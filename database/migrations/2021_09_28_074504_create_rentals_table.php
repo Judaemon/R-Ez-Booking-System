@@ -15,12 +15,11 @@ class CreateRentalsTable extends Migration
     {
         Schema::create('rentals', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->char('name');
             $table->float('price');
             $table->string('description');
-            $table->text('picture');
-            
+            $table->text('image_path');
+            $table->timestamps();
         });
     }
 

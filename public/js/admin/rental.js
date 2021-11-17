@@ -8,18 +8,47 @@ const swalWithBootstrapButtons = Swal.mixin({
 });
 
 $(function () {
-    console.log("rental loaded");
+    //console.log("rental loaded");
     getRentalTable();
 });
 
 function getRentalTable(page) {
     $.ajax({
         type: 'GET',
-        url: 'showAllRental?page=' + page,
+        url: 'showAllRental',
         success: function (response) {
-            $('#rentalTable').html(response);
+            //console.log(response);
+            //console.log("Rental Table Loaded");
+            $('#rentalTableContainer').html(response);
+            $("#rentalTable").DataTable({
+                language: {
+                    search: '',
+                    searchPlaceholder: "Search..."
+                },
+                dom: "<'row mb-3'<'col-md-6'f><'col-md-6' <'RentalAddBtn'>>>" +
+                    "<'row'<'col-md-6'l><'col-md-6'i>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row'<'col-md-12'p>>",
+            });
+            addBtnRentalTable();
+        },
+        error: function () {
+            errorNotif();
         },
     });
+}
+
+function addBtnRentalTable() {
+    const html = `<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addRentalModal" style="width: 100%;">Add Rental</button>`;
+    $(".RentalAddBtn").html(html);
+}
+
+function errorNotif() {
+    swalWithBootstrapButtons.fire(
+        'Error! ',
+        'Something went wrong! Please try agan later.',
+        'error'
+    )
 }
 
 function clearErrorText(formID) {
@@ -126,6 +155,7 @@ $('#addRentalForm').on('submit', function (event) {
                     if (response.status == 1) {
                         $('#addRentalModal').modal('hide');
                         getRentalTable();
+                        $(form)[0].reset();
 
                         swalWithBootstrapButtons.fire(
                             'Successful!',
@@ -149,3 +179,90 @@ $('#addRentalForm').on('submit', function (event) {
         }
     })
 });
+
+// Display Edit Form
+$(document).on('click', '#rentalUpdateBtn', function (event) {
+    const id = ($(this).attr('room_id'));
+    console.log(id);
+    const form = this;
+    $.ajax({
+        method: 'GET',
+        url: 'rental/' + id + '/edit/',
+        processData: false,
+        contentType: false,
+        success: function (response) {
+            //console.log(response);
+            $('#editRentalForm').html(response);
+        },
+    });
+});
+
+// Update Ajax
+$(document).on('submit', '#updateRentalForm', function (event) {
+    event.preventDefault();
+    //console.log("update btn test");
+    swalWithBootstrapButtons.fire({
+        title: 'Are you sure?',
+        text: "This Room information will be updated from the database!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, Update it!',
+        cancelButtonText: 'No, Cancel!',
+        reverseButtons: true
+        
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const form = this;
+   
+            $.ajax({
+                url: $(form).attr('action'),
+                method: $(form).attr('method'),
+                dataType: 'JSON',
+                data: new FormData(form),
+                processData: false,
+                contentType: false,
+                // success: function (response) {
+                    //console.log(response);
+                //     $('#updateRentalModal').modal('hide');
+                //     getRentalTable();
+                // },
+                beforeSend: function () {
+                    clearErrorText('updateRentalForm');
+                },
+                success: function (response) {
+                    if (response.status == 0) {
+                        $.each(response.error, function (prefix, val) {
+                            $('#updateRentalForm #input_' + prefix).addClass('is-invalid')
+                            $('#updateRentalForm span.' + prefix + '_error').text(val)
+                        })
+                    }
+
+                    if (response.status == 1) {
+                        $('#updateRentalModal').modal('hide');
+                        getRentalTable();
+                        $(form)[0].reset();
+
+                        swalWithBootstrapButtons.fire(
+                            'Successful!',
+                            response.msg,
+                            'success'
+                        )
+                    }
+                },
+                error: function (response) {
+                    errorWarning()
+                }
+            });
+        } else if (
+            result.dismiss === Swal.DismissReason.cancel // click ayaw
+        ) {
+            swalWithBootstrapButtons.fire(
+                'Cancelled',
+                'Lets pretend that never happend >:)',
+                'error'
+            )
+        }
+    })
+});
+
+           

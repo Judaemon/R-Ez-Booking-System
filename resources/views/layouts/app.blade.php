@@ -41,6 +41,9 @@
                         </li>
                         @if (Auth::user()->account_type == 'admin' || Auth::user()->account_type == 'employee' )
                             <li class="nav-item">
+                                <a class="nav-link @if(Route::is('scheduler')) active @endif" href="{{ route('scheduler') }}">{{ __('Scheduler') }}</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link @if(Route::is('transaction')) active @endif" href="{{ route('transaction') }}">{{ __('Transaction') }}</a>
                             </li>
                             <li class="nav-item">
@@ -49,6 +52,7 @@
                             <li class="nav-item">
                                 <a class="nav-link @if(Route::is('rental.index')) active @endif" href="{{ route('rental.index') }}">{{ __('Rentals') }}</a>
                             </li>
+                            
                             @if (Auth::user()->account_type == 'admin' )
                                 <li class="nav-item">
                                     <a class="nav-link @if(Route::is('user.index')) active @endif" href="{{ route('user.index') }}">{{ __('Users') }}</a>
@@ -83,6 +87,11 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('viewProfile')}}">
+                                        {{ __('Profile') }}
+                                    </a>
+                                    {{-- <a href="{{route('profile.edit',$user->id)}}" class="btn btn-info updateButton" style='width: 93px; margin: 2px;'>Edit</a>  --}}
+
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -100,9 +109,9 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <div>
             @yield('content')
-        </main>
+        </div>
 
         <div>
             @yield('script')

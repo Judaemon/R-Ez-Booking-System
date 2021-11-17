@@ -1,11 +1,11 @@
-<table class="table table-tripped table-hover table-light">
-    <thead>
+<table id="rentalTable" class="table table-tripped table-hover table-light">
+    <thead class="table-dark text-center">
         <tr>
             <th scope="col">ID</th>
             <th scope="col">Name</th>
             <th scope="col">Price</th>
             <th scope="col">Description</th>
-            <th scope="col">Picture</th>
+            <th scope="col">Image</th>
             <th scope="col">Action</th>
         </tr>
     </thead>
@@ -16,7 +16,11 @@
             <td>{{$rental->name}}</td>
             <td>{{$rental->price}}</td>
             <td>{{$rental->description}}</td>
-            <td>{{$rental->picture}}</td>
+            <td> 
+            <img 
+                src="{{ asset('img/' . $rental->image_path) }}"
+                alt="wow" height="200" width="200">
+            </td>
             <td>
                 <div class='d-flex justify-content-around'>
                     <form method="POST" class="deleteRental" dataId="{{$rental->id}}"
@@ -28,7 +32,7 @@
     
                     {{-- div for copying the interaction btn and form above --}}
                     <div style="display: block; margin-top: 0em; margin-block-end: 1em;">
-                        <button rental_ID="{{$rental->id}}" type='button' class='btn btn-info mx-2 myButton' id='rentalUpdateBtn' data-bs-toggle='modal'
+                        <button room_id="{{$rental->id}}" type='button' class='btn btn-info mx-2 myButton' id='rentalUpdateBtn' data-bs-toggle='modal'
                         data-bs-target='#updateRentalModal'>Update</button>
                     </div>
                 </div>

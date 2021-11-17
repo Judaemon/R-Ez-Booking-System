@@ -4,6 +4,9 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
+// for created_at and updated_at column value
+use Carbon\Carbon;
+
 // For sql query
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -23,8 +26,12 @@ class UserSeeder extends Seeder
                 'firstname' => 'Fadmin',
                 'lastname' => 'Ladmin',
                 'contact_number' => '0912312312',
+                'address' => 'admin address',
                 'email' => 'admin@gmail.com',
                 'password' => Hash::make('admin'),
+                'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
             [
                 'account_type' => 'employee',
@@ -32,8 +39,12 @@ class UserSeeder extends Seeder
                 'firstname' => 'Femployee',
                 'lastname' => 'Lemployee',
                 'contact_number' => '0912312313',
+                'address' => 'employee address',
                 'email' => 'employee@gmail.com',
                 'password' => Hash::make('employee'),
+                'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
             [
                 'account_type' => 'user',
@@ -41,8 +52,12 @@ class UserSeeder extends Seeder
                 'firstname' => 'Fuser',
                 'lastname' => 'Luser',
                 'contact_number' => '0912312314',
+                'address' => 'user adress',
                 'email' => 'user@gmail.com',
                 'password' => Hash::make('user'),
+                'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
         ];
     
