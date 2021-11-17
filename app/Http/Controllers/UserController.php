@@ -33,7 +33,6 @@ class UserController extends Controller
             'account_type' => 'required|string|max:255',
             'email' => 'required|string|email|max:255',
             'contact_number' => 'required|Numeric',
-            'address' => 'required|string|max:255',
             // 'contact_number' => 'required|regex:/^[(][0-9]{2}[)][\s][0-9]{3}[-][0-9]{4}$/',
             'firstname' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
@@ -47,6 +46,8 @@ class UserController extends Controller
                 'error' => $validated->errors()->toArray()
             ]);
         }
+
+        $request['password']  = Hash::make($request['password']);
 
         User::create($request->all());
 
@@ -106,11 +107,11 @@ class UserController extends Controller
             'account_type' => 'required|string|max:255',
             'email' => 'required|string|email|max:255',
             'contact_number' => 'required|Numeric',
-            'address' => 'required|string|max:255',
+            //'address' => 'required|string|max:255',
             // 'contact_number' => 'required|regex:/^[(][0-9]{2}[)][\s][0-9]{3}[-][0-9]{4}$/',
             'firstname' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
-            'password' => 'required|string|min:8|max:255',
+            // 'password' => 'required|string|min:8|max:255',
 
         ]);
         
