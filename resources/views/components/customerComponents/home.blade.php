@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('script')
-<script src="{{ asset('js/transaction.js') }}"></script>
+<script src="{{ asset('js/booking.js') }}"></script>
 @endsection
 
 <style>
@@ -25,14 +25,6 @@
             <form class="text-white">
                 <div class="row">
                     <div class="col-12 col-md-7">
-                        <div class="form-group col-12">
-                            <label for="title" class="col-md-5 col-form-label">Name of reservation</label>
-                            <input id="title" type="text" class="m-0 form-control" name="title" autocomplete="title"
-                                placeholder="Title..." autofocus>
-
-                            <span class="invalid-feedback fw-bold error-text title_error"></span>
-                        </div>
-
                         <div class="row">
                             <div class="form-group col-12 col-md-6 ">
                                 <label for="start" class="col-md-5 col-form-label">Check In</label>
@@ -71,6 +63,17 @@
                                 style="height: 120px" maxlength="250" name="description"></textarea>
 
                             <span class="invalid-feedback fw-bold error-text description_error"></span>
+                        </div>
+
+                        <div class="form-group col-12">
+                            <label for="adress" class="col-md-5 col-form-label">Adress</label>
+                            <input id="adress" type="text" class="m-0 form-control" name="adress"
+                                    placeholder="Address">
+                            
+                            <span class="invalid-feedback fw-bold error-text description_error"></span>
+                            <div class="px-1">
+                                <p class="small text-danger">*For covid protocol.</p>
+                            </div>
                         </div>
 
                         {{-- href of btn here for easy viewing of btn --}}

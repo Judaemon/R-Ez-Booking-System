@@ -49,33 +49,37 @@ function fetchAvailableRooms() {
             checkOut: checkOut
         },
         success: function (response) {
-            $('#roomsContainer').html(response);
+            // $('#roomsContainer').html(response);
+            console.log(response);
         },
-        error: function () {
+        error: function (response) {
+            console.log(response);
+
+            // $('#roomsContainer').html(response);
             errorNotif();
         },
     });
 }
 
-function fetchAvailableRentals() {
-    let checkIn = $('#start').val();
-    let checkOut = $('#end').val();
+// function fetchAvailableRentals() {
+//     let checkIn = $('#start').val();
+//     let checkOut = $('#end').val();
 
-    $.ajax({
-        type: "POST",
-        url: "getAvailableRentals",
-        data: {
-            checkIn: checkIn,
-            checkOut: checkOut
-        },
-        success: function (response) {
-            $('#rentalContainer').html(response);
-        },
-        error: function () {
-            errorNotif();
-        },
-    });
-}
+//     $.ajax({
+//         type: "POST",
+//         url: "getAvailableRentals",
+//         data: {
+//             checkIn: checkIn,
+//             checkOut: checkOut
+//         },
+//         success: function (response) {
+//             $('#rentalContainer').html(response);
+//         },
+//         error: function () {
+//             errorNotif();
+//         },
+//     });
+// }
 
 $(document).on('change', '#start', function (event) {
     const checkIn = $('#start').val();
@@ -95,7 +99,7 @@ $(document).on('change', '#start', function (event) {
     }
 
     fetchAvailableRooms()
-    fetchAvailableRentals()
+    // fetchAvailableRentals()
 
 })
 
@@ -103,7 +107,7 @@ $(document).on('change', '#end', function (event) {
     // console.log($('#start').val());
     if ($('#start').val()) {
         fetchAvailableRooms()
-        fetchAvailableRentals()
+        // fetchAvailableRentals()
     }
 })
 
