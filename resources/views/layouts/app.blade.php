@@ -44,7 +44,7 @@
                                 <a class="nav-link @if(Route::is('scheduler')) active @endif" href="{{ route('scheduler') }}">{{ __('Scheduler') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link @if(Route::is('transaction')) active @endif" href="{{ route('transaction') }}">{{ __('Transaction') }}</a>
+                                <a class="nav-link @if(Route::is('booking')) active @endif" href="{{ route('booking') }}">{{ __('Booking') }}</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link @if(Route::is('room.index')) active @endif" href="{{ route('room.index') }}">{{ __('Rooms') }}</a>
