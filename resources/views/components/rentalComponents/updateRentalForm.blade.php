@@ -3,8 +3,20 @@
     @method('PUT')
     <div class="form-group">
         <label>Name</label>
-        <input type="text" class="form-control" id="input_name" name="name" value="{{$rental->name}}" >
+        <input type="text" class="form-control" id="input_name" name="name" value="{{$rental->rental_type}}" >
         <span class="invalid-feedback fw-bold error-text name_error" role="alert"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Count</label>
+        <input type="number" class="form-control" id="input_count" name="count" value="{{$rental->rental_count}}">
+        <span class="invalid-feedback fw-bold error-text price_error" role="alert"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Price</label>
+        <input type="number" class="form-control" id="input_price" name="price" value="{{$rental->price}}">
+        <span class="invalid-feedback fw-bold error-text price_error" role="alert"></span>
     </div>
 
     <div class="form-group">
@@ -13,12 +25,6 @@
         <span class="invalid-feedback fw-bold error-text description_error" role="alert"></span>
     </div>  
 
-    <div class="form-group">
-        <label>Price</label>
-        <input type="number" class="form-control" id="input_price" name="price" value="{{$rental->price}}">
-        <span class="invalid-feedback fw-bold error-text price_error" role="alert"></span>
-    </div>
-
     <!-- <div class="form-group">
         <label>Picture</label>
         <input type="text" class="form-control" id="input_picture" name="picture" value="{{$rental->picture}}" >
@@ -26,7 +32,7 @@
     </div> -->
 
     <div class="form-group mb-2">
-        <label>image</label>
+        <label>Image</label>
         <input type="file" class="form-control" id="input_image" name="image_path">
         <span class="invalid-feedback fw-bold error-text image_error" role="alert"></span>
     </div>

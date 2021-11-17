@@ -73,6 +73,13 @@
                     </div>
 
                     <div class="form-group mb-2">
+                        <label>Count</label>
+                        <input type="number" class="form-control" id="input_count" name="count"
+                            placeholder="Rental Count">
+                        <span class="invalid-feedback fw-bold error-text price_error" role="alert"></span>
+                    </div>
+
+                    <div class="form-group mb-2">
                         <label>Price</label>
                         <input type="number" class="form-control" id="input_price" name="price"
                             placeholder="Rental Price">
@@ -93,7 +100,7 @@
                     </div> -->
                    
                     <div class="form-group mb-2">
-                        <label>image</label>
+                        <label>Image</label>
                         <input type="file" class="form-control" id="input_image" name="image_path">
                         <span class="invalid-feedback fw-bold error-text image_error" role="alert"></span>
                     </div>

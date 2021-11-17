@@ -3,9 +3,10 @@
         <tr>
             <th scope="col">ID</th>
             <th scope="col">Name</th>
+            <th scope="col">Count</th>
             <th scope="col">Price</th>
             <th scope="col">Description</th>
-            <th scope="col">Image</th>
+            {{-- <th scope="col">Image</th> --}}
             <th scope="col">Action</th>
         </tr>
     </thead>
@@ -13,14 +14,15 @@
         @foreach ($rentals as $rental)
         <tr>
             <td>{{$rental->id}}</td>
-            <td>{{$rental->name}}</td>
+            <td>{{$rental->rental_type}}</td>
+            <td>{{$rental->rental_count}}</td>
             <td>{{$rental->price}}</td>
             <td>{{$rental->description}}</td>
-            <td> 
+            {{-- <td> 
             <img 
                 src="{{ asset('img/' . $rental->image_path) }}"
                 alt="wow" height="200" width="200">
-            </td>
+            </td> --}}
             <td>
                 <div class='d-flex justify-content-around'>
                     <form method="POST" class="deleteRental" dataId="{{$rental->id}}"

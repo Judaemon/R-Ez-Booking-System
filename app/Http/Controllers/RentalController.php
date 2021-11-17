@@ -27,7 +27,8 @@ class RentalController extends Controller
     public function store(Request $request)
     {
         $validated = Validator::make($request->all(), [
-            'name' => 'required|string|max:255|unique:rentals',
+            'rental_type' => 'required|string|max:255|unique:rentals',
+            'rental_count' => 'required|Numeric',
             'price' => 'required|Numeric',
             'description' => 'required|string|max:255',
             'image_path' => 'required|mimes:jpg,png,jpeg|max:5048',
@@ -46,7 +47,8 @@ class RentalController extends Controller
         
         //Rental::create($request->all());
         Rental::create([
-            'name' => $request->input('name'),
+            'rental_type' => $request->input('name'),
+            'rental_count' => $request->input('count'),
             'description' => $request->input('description'),
             'price' => $request->input('price'),
             'image_path' => $newImageName,
@@ -71,7 +73,8 @@ class RentalController extends Controller
     public function update(Request $request, Rental $rental)
     {
         $validated = Validator::make($request->all(), [
-            'name' => 'required|string|max:255|unique:rentals,name,'.$rental->id,
+            'rental_type' => 'required|string|max:255|unique:rentals,name,'.$rental->id,
+            'rental_count' => 'required|Numeric',
             'price' => 'required|Numeric',
             'description' => 'required|string|max:255',
             'image_path' => 'required|mimes:jpg,png,jpeg|max:5048',
@@ -91,7 +94,8 @@ class RentalController extends Controller
 
         //$rental->update($request->all());
         $rental->update([
-            'name' => $request->input('name'),
+            'rental_type' => $request->input('name'),
+            'rental_count' => $request->input('count'),
             'description' => $request->input('description'),
             'price' => $request->input('price'),
             'image_path' => $newImageName,
