@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Transactions;
+use App\Models\Room;
+
 use Illuminate\Support\Facades\DB;
 
 
@@ -48,27 +50,41 @@ class ReportController extends Controller
 
         $dataCount = DB::table('transactions')
                     ->select(DB::raw('count(*) as total_rows'))
-                    ->where('payment_status', '=', $status,)
+                    ->where('transaction_status', '=', $status,)
                     ->get();
 
         return $dataCount;
     }
 
     public function getGraphData(){
-        $filterList = ["On-going", "Pending", "Cancelled", "Finished"];
-        $graphData = "";
+        $filterList = ["On-going", "Booked", "Cancelled", "Finished"];
+        $yeet = "";
         foreach ($filterList as $key => $value) {
     
           if ($key == 3) {
-            $graphData .= $this->countData($value);
+            
+            $yeet .= $this->countData($value);
+
+            // $graphData = Transactions::where('transaction_status', '=', 'Cancelled')->count(); 
+            
+            // $graphData = $yeet->count();
+            // $graphData .= $this->countData($value);
           }else {
-            $graphData .= $this->countData($value).", ";
+
+            $yeet .= $this->countData($value);
+
+            $graphData = Transactions::where('transaction_status', '=', "$yeet")->count().", ";
+            
+            // $graphData = $yeet->count().", ";
+            // $graphData .= $this->countData($value).", ";
           }
         }
     
         return response()->json([
             'status'=> 1,
-            'graphData' => $graphData
+            'graphData' => $graphData,
+            'yeet' => $yeet,
+            'value' => $value
         ]);
       }
 }

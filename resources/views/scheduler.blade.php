@@ -1,7 +1,12 @@
 @extends("layouts.app")
 
+@section('script')
+<script src="{{ asset('js/dashboard.js') }}"></script>
+@endsection
+
 @section('content')
 {{-- <h1>DASHBOARD YAWA</h1> --}}
+
 
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
@@ -38,7 +43,7 @@
             indexLabelPlacement: "inside",
             indexLabelFontWeight: "bolder",
             indexLabelFontColor: "white",
-            dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
+            dataPoints: [{label: "Kubo", y: 100},{label:"Superior", y: 25},{label:"Villa", y: 50}]
         }]
     });
     chart.render();
@@ -52,18 +57,12 @@
         <div class="col-6">
             <div class="row" style="text-align: center">
                 <h1>ACCOUNTS</h1>
-                <div class="col-4">
-                    <h5>user</h5>
-                    <h1>1</h1>
-                </div>
-                <div class="col-4">
-                    <h5>employee</h5>
-                    <h1>1</h1>
-                </div>
-                <div class="col-4">
-                    <h5>admin</h5>
-                    <h1>1</h1>
-                </div>          
+                <div id="accountContainer" class="row">
+                    {{-- <div class="col-4">
+                        <h5>user</h5>
+                        <h1>1</h1>
+                    </div>--}}
+                </div>           
             </div>
 
             <div class="row">
