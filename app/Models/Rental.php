@@ -14,7 +14,7 @@ class Rental extends Model
         'rental_count',
         'price',
         'description',
-        'image_path',
+        'image_paths',
     ];
 
     public function bookings() 

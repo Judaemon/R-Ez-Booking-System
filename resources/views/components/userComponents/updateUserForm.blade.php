@@ -22,11 +22,6 @@
                     <span class="invalid-feedback fw-bold error-text account_type_error" role="alert"></span>
                 </div>
     <div class="form-group">
-        <label>Username</label>
-        <input type="text" class="form-control" id="input_username" name="username" value="{{$user->username}}" >
-        <span class="invalid-feedback fw-bold error-text username_error" role="alert"></span>
-    </div>
-    <div class="form-group">
         <label>First Name</label>
         <input type="text" class="form-control" id="input_firstname" name="firstname" value="{{$user->firstname}}" >
         <span class="invalid-feedback fw-bold error-text firstname_error" role="alert"></span>
@@ -40,11 +35,6 @@
         <label>Contact Number</label>
         <input type="text" class="form-control" id="input_contact_number" name="contact_number" value="{{$user->contact_number}}" >
         <span class="invalid-feedback fw-bold error-text contact_number_error" role="alert"></span>
-    </div>
-    <div class="form-group">
-        <label>Address</label>
-        <input type="text" class="form-control" id="input_address" name="address" value="{{$user->address}}" >
-        <span class="invalid-feedback fw-bold error-text address_error" role="alert"></span>
     </div>
     <div class="form-group">
         <label>Password</label>

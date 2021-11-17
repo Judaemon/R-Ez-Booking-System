@@ -1,11 +1,9 @@
 <table id="userTable" class="table table-tripped table-hover table-light">
     <thead class="table-dark text-center">
         <th>ID</th>
-        <th>Username</th>
         <th>Role</th>
         <th>Email</th>
         <th>Contact Number</th>
-        <th>Address</th>
         <th>Firstname</th>
         <th>Lastname</th>
         <th>Actions</th>
@@ -14,11 +12,9 @@
         @foreach ($users as $user)
         <tr>
             <td> {{$user->id}} </td>
-            <td> {{$user->username}} </td>
             <td> {{$user->account_type}} </td>
             <td> {{$user->email}} </td>
             <td> {{$user->contact_number}} </td>
-            <td> {{$user->address}} </td>
             <td> {{$user->firstname}} </td>
             <td> {{$user->lastname}} </td>
             <td>

@@ -22,7 +22,6 @@ class UserSeeder extends Seeder
         $users = [
             [
                 'account_type' => 'admin',
-                'username' => 'admin',
                 'firstname' => 'Fadmin',
                 'lastname' => 'Ladmin',
                 'contact_number' => '0912312312',
@@ -34,7 +33,6 @@ class UserSeeder extends Seeder
             ],
             [
                 'account_type' => 'employee',
-                'username' => 'employee',
                 'firstname' => 'Femployee',
                 'lastname' => 'Lemployee',
                 'contact_number' => '0912312313',
@@ -46,7 +44,6 @@ class UserSeeder extends Seeder
             ],
             [
                 'account_type' => 'user',
-                'username' => 'user',
                 'firstname' => 'Fuser',
                 'lastname' => 'Luser',
                 'contact_number' => '0912312314',

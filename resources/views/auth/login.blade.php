@@ -13,17 +13,17 @@
 
                         <div class="form-group row mb-3">
                             <label for="login" class="col-sm-4 col-form-label text-md-right">
-                                {{ __('Username or Email') }}
+                                {{ __('Email') }}
                             </label>
 
                             <div class="col-md-6">
                                 <input id="login" type="text"
-                                    class="form-control{{ $errors->has('username') || $errors->has('email') ? ' is-invalid' : '' }}"
-                                    name="login" value="{{ old('username') ?: old('email') }}"  autofocus placeholder="Username or Email...">
+                                    class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
+                                    name="login" value="{{ old('email') }}"  autofocus placeholder="Email">
 
-                                @if ($errors->has('username') || $errors->has('email'))
+                                @if ($errors->has('email'))
                                 <span class="invalid-feedback">
-                                    <strong>{{ $errors->first('username') ?: $errors->first('email') }}</strong>
+                                    <strong>{{ $errors->first('email') }}</strong>
                                 </span>
                                 @endif
                             </div>
