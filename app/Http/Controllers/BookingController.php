@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Transactions;
+use App\Models\Booking;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
 
-class TransactionsController extends Controller
+class BookingController extends Controller
 {
     public function index()
     {
@@ -24,22 +24,22 @@ class TransactionsController extends Controller
         //
     }
 
-    public function show(Transactions $transactions)
+    public function show(Booking $Booking)
     {
         //
     }
 
-    public function edit(Transactions $transactions)
+    public function edit(Booking $Booking)
     {
         //
     }
 
-    public function update(Request $request, Transactions $transactions)
+    public function update(Request $request, Booking $Booking)
     {
         //
     }
 
-    public function destroy(Transactions $transactions)
+    public function destroy(Booking $Booking)
     {
         //
     }
@@ -104,34 +104,42 @@ class TransactionsController extends Controller
 
     public function showAllTransaction()
     {
-        $transactions = DB::table('transactions')
-        ->join('users', 'users.id', '=', 'transactions.user_id')
-        ->join('rooms', 'rooms.id', '=', 'transactions.room_id')
-        ->select('users.firstname', 'users.lastname', 'transactions.id', 'transactions.title', 'transactions.payment_status', 'transactions.start', 'transactions.end')
+        $booking = DB::table('booking')
+        ->join('users', 'users.id', '=', 'booking.user_id')
+        ->join('rooms', 'rooms.id', '=', 'booking.room_id')
+        ->select('users.firstname', 'users.lastname', 'booking.id', 'booking.title', 'booking.payment_status', 'transactions.start', 'transactions.end')
         ->get();
 
-        return view('components.transactionComponents.transactionTable', compact('transactions'));
+        return view('components.transactionComponents.transactionTable', compact('booking'));
     }
 
     public function getAvailableRooms(Request $request)
     {
         $checkIn = $request->input('checkIn');
         $checkOut = $request->input('checkOut');
-        
+//         SELECT * FROM `rooms` 
+// LEFT JOIN `bookings`
+// ON rooms.id  = bookings.id
         $rooms = DB::table('rooms')
-        ->leftJoin('transactions', 'rooms.id', '=', 'transactions.room_id')
-        ->select('rooms.name', 'rooms.description', 'rooms.price', 'rooms.recommended_capacity', 'rooms.image_path', 'rooms.id', 'transactions.start', 'transactions.end')
-        ->orwhere(function($q)use ($checkOut) {
-            $q->whereDate('transactions.start', '>', $checkOut)
-            ->orwhereNull('transactions.start');
-        })
-        ->orwhere(function($q) use ($checkIn) {
-            $q->whereDate('transactions.end', '<', $checkIn)
-            ->orwhereNull('transactions.end');
-        })
+        ->leftJoin('bookings', 'rooms.id', '=', 'bookings.room_id')
+        // ->select('rooms.room_type', 'rooms.room_count', 'rooms.description', 'rooms.price', 'rooms.recommended_capacity', 'rooms.maximum_capacity','rooms.image_paths', 'rooms.amenities','rooms.id', 'bookings.start', 'bookings.end')
+        // ->orwhere(function($q)use ($checkOut) {
+        //     $q->whereDate('bookings.start', '>', $checkOut)
+        //     ->orwhereNull('bookings.start');
+        // })
+        // ->orwhere(function($q) use ($checkIn) {
+        //     $q->whereDate('bookings.end', '<', $checkIn)
+        //     ->orwhereNull('bookings.end');
+        // })
         ->get();
 
-        return view('components.transactionComponents.roomList', compact('rooms'));
+        return response()->json([
+            'status' => 0,
+            'rooms' => $rooms
+        ]);
+
+        // dd($rooms);
+        // return view('components.bookingComponents.roomList', compact('rooms'));
     }
 
     public function getAvailableRentals(Request $request)
@@ -140,18 +148,18 @@ class TransactionsController extends Controller
         $checkOut = $request->input('checkOut');
         
         $rentals = DB::table('rentals')
-        ->leftJoin('transactions', 'rentals.id', '=', 'transactions.rental_id')
+        ->leftJoin('booking', 'rentals.id', '=', 'booking.rental_id')
         ->select('rentals.name', 'rentals.description', 'rentals.price', 'rentals.image_path', 'rentals.id', 'transactions.start', 'transactions.end')
         ->orwhere(function($q)use ($checkOut) {
-            $q->whereDate('transactions.start', '>', $checkOut)
-            ->orwhereNull('transactions.start');
+            $q->whereDate('booking.start', '>', $checkOut)
+            ->orwhereNull('booking.start');
         })
         ->orwhere(function($q) use ($checkIn) {
-            $q->whereDate('transactions.end', '<', $checkIn)
-            ->orwhereNull('transactions.end');
+            $q->whereDate('booking.end', '<', $checkIn)
+            ->orwhereNull('booking.end');
         })
         ->get();
 
-        return view('components.transactionComponents.rentalList', compact('rentals'));
+        return view('components.bookingComponents.rentalList', compact('rentals'));
     }
 }

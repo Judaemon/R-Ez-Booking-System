@@ -21,6 +21,16 @@ class Booking extends Model
     
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(User::class);
+    }
+
+    public function rooms()
+    {
+        return $this->hasMany(Rooms::class);
+    }
+
+    public function rentals()
+    {
+        return $this->hasMany(Rental::class);
     }
 }
