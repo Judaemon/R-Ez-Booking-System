@@ -12,8 +12,9 @@ class RentalController extends Controller
 {
     public function index()
     {
-        //
         $rental = DB::table('rentals')->get();
+        //$test = DB::table('rentals')->select("image_paths")->get();
+        //dd($rental['image_paths']);
         return view('rental',compact('rental'));
         
     }
