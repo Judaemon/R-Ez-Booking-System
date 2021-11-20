@@ -27,13 +27,16 @@ class RentalController extends Controller
 
     public function store(Request $request)
     {
-        $validated = Validator::make($request->all(), [
+        $input = $request->all();
+        $validated = Validator::make($input, 
+        [
             'rental_type' => 'required|string|max:255|unique:rentals',
             'rental_count' => 'required|Numeric',
             'price' => 'required|Numeric',
             'description' => 'required|string|max:255',
-            'image_path' => 'required|mimes:jpg,png,jpeg|max:5048',
-        ]);
+            'image_paths' => 'required|array',
+        ]
+        );
         
         if ($validated->fails()) {
             return response()->json([
@@ -41,18 +44,19 @@ class RentalController extends Controller
                 'error' => $validated->errors()->toArray()
             ]);
         }
-        $newImageName = 'uploaded/' . time() . '-' . $request->name . '.' . 
-        $request->image_path->extension();
 
-        $request->image_path->move(public_path('img/uploaded'), $newImageName);
-        
-        //Rental::create($request->all());
+        foreach($input['image_paths'] as $key => $value){
+            $newImageName = 'rentals/' .$request->rental_type. '/' . $request->rental_type .'_'. $key.'.'. $value->extension();
+            $value->move(public_path('img/rentals/'.$request->rental_type), $newImageName);
+            $origName[] = $newImageName;
+        }
+
         Rental::create([
-            'rental_type' => $request->input('name'),
-            'rental_count' => $request->input('count'),
+            'rental_type' => $request->input('rental_type'),
+            'rental_count' => $request->input('rental_count'),
             'description' => $request->input('description'),
             'price' => $request->input('price'),
-            'image_path' => $newImageName,
+            'image_paths' => json_encode($origName),
         ]);
 
         return response()->json([

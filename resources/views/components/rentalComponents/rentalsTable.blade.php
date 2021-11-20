@@ -6,7 +6,7 @@
             <th scope="col">Count</th>
             <th scope="col">Price</th>
             <th scope="col">Description</th>
-            {{-- <th scope="col">Image</th> --}}
+            <th scope="col">Image</th>
             <th scope="col">Action</th>
         </tr>
     </thead>
@@ -18,11 +18,15 @@
             <td>{{$rental->rental_count}}</td>
             <td>{{$rental->price}}</td>
             <td>{{$rental->description}}</td>
-            <td> 
+            <td>  
             {{-- <img 
                 src="{{ asset('img/' . $picture) }}"
                 alt="wow" height="200" width="200"> --}}
-                {{-- {{json_decode($rental->image_paths)}} --}}
+                {{-- {{($rental->image_paths)}} --}}
+            <?php foreach (json_decode($rental->image_paths)as $picture) { ?>
+                    {{-- <img src="{{ asset('img/' . $picture) }}" style="height:120px; width:200px"/> --}}
+                    <p>{{$picture}}</p>
+                   <?php } ?>
             </td>
             <td>
                 <div class='d-flex justify-content-around'>

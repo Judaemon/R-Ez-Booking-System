@@ -43,9 +43,6 @@
         <span class="invalid-feedback fw-bold error-text image_error" role="alert"></span>
     </div> --}}
 
-    <form method="post" action="{{url('file')}}" enctype="multipart/form-data">
-        @csrf
-
         <div id="imgInputs">
             <div class="row" id="imageInput0">
                 <div class="col-9">
@@ -64,10 +61,8 @@
                     <button class="btn btn-danger removeImageInputBtn" inputContainer="imageInput2" inputContainerID=2 type="button">Remove</button>     
                 </div>
             </div> --}}
-            
         </div>
-    </form>   
-
+        
     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
     <button type="submit" class="btn btn-primary">Save changes</button>
 </form>

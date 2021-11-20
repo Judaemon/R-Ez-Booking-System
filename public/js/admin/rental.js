@@ -17,7 +17,6 @@ $(function () {
 
 $(document).on('click', '#addImageBtn', function (event) {
     imageInputArray.push((imageInputArray.length))
-
     addImageInput()
 });
 
@@ -40,7 +39,7 @@ function imageInput(id) {
     const imageInputHTML = 
     `<div class="row" id="imageInput`+id+`">
         <div class="col-9">
-            <input type="file" name="image_paths[]" class="form-control">
+            <input type="file" name="image_paths[]" class="form-control" accept="image/png, image/gif, image/jpeg">
         </div>
         <div class="col-3">
             <button class="btn btn-danger w-100 removeImageInputBtn" inputContainer="imageInput`+id+`" inputContainerID=`+id+` type="button">Remove</button>     
@@ -155,7 +154,7 @@ function errorWarning() {
 //     })
 // });
 
-// Add Ajax
+//Add Ajax
 // $('#addRentalForm').on('submit', function (event) {
 //     event.preventDefault();
 
