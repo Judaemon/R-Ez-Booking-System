@@ -37,9 +37,9 @@ function addImageInput() {
 
 function imageInput(id) {
     const imageInputHTML = 
-    `<div class="row" id="imageInput`+id+`">
+    `<div class="row mt-2" id="imageInput`+id+`">
         <div class="col-9">
-            <input type="file" name="image_paths[]" class="form-control" accept="image/png, image/gif, image/jpeg">
+            <input type="file" name="image_paths[]" class="form-control" accept="image/png, image/gif, image/jpeg" required>
         </div>
         <div class="col-3">
             <button class="btn btn-danger w-100 removeImageInputBtn" inputContainer="imageInput`+id+`" inputContainerID=`+id+` type="button">Remove</button>     

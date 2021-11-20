@@ -67,16 +67,16 @@
                     @csrf
 
                     <div class="form-group mb-2">
-                        <label>Name</label>
+                        <label>Rental Type</label>
                         <input type="text" class="form-control" id="input_rental_type" name="rental_type" placeholder="Rental Name">
-                        <span class="invalid-feedback fw-bold error-text name_error" role="alert"></span>
+                        <span class="invalid-feedback fw-bold error-text rental_type_error" role="alert"></span>
                     </div>
 
                     <div class="form-group mb-2">
                         <label>Count</label>
                         <input type="number" class="form-control" id="input_rental_count" name="rental_count"
                             placeholder="Rental Count">
-                        <span class="invalid-feedback fw-bold error-text price_error" role="alert"></span>
+                        <span class="invalid-feedback fw-bold error-text rental_count_error" role="alert"></span>
                     </div>
 
                     <div class="form-group mb-2">
@@ -93,23 +93,23 @@
                         <span class="invalid-feedback fw-bold error-text description_error" role="alert"></span>
                     </div>
              
-                    <div id="imgInputs">
+                    <div id="imgInputs" class="form-group mb-2">
                         <div class="row" id="imageInput0">
                             <div class="col-9">
-                                <input type="file" id="input_image_paths[]" name="image_paths[]" class="form-control" accept="image/png, image/gif, image/jpeg" >
+                                <input type="file" id="input_image_paths[]" name="image_paths[]" class="form-control" accept="image/png, image/gif, image/jpeg" required>
                             </div>
                             <div class="col-3">
                                 <button class="btn btn-success w-100" id='addImageBtn' type="button">Add</button>
                             </div>
                         </div>
-                        
+                        {{-- <span class="invalid-feedback fw-bold error-text image_paths_error" role="alert"></span> --}}
                     </div>
 
                     <div class="mt-2">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Add New Rental</button>
                     </div>
-                    
+
                 </form>
             </div>
         </div>
