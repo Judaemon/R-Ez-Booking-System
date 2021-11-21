@@ -117,29 +117,26 @@ class BookingController extends Controller
     {
         $checkIn = $request->input('checkIn');
         $checkOut = $request->input('checkOut');
-//         SELECT * FROM `rooms` 
-// LEFT JOIN `bookings`
-// ON rooms.id  = bookings.id
-        $rooms = DB::table('rooms')
-        ->leftJoin('bookings', 'rooms.id', '=', 'bookings.room_id')
-        // ->select('rooms.room_type', 'rooms.room_count', 'rooms.description', 'rooms.price', 'rooms.recommended_capacity', 'rooms.maximum_capacity','rooms.image_paths', 'rooms.amenities','rooms.id', 'bookings.start', 'bookings.end')
-        // ->orwhere(function($q)use ($checkOut) {
-        //     $q->whereDate('bookings.start', '>', $checkOut)
-        //     ->orwhereNull('bookings.start');
-        // })
-        // ->orwhere(function($q) use ($checkIn) {
-        //     $q->whereDate('bookings.end', '<', $checkIn)
-        //     ->orwhereNull('bookings.end');
-        // })
-        ->get();
 
-        return response()->json([
-            'status' => 0,
-            'rooms' => $rooms
-        ]);
+        $rooms = DB::select("SELECT *, (rooms.room_count - t2.occupiedRoom) as availableRoom
+        FROM `rooms` 
+        LEFT JOIN (	SELECT rooms.id AS occupiedRoomsID, count(*) AS occupiedRoom
+                FROM `rooms`
+                LEFT JOIN `room_booking`
+                    ON rooms.id = room_booking.room_id
+                    WHERE (room_booking.start BETWEEN '".$checkIn."' AND '".$checkOut."') 
+                    OR (room_booking.end BETWEEN '".$checkIn."' AND '".$checkOut."')
+                GROUP BY rooms.room_type) AS t2
+        ON rooms.id = t2.occupiedRoomsID");
 
-        // dd($rooms);
-        // return view('components.bookingComponents.roomList', compact('rooms'));
+        // return response()->json([
+        //     'status'=> 1,
+        //     'checkIn' => $checkIn,
+        //     'checkOut' => $checkOut,
+        //     'transactions' => $rooms
+        // ]);
+
+        return view('components.bookingComponents.roomList', compact('rooms'));
     }
 
     public function getAvailableRentals(Request $request)
@@ -147,18 +144,21 @@ class BookingController extends Controller
         $checkIn = $request->input('checkIn');
         $checkOut = $request->input('checkOut');
         
-        $rentals = DB::table('rentals')
-        ->leftJoin('booking', 'rentals.id', '=', 'booking.rental_id')
-        ->select('rentals.name', 'rentals.description', 'rentals.price', 'rentals.image_path', 'rentals.id', 'transactions.start', 'transactions.end')
-        ->orwhere(function($q)use ($checkOut) {
-            $q->whereDate('booking.start', '>', $checkOut)
-            ->orwhereNull('booking.start');
-        })
-        ->orwhere(function($q) use ($checkIn) {
-            $q->whereDate('booking.end', '<', $checkIn)
-            ->orwhereNull('booking.end');
-        })
-        ->get();
+        $rentals = DB::select("SELECT *, (rentals.rental_count - t2.occupiedRental) as availableRental
+        FROM `rentals` 
+        LEFT JOIN (	SELECT rentals.id AS occupiedRentalsID, count(*) AS occupiedRental
+                FROM `rentals`
+                LEFT JOIN `booking_rental`
+                    ON rentals.id = booking_rental.rental_id
+                    WHERE (booking_rental.start BETWEEN '".$checkIn."' AND '".$checkOut."') 
+                    OR (booking_rental.end BETWEEN '".$checkIn."' AND '".$checkOut."')
+                GROUP BY rentals.rental_type) AS t2
+        ON rentals.id = t2.occupiedRentalsID");
+
+        //  return response()->json([
+        //     'status'=> 1,
+        //     'transactions' => $rentals
+        // ]);
 
         return view('components.bookingComponents.rentalList', compact('rentals'));
     }
