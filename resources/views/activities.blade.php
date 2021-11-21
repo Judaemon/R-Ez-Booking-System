@@ -1,6 +1,13 @@
 @extends("layouts.app")
 
 @section('content')
-<h1>ACTIVITIES YAWA</h1>
+
+<div class="container">
+    
+    <h1>Rentals</h1>
+
+
+</div>
+
 @endsection
 
