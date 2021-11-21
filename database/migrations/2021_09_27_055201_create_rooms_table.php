@@ -11,7 +11,7 @@ class CreateRoomsTable extends Migration
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
             $table->text('room_type'); // name to dati
-            $table->text('room_count'); 
+            $table->integer('room_count'); 
             $table->text('description');
             $table->float('price');
             $table->text('amenities')->nullable(); //

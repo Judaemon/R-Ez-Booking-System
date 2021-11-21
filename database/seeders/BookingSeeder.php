@@ -20,7 +20,7 @@ class BookingSeeder extends Seeder
         
         $bookings = [
             [
-                'user_id' => '1',
+                'user_id' => '2',
                 'payment_method' => 'Bank Transfer',
                 'amount_paid' => '1',
                 'total_price' => '1',
@@ -32,7 +32,7 @@ class BookingSeeder extends Seeder
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
             [
-                'user_id' => '2',
+                'user_id' => '2', 
                 'payment_method' => 'GCash',
                 'amount_paid' => '1',
                 'total_price' => '2',
@@ -56,7 +56,7 @@ class BookingSeeder extends Seeder
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
             [
-                'user_id' => '2',
+                'user_id' => '',
                 'payment_method' => 'GCash',
                 'amount_paid' => '1',
                 'total_price' => '4',
