@@ -1,3 +1,4 @@
+<div class="table-responsive">
 <table id="rentalTable" class="table table-tripped table-hover table-light">
     <thead class="table-dark text-center">
         <tr>
@@ -5,8 +6,6 @@
             <th scope="col">Type</th>
             <th scope="col">Count</th>
             <th scope="col">Price</th>
-            <th scope="col">Description</th>
-            <th scope="col">Image</th>
             <th scope="col">Action</th>
         </tr>
     </thead>
@@ -17,39 +16,29 @@
             <td>{{$rental->rental_type}}</td>
             <td>{{$rental->rental_count}}</td>
             <td>{{$rental->price}}</td>
-            <td>{{$rental->description}}</td>
-            <td>
-                {{-- <img 
-                src="{{ asset('img/' . $picture) }}"
-                alt="wow" height="200" width="200"> --}}
-                {{-- {{($rental->image_paths)}} --}}
-                <?php foreach (json_decode($rental->image_paths)as $picture) { ?>
-                {{-- <img src="{{ asset('img/' . $picture) }}" style="height:120px; width:200px"/> --}}
-                <p>{{$picture}}</p>
-                <?php } ?>
-            </td>
-            <td>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewRentalModal{{$rental->id}}">View</button>
-                <div class='d-flex justify-content-around'>
-                    <form method="POST" class="deleteRental" dataId="{{$rental->id}}"
-                        action="{{route('rental.destroy',$rental->id)}}">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-danger" style="width: 100px; margin: 2px;" type="submit">Delete</button>
-                    </form>
+            <td class="w-25">
                     {{-- div for copying the interaction btn and form above --}}
-                    <div style="display: block; margin-top: 0em; margin-block-end: 1em;">
+                    <div class="d-flex justify-content-around">
+                        <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#viewRentalModal{{$rental->id}}">View</button>
+                        
                         <button room_id="{{$rental->id}}" type='button' class='btn btn-info mx-2 myButton'
                             id='rentalUpdateBtn' data-bs-toggle='modal'
                             data-bs-target='#updateRentalModal'>Update</button>
+
+                            <form method="POST" class="deleteRental" dataId="{{$rental->id}}"
+                                action="{{route('rental.destroy',$rental->id)}}">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger" type="submit">Delete</button>
+                            </form>
                     </div>
-                </div>
                 {{-- <a href="" class="btn btn-info updateButton" style='width: 100px; margin: 2px;'>Edit</a> --}}
             </td>
         </tr>
         @endforeach
     </tbody>
 </table>
+</div>
 
 @foreach ($rentals as $rental)
 <!-- View Modal -->
@@ -62,29 +51,21 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-
-
-
             <div class="row">
                     <div class="col-12 col-md-6">
-                        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                        <div id="carouselExampleControls{{$rental->id}}" class="carousel slide" data-bs-ride="carousel">
                             <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <img src="{{ URL::asset('/img/kubo_fan_room/kubo1.jpg') }}" style="width: 100%; height: 500px; object-fit: cover;">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="{{ URL::asset('/img/kubo_fan_room/kubo3.jpg') }}" style="width: 100%; height: 500px; object-fit: cover;">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="{{ URL::asset('/img/kubo_fan_room/kubo2.jpg') }}" style="width: 100%; height: 500px; object-fit: cover;">
-                                </div>
+                                @foreach (json_decode($rental->image_paths) as $image_path)
+                                    <div class="carousel-item @if($loop->first)active @endif">
+                                            <img src="{{asset('/img/'.$image_path) }}" style="width: 100%; height: 500px; object-fit: cover;">
+                                    </div>
+                                @endforeach                   
                             </div>
-
-                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls{{$rental->id}}" data-bs-slide="prev">
                               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                               <span class="visually-hidden">Previous</span>
                             </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls{{$rental->id}}" data-bs-slide="next">
                               <span class="carousel-control-next-icon" aria-hidden="true"></span>
                               <span class="visually-hidden">Next</span>
                             </button>
@@ -101,28 +82,18 @@
 
                         <div class="row">
                             <div class="col-12">
-                                <p>Experience one of what represents the Filipino Culture with our Kubo Room. The kubo which design allows for great airflow enables it to trully allow the sea air breaths throughout the room. 
-                                    With its bunk beds we made sure that theres enough room for you and up to three other persons.</p>
+                                <p>{{$rental->description}}</p>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-6">
-                                <h3><i class="bi bi-tag"></i> 2500 php</h3>
+                                <h3><i class="bi bi-tag"></i> {{$rental->price}}</h3>
                             </div>
                             
                             <div class="col-6">
-                                <h3><i class="bi bi-person"></i> 2-4 persons</h3>
+                                <h3><i class="bi bi-person"></i> {{$rental->rental_count}} Count</h3>
                             </div>
-                        </div>
-
-                        <div class="row mt-3">
-                            <div class="col-12">
-                                <h3><i class="bi bi-plus-square"></i> Amenities</h3>
-                                <p>
-                                    (Insert Amenities here)
-                                </p>
-                            </div> 
                         </div>
                     </div>
                 </div>
@@ -130,7 +101,6 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
         </div>
       </div>
     </div>

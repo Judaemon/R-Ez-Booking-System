@@ -92,23 +92,6 @@
                             placeholder="Rental Description">
                         <span class="invalid-feedback fw-bold error-text description_error" role="alert"></span>
                     </div>
-
-                      <div class="form-group mb-3">
-                        <label>Amenities</label>
-                        <div class="row">
-                            <div class="col-9">
-                                <select class="form-select" aria-label="Default select example">
-                                    <option selected></option>
-                                    @foreach($amenities as $amenities)
-                                    <option>{{$amenities}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-3">
-                                <button class="btn btn-success w-100" id='addImageBtn' type="button">Add</button>
-                            </div>
-                        </div>
-                    </div>
              
                     <div id="imgInputs" class="form-group mb-2">
                         <div class="row" id="imageInput0">

@@ -103,56 +103,56 @@ function errorWarning() {
   )
 }
 
-// Delete Ajax
-// $(document).on('submit', '.deleteRental', function (event) {
-//     event.preventDefault();
-//     swalWithBootstrapButtons.fire({
-//         title: 'Are you sure?',
-//         text: "This Rental information will be delete from the database!",
-//         icon: 'warning',
-//         showCancelButton: true,
-//         confirmButtonText: 'Yes, Delete it!',
-//         cancelButtonText: 'No, Cancel!',
-//         reverseButtons: true
+//Delete Ajax
+$(document).on('submit', '.deleteRental', function (event) {
+    event.preventDefault();
+    swalWithBootstrapButtons.fire({
+        title: 'Are you sure?',
+        text: "This Rental information will be delete from the database!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, Delete it!',
+        cancelButtonText: 'No, Cancel!',
+        reverseButtons: true
 
-//     }).then((result) => {
-//         if (result.isConfirmed) {
-//             const form = this;
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const form = this;
 
-//             $.ajax({
-//                 url: $(form).attr('action'),
-//                 method: $(form).attr('method'),
-//                 type: 'DELETE',
-//                 dataType: 'JSON',
-//                 data: new FormData(form),
-//                 processData: false,
-//                 contentType: false,
-//                 success: function (response) {
-//                   if (response.code == 0) {
-//                     errorWarning();
-//                 } else {
-//                     getRentalTable();
+            $.ajax({
+                url: $(form).attr('action'),
+                method: $(form).attr('method'),
+                type: 'DELETE',
+                dataType: 'JSON',
+                data: new FormData(form),
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                  if (response.code == 0) {
+                    errorWarning();
+                } else {
+                    getRentalTable();
 
-//                     swalWithBootstrapButtons.fire(
-//                         'Successful!',
-//                         response.msg,
-//                         'success'
-//                     )
-//                 }
-//                 }
+                    swalWithBootstrapButtons.fire(
+                        'Successful!',
+                        response.msg,
+                        'success'
+                    )
+                }
+                }
 
-//             });
-//         } else if (
-//             result.dismiss === Swal.DismissReason.cancel // click ayaw
-//         ) {
-//             swalWithBootstrapButtons.fire(
-//                 'Cancelled',
-//                 'Lets pretend that never happend >:)',
-//                 'error'
-//             )
-//         }
-//     })
-// });
+            });
+        } else if (
+            result.dismiss === Swal.DismissReason.cancel // click ayaw
+        ) {
+            swalWithBootstrapButtons.fire(
+                'Cancelled',
+                'Lets pretend that never happend >:)',
+                'error'
+            )
+        }
+    })
+});
 
 //Add Ajax
 $('#addRentalForm').on('submit', function (event) {
