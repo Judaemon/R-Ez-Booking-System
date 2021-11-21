@@ -53,7 +53,7 @@
 <div class="container p-3">
     <h1>Rentals</h1>
 </div>
-<!-- Modal -->
+<!-- Add Modal -->
 <div class="modal fade" id="addRentalModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -91,6 +91,23 @@
                         <input type="text" class="form-control" id="input_description" name="description"
                             placeholder="Rental Description">
                         <span class="invalid-feedback fw-bold error-text description_error" role="alert"></span>
+                    </div>
+
+                      <div class="form-group mb-3">
+                        <label>Amenities</label>
+                        <div class="row">
+                            <div class="col-9">
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected></option>
+                                    @foreach($amenities as $amenities)
+                                    <option>{{$amenities}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-3">
+                                <button class="btn btn-success w-100" id='addImageBtn' type="button">Add</button>
+                            </div>
+                        </div>
                     </div>
              
                     <div id="imgInputs" class="form-group mb-2">
@@ -132,6 +149,9 @@
         </div>
     </div>
 </div>
+
+
+
 <div id="rentalTableContainer" class="container">
 </div>
 @endsection
