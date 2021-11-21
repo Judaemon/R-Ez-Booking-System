@@ -14,14 +14,14 @@
         @foreach ($rooms as $room)
         <tr>
             <td>{{$room->id}}</td>
-            <td>{{$room->name}}</td>
-            <td>{{$room->description}}</td>
+            <td>{{$room->room_type}}</td>
+            <td>{{$room->room_count}}</td>
             <td>{{$room->price}}</td>
             <td>{{$room->recommended_capacity}}</td>
             <td> 
-            <img 
+            {{-- <img 
                 src="{{ asset('img/' . $room->image_path) }}"
-                alt="wow" height="200" width="200">
+                alt="wow" height="200" width="200"> --}}
             </td>
             <td>
             <div class='d-flex justify-content-around'>
