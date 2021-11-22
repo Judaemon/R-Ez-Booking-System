@@ -39,6 +39,7 @@ Route::view('/contact', 'contact')->name('contact');
 // Booking links
 Route::post('getAvailableRooms', [BookingController::class, 'getAvailableRooms'])->name('getAvailableRooms');
 Route::post('getAvailableRentals', [BookingController::class, 'getAvailableRentals'])->name('getAvailableRentals');
+Route::resource('booking', BookingController::class);
 
 // Booking links
 // Route::get('showAllBooking', [BookingController::class, 'showAllBooking'])->name('showAllBooking');
@@ -50,7 +51,6 @@ Route::group([
 ],function () {
     // all paths for customer only
     Route::resource('customer', customerController::class);
-    Route::resource('booking', BookingController::class);
 });
 
 // for admin only links
@@ -61,7 +61,6 @@ Route::group([
     Route::resource('user', UserController::class);
     Route::resource('rental', RentalController::class);
     Route::resource('room', RoomController::class);
-    Route::resource('booking', BookingController::class);
 
 
     Route::view('/booking', 'booking')->name('booking');
