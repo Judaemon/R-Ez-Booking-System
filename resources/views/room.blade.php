@@ -68,16 +68,16 @@
                 <form id="addRoomForm" method="POST" enctype="multipart/form-data" action="{{route('room.store')}}">
                     @csrf
                     <div class="form-group mb-2">
-                        <label>Name</label>
+                        <label>Room Type</label>
                         <input type="text" class="form-control" id="input_name" name="name" placeholder="Room Name">
                         <span class="invalid-feedback fw-bold error-text name_error" role="alert"></span>
                     </div>
-
+                    
                     <div class="form-group mb-2">
-                        <label>Description</label>
-                        <input type="text" class="form-control" id="input_description" name="description"
-                            placeholder="Room Description">
-                        <span class="invalid-feedback fw-bold error-text description_error" role="alert"></span>
+                        <label>Count</label>
+                        <input type="number" class="form-control" id="input_room_count" name="room_count"
+                            placeholder="Room Count">
+                        <span class="invalid-feedback fw-bold error-text room_count_error" role="alert"></span>
                     </div>
 
                     <div class="form-group mb-2">
@@ -87,6 +87,13 @@
                         <span class="invalid-feedback fw-bold error-text price_error" role="alert"></span>
                     </div>
 
+                    <div class="form-group mb-2">
+                        <label>Description</label>
+                        <input type="text" class="form-control" id="input_description" name="description"
+                            placeholder="Room Description">
+                        <span class="invalid-feedback fw-bold error-text description_error" role="alert"></span>
+                    </div>
+
                     <div class="form-group">
                         <label>Recommended Capacity</label>
                         <input type="number" class="form-control" id="input_recommended_capacity" name="recommended_capacity"
@@ -94,17 +101,37 @@
                         <span class="invalid-feedback fw-bold error-text recommended_capacity_error" role="alert"></span>
                      </div>
 
-                    <!-- <div class="form-group mb-2">
-                        <label>Picture</label>
-                        <input type="text" class="form-control" id="input_picture" name="picture"
-                            placeholder="Room Price">
-                        <span class="invalid-feedback fw-bold error-text picture_error" role="alert"></span>
-                    </div> -->
+                     <div id="amenitiesInputs" class="form-group mb-2 mt-3">
+                        <label for="exampleSelect1" class="form-label">Amenities</label>
+                       <div class="row" id="amenitiesInput0">
+                           <div class="col-9">
+                               {{-- <input type="text" class="form-control" id="input_amenities[]" name="amenities[]" placeholder="Amenities"> --}}
+                                <select name="type" class="form-select" id="input_amenities[]" name="amenities[]" placeholder="Amenities">
+                                    <option value=""></option>
+                                        @foreach($amenities as $amenities)
+                                            <option>{{$amenities}}</option>
+                                        @endforeach
+                                </select>
+                           </div>
+                           <div class="col-3">
+                               <button class="btn btn-success w-100" id='addAmenitiesBtn' type="button">Add</button>
+                           </div>
+                       </div>
+                       {{-- <span class="invalid-feedback fw-bold error-text image_paths_error" role="alert"></span> --}}
+                   </div>
                     
-                    <div class="form-group mb-2">
-                        <label>image</label>
-                        <input type="file" class="form-control" id="input_image" name="image_path">
-                        <span class="invalid-feedback fw-bold error-text image_error" role="alert"></span>
+                     
+                    <div id="imgInputs" class="form-group mb-2 mt-3">
+                         <label>Image</label>
+                        <div class="row" id="imageInput0">
+                            <div class="col-9">
+                                <input type="file" id="input_image_paths[]" name="image_paths[]" class="form-control" accept="image/png, image/gif, image/jpeg" required>
+                            </div>
+                            <div class="col-3">
+                                <button class="btn btn-success w-100" id='addImageBtn' type="button">Add</button>
+                            </div>
+                        </div>
+                        {{-- <span class="invalid-feedback fw-bold error-text image_paths_error" role="alert"></span> --}}
                     </div>
 
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
