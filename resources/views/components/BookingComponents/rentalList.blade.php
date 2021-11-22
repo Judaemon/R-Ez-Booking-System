@@ -20,7 +20,7 @@
             </span>
         </div>
         <div class="col-12 col-md-3">
-            <a id="addRental{{$rental->id}}" href="#viewingRental" rental_id="{{$rental->id}}" rental_type="{{$rental->rental_type}}" class="btn btn-primary w-100 selectRentalBtn @if (!is_null($rental->availableRental) && $rental->availableRental == 0) disabled @endif">Reserve</a> 
+            <a id="addRental{{$rental->id}}" href="#viewingRental" rental_id="{{$rental->id}}" rental_type="{{$rental->rental_type}}" rental_price="{{$rental->price}}" class="btn btn-primary w-100 selectRentalBtn @if (!is_null($rental->availableRental) && $rental->availableRental == 0) disabled @endif">Reserve</a> 
         </div>
     </div>
     <div class="modal fade " id="viewRentalInfoModal{{$rental->id}}" tabindex="-1" aria-labelledby="viewRentalInfoModal" aria-hidden="true">

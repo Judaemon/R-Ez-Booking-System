@@ -22,7 +22,8 @@
 <div id="test" class="">
     <div class="row justify-content-center p-2 p-md-5 m-0">
         <div class="border border-white rounded-2 border-3 row bg-primary mx-2 w-100 ">
-            <form class="text-white">
+            <form class="text-white" id="addBookingForm" method="POST" enctype="multipart/form-data" action="{{route('booking.store')}}">
+                @csrf
                 <div class="row">
                     <div class="col-12 col-md-7">
                         <div class="row">
@@ -104,6 +105,13 @@
                                     placeholder="0" value="name of room">
                                 <a href="#" class="btn btn-danger selectRoomBtn w-25 selectRoomBtn">Remove</a>
                             </div> --}}
+                        </div>
+                        <div class="form-group col-12">
+                            <label for="total_price" class="col-md-5 col-form-label">Total price</label>
+                            <input id="total_price" type="number" readonly class="m-0 form-control" name="total_price"
+                                placeholder="total price">
+
+                            <span class="invalid-feedback fw-bold error-text total_price_error"></span>
                         </div>
                     </div>
 

@@ -50,6 +50,7 @@ Route::group([
 ],function () {
     // all paths for customer only
     Route::resource('customer', customerController::class);
+    Route::resource('booking', BookingController::class);
 });
 
 // for admin only links
