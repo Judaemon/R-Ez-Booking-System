@@ -66,16 +66,19 @@ Route::group([
 
     // report paths
     Route::view('/report', 'report')->name('report');
-    Route::get('/getGraphData', [ReportController::class, 'getGraphData'])->name('getGraphData');
+    // Route::get('/getGraphData', [ReportController::class, 'getGraphData'])->name('getGraphData');
 
     // dashboard paths
     Route::get('/getUserCount', [DashboardController::class, 'getUserCount'])->name('getUserCount');
+
+    Route::get('/getBookingCount', [ReportController::class, 'getBookingCount'])->name('getBookingCount');
+
 
     // Dapat ma move yung mga route ng tables sa ganto kasi mali yung pag gamit ng show method
     Route::get('showAllRental', [RentalController::class, 'showAllRental'])->name('showAllRental');
     Route::get('showAllUser', [UserController::class, 'showAllUser'])->name('showAllUser');
     Route::get('showAllRoom', [RoomController::class, 'showAllRoom'])->name('showAllRoom');
-    Route::get('/getGraphData', [ReportController::class, 'getGraphData'])->name('getGraphData');
+    // Route::get('/getGraphData', [ReportController::class, 'getGraphData'])->name('getGraphData');
 
     
 

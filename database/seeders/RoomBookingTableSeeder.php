@@ -42,6 +42,18 @@ class RoomBookingTableSeeder extends Seeder
                 'start' => '2021-12-5',
                 'end' => '2021-12-8',
             ],
+            [
+                'booking_id' => 5,
+                'room_id' => 3,
+                'start' => '2021-12-9',
+                'end' => '2021-12-11',
+            ],
+            [
+                'booking_id' => 5,
+                'room_id' => 3,
+                'start' => '2021-12-12',
+                'end' => '2021-12-13',
+            ],
         ];
 
         DB::table('room_booking')->insert($room_booking);
