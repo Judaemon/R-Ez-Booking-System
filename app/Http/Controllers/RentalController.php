@@ -13,10 +13,10 @@ class RentalController extends Controller
     public function index()
     {
         $rental = DB::table('rentals')->get();
-        $amenities= array('Free Wifi','Free Food','Free Water');
+        // $amenities= array('Free Wifi','Free Food','Free Water');
         //$test = DB::table('rentals')->select("image_paths")->get();
         //dd($rental['image_paths']);
-        return view('rental',compact('rental','amenities'));
+        return view('rental',compact('rental'));
     }
 
     public function create()
