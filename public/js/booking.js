@@ -210,7 +210,7 @@ function updateBookedRoomList() {
         <input id="room_id`+value1[0]+`" rental_price="`+value1[3]+`" type="text" class="m-0 form-control" readonly 
             value="`+value1[1]+`">
 
-        <input name="room_id[]" type="text" class="m-0 form-control hidden" 
+        <input name="room_id[]" type="text" hidden class="m-0 form-control" 
         value="`+value1[0]+`">
         
         <a href="#viewingRental" room_id="`+value1[0]+`" room_name="`+value1[1]+`" room_price="`+value1[3]+`" class="btn btn-danger w-25 removeRoomBtn">Remove 1 of  `+value1[2]+`</a>
@@ -278,7 +278,7 @@ function updateBookedRentalList() {
                         <input id="rental_id`+value1[0]+`" type="text" class="m-0 form-control" readonly "
                             placeholder="0" value="`+value1[1]+`">
 
-                        <input type="text" class="m-0 form-control hidden" name="rental_id[]"
+                        <input type="text" class="m-0 form-control" hidden name="rental_id[]"
                         placeholder="0" value="`+value1[0]+`">
                         <a href="#viewingRental" rental_price="`+value1[3]+`" rental_id="`+value1[0]+`" rental_name="`+value1[1]+`" class="btn btn-danger w-25 removeRentalBtn">Remove 1 of `+value1[2]+`</a>
                     </div>`
