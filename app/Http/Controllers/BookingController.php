@@ -162,4 +162,8 @@ class BookingController extends Controller
 
         return view('components.bookingComponents.rentalList', compact('rentals'));
     }
+    public function getBookingTable(){
+        $bookings = DB::table('bookings')->get();
+        return view('components.BookingComponents.bookingTable',compact('bookings'));
+    }
 }
