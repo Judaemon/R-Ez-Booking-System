@@ -19,7 +19,7 @@
             </span>
         </div>
         <div class="col-12 col-md-3">
-            <a id="addRoom{{$room->id}}" href="#viewingRental" room_id="{{$room->id}}" room_type="{{$room->room_type}}" class="btn btn-primary w-100 selectRoomBtn @if (!is_null($room->availableRoom) && $room->availableRoom == 0) disabled @endif">Book</a> 
+            <a id="addRoom{{$room->id}}" href="#viewingRental" room_id="{{$room->id}}" room_type="{{$room->room_type}}" room_price="{{$room->price}}" class="btn btn-primary w-100 selectRoomBtn @if (!is_null($room->availableRoom) && $room->availableRoom == 0) disabled @endif">Book</a> 
         </div>
     </div>
     <div class="modal fade " id="viewRoomInfoModal{{$room->id}}" tabindex="-1" aria-labelledby="viewRoomInfoModal" aria-hidden="true">

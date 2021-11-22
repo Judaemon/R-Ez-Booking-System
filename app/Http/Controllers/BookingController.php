@@ -21,7 +21,7 @@ class BookingController extends Controller
 
     public function store(Request $request)
     {
-        //
+        dd($request->all());
     }
 
     public function show(Booking $Booking)
@@ -44,7 +44,7 @@ class BookingController extends Controller
         //
     }
 
-    public function getAllTransaction()
+    public function getAllBooking()
     {
         $transactions = DB::table('transactions')->get();
         $color = '#000';
@@ -129,13 +129,6 @@ class BookingController extends Controller
                 GROUP BY rooms.room_type) AS t2
         ON rooms.id = t2.occupiedRoomsID");
 
-        // return response()->json([
-        //     'status'=> 1,
-        //     'checkIn' => $checkIn,
-        //     'checkOut' => $checkOut,
-        //     'transactions' => $rooms
-        // ]);
-
         return view('components.bookingComponents.roomList', compact('rooms'));
     }
 
@@ -154,11 +147,6 @@ class BookingController extends Controller
                     OR (booking_rental.end BETWEEN '".$checkIn."' AND '".$checkOut."')
                 GROUP BY rentals.rental_type) AS t2
         ON rentals.id = t2.occupiedRentalsID");
-
-        //  return response()->json([
-        //     'status'=> 1,
-        //     'transactions' => $rentals
-        // ]);
 
         return view('components.bookingComponents.rentalList', compact('rentals'));
     }

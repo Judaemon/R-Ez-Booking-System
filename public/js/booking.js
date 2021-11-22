@@ -30,13 +30,6 @@ function setMinDateToToday() {
 
 function setMinDateCheckOut(date) {
     $("#end").attr("min", date);
-
-        // if ($("#end").val()) {
-        //     console.log("wew");   
-        // }else{
-        //     console.log("lol");   
-        // }
-    ;
 }
 
 function errorNotif() {
@@ -129,12 +122,18 @@ $(document).on('change', '#end', function (event) {
 let SelectedRoomList = new Array
 let SelectedRentalList = new Array
 
+let totalPrice = 0
+
+// add room
 $(document).on('click', '.selectRoomBtn', function (event) {
     let room_id = $(this).attr('room_id')
     let room_type = $(this).attr('room_type')
+    let room_price = $(this).attr('room_price')
     let count = updateBookedRoomItem(room_id)
     
-    console.log("id:" + room_id +" | room_type: " + room_type + " | count: "+ count);
+    console.log("id:" + room_id +" | room_type: " + room_type + " | count: "+ count + " | count: "+ room_price);
+
+    totalPrice+= parseInt(room_price)
 
     if (count <= 0) {
         $(this).addClass("disabled")
@@ -147,8 +146,10 @@ $(document).on('click', '.selectRoomBtn', function (event) {
             }
         });
     }else{
-        SelectedRoomList.push([room_id, room_type, 1]);
+        SelectedRoomList.push([room_id, room_type, 1, parseInt(room_price)]);
     }
+
+    updateTotalPrice()
 
     updateBookedRoomList()
 })
@@ -166,7 +167,8 @@ function updateBookedRoomItem(id) {
 
 $(document).on('click', '.removeRoomBtn', function (event) {
     let room_id = $(this).attr('room_id')
-    
+    let price = $(this).attr('room_price')
+ 
     SelectedRoomList.forEach(room => {
         console.log(room[2]); 
         if(room[0] == room_id && room[2] == 1){
@@ -175,10 +177,12 @@ $(document).on('click', '.removeRoomBtn', function (event) {
 
         if (room[0] == room_id && room[2] > 1) {
             room[2]--
-            console.log(room[2]);
         }
-        
     });
+
+    console.log(price);
+    totalPrice -= price
+    updateTotalPrice()
 
     updateAvailableRoomItem(room_id)
 
@@ -203,12 +207,13 @@ function updateBookedRoomList() {
 
     $.each(SelectedRoomList, function(key1, value1) {
         htmlCode += `<div class="form-group col-12 d-flex justify-content-between my-1">
-        <input id="room_id`+value1[0]+`" type="text" class="m-0 form-control""
+        <input id="room_id`+value1[0]+`" rental_price="`+value1[3]+`" type="text" class="m-0 form-control" readonly 
             value="`+value1[1]+`">
 
-        <input id="room_id`+value1[0]+`" type="text" hidden class=" m-0 form-control" name="room_id[]"
-            value="`+value1[0]+`">
-        <a href="#viewingRental" room_id="`+value1[0]+`" room_name="`+value1[1]+`" class="btn btn-danger w-25 removeRoomBtn">Remove 1 of  `+value1[2]+`</a>
+        <input name="room_id[]" type="text" class="m-0 form-control hidden" 
+        value="`+value1[0]+`">
+        
+        <a href="#viewingRental" room_id="`+value1[0]+`" room_name="`+value1[1]+`" room_price="`+value1[3]+`" class="btn btn-danger w-25 removeRoomBtn">Remove 1 of  `+value1[2]+`</a>
     </div>`
     });
 
@@ -223,14 +228,16 @@ function updateBookedRoomList() {
     $('#bookedRoomsContainer').html(htmlCode);
 }
 
+// add rental
 $(document).on('click', '.selectRentalBtn', function (event) {
     let rental_id = $(this).attr('rental_id')
     let rental_type = $(this).attr('rental_type')
+    let rental_price = $(this).attr('rental_price')
     let count = updateBookedRentalItem(rental_id)
 
-    console.log("id:" + rental_id +" | room_type: " + rental_type + " | count: "+ count);
+    // console.log("id:" + rental_id +" | room_type: " + rental_type + " | count: "+ count + " | price: "+ rental_price);
     
-    console.log("#addRental" + rental_id);
+    totalPrice+= parseInt(rental_price)
 
     if (count <= 0) {
         $(this).addClass("disabled")
@@ -243,8 +250,11 @@ $(document).on('click', '.selectRentalBtn', function (event) {
             }
         });
     }else{
-        SelectedRentalList.push([rental_id, rental_type, 1]);
+        SelectedRentalList.push([rental_id, rental_type, 1, parseInt(rental_price)]);
     }
+
+    console.log(totalPrice);
+    updateTotalPrice()
 
     updateBookedRentalList()
 })
@@ -265,9 +275,12 @@ function updateBookedRentalList() {
 
     $.each(SelectedRentalList, function(key1, value1) {
         htmlCode += `<div class="form-group col-12 d-flex justify-content-between my-1">
-                        <input id="rental_id`+value1[0]+`" type="text" class="m-0 form-control" name="room_id"`+value1[0]+`
+                        <input id="rental_id`+value1[0]+`" type="text" class="m-0 form-control" readonly "
                             placeholder="0" value="`+value1[1]+`">
-                        <a href="#viewingRental" rental_id="`+value1[0]+`" rental_name="`+value1[1]+`" class="btn btn-danger w-25 removeRentalBtn">Remove 1 of `+value1[2]+`</a>
+
+                        <input type="text" class="m-0 form-control hidden" name="rental_id[]"
+                        placeholder="0" value="`+value1[0]+`">
+                        <a href="#viewingRental" rental_price="`+value1[3]+`" rental_id="`+value1[0]+`" rental_name="`+value1[1]+`" class="btn btn-danger w-25 removeRentalBtn">Remove 1 of `+value1[2]+`</a>
                     </div>`
     });
     
@@ -293,22 +306,34 @@ function updateAvailableRentalItem(id) {
     $("#addRental"+id).removeClass("disabled")
 }
 
+// remove rental
 $(document).on('click', '.removeRentalBtn', function (event) {
     let rental_id = $(this).attr('rental_id')
-    
+    let price = $(this).attr('rental_price')
+
     SelectedRentalList.forEach(rental => {
         console.log(rental[2]); 
         if(rental[0] == rental_id && rental[2] == 1){
+            price = rental[3]
             SelectedRentalList = removeItemFromArray(SelectedRentalList, rental_id)
         }
     
         if (rental[0] == rental_id && rental[2] > 1) {
             rental[2]--
+            price = rental[3]
             console.log(rental[2]);
         }
+
     });
+    
+    totalPrice -= price
+    updateTotalPrice()
 
     updateAvailableRentalItem(rental_id)
 
     updateBookedRentalList()
 })
+
+function updateTotalPrice() {
+    $("#total_price").val(totalPrice)
+}
