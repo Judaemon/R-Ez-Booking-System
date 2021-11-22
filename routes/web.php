@@ -60,6 +60,8 @@ Route::group([
     Route::resource('user', UserController::class);
     Route::resource('rental', RentalController::class);
     Route::resource('room', RoomController::class);
+    Route::resource('booking', BookingController::class);
+
 
     Route::view('/booking', 'booking')->name('booking');
     Route::view('/scheduler', 'scheduler')->name('scheduler');
@@ -75,6 +77,8 @@ Route::group([
     Route::get('showAllRental', [RentalController::class, 'showAllRental'])->name('showAllRental');
     Route::get('showAllUser', [UserController::class, 'showAllUser'])->name('showAllUser');
     Route::get('showAllRoom', [RoomController::class, 'showAllRoom'])->name('showAllRoom');
+    Route::get('getBookingTable', [BookingController::class, 'getBookingTable'])->name('getBookingTable');
+
     Route::get('/getGraphData', [ReportController::class, 'getGraphData'])->name('getGraphData');
 
     

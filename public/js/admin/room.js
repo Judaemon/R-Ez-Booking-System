@@ -7,9 +7,88 @@ const swalWithBootstrapButtons = Swal.mixin({
     buttonsStyling: false
 });
 
+let imageInputArray = [0]
+let amenitiesInputArray = [0]
+
 $(function () {
+    getAmenities();
     getRoomTable();
 });
+
+// Add Amenities
+$(document).on('click', '#addAmenitiesBtn', function (event) {
+    amenitiesInputArray.push((amenitiesInputArray.length))
+    addAmenitiesInput()
+});
+
+$(document).on('click', '.removeAmenitiesInputBtn', function (event) {
+    const inputContainer = $(this).attr('inputContainer')
+    const inputContainerID = $(this).attr('inputContainerID')
+
+    amenitiesInputArray.splice( $.inArray(inputContainerID, amenitiesInputArray), 1 );
+
+    $("#"+inputContainer).remove();
+});
+
+function addAmenitiesInput() {
+    const latestInputAmenitiesID = amenitiesInputArray[amenitiesInputArray.length-1]
+
+    $(amenitiesInput(latestInputAmenitiesID)).insertAfter("#amenitiesInput"+(latestInputAmenitiesID-1));
+}
+
+function amenitiesInput(id) {
+    const amenitiesInputHTML = 
+    `<div class="row mt-2" id="amenitiesInput`+id+`">
+        <div class="col-9">
+        <select name="type" class="form-select" id="input_amenities[]" name="amenities[]" placeholder="Amenities">
+            <option value=""></option>
+                @foreach($amenities as $amenities)
+                    <option>{{$amenities}}</option>
+                @endforeach
+        </select>
+        </div>
+        <div class="col-3">
+            <button class="btn btn-danger w-100 removeAmenitiesInputBtn" inputContainer="amenitiesInput`+id+`" inputContainerID=`+id+` type="button">Remove</button>     
+        </div>
+    </div>`
+    return amenitiesInputHTML
+}
+
+
+// Add Image
+$(document).on('click', '#addImageBtn', function (event) {
+    imageInputArray.push((imageInputArray.length))
+    addImageInput()
+});
+
+$(document).on('click', '.removeImageInputBtn', function (event) {
+    const inputContainer = $(this).attr('inputContainer')
+    const inputContainerID = $(this).attr('inputContainerID')
+
+    imageInputArray.splice( $.inArray(inputContainerID, imageInputArray), 1 );
+
+    $("#"+inputContainer).remove();
+});
+
+function addImageInput() {
+    const latestInputImageID = imageInputArray[imageInputArray.length-1]
+
+    $(imageInput(latestInputImageID)).insertAfter("#imageInput"+(latestInputImageID-1));
+}
+
+function imageInput(id) {
+    const imageInputHTML = 
+    `<div class="row mt-2" id="imageInput`+id+`">
+        <div class="col-9">
+            <input type="file" name="image_paths[]" class="form-control" accept="image/png, image/gif, image/jpeg" required>
+        </div>
+        <div class="col-3">
+            <button class="btn btn-danger w-100 removeImageInputBtn" inputContainer="imageInput`+id+`" inputContainerID=`+id+` type="button">Remove</button>     
+        </div>
+    </div>`
+
+    return imageInputHTML
+}
 
 function getRoomTable(page) {
     $.ajax({
@@ -36,6 +115,20 @@ function getRoomTable(page) {
         },
     });
 }
+
+// function getAmenities() {
+//     $.ajax({
+//         type: 'GET',
+//         url: 'booking',
+//         success: function (response) {
+//             console.log(response);
+//             //console.log("Room Table Loaded");
+//         },
+//         error: function () {
+//             errorNotif();
+//         },
+//     });
+// }
 
 function addBtnRoomTable() {
     const html = `<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addRoomModal" style="width: 100%;">Add Room</button>`;
