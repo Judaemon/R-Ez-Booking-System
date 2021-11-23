@@ -9,10 +9,9 @@
                 <div class="card-header">{{ __('Update') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{route('updateProfile',$profile->id)}}">
+                    <form method="POST" action="{{route('updateProfile',$profile->id)}}" enctype="multipart/form-data">
                         @csrf
                         <input type="text" type="hidden" name="id" value="{{$profile['id']}}" hidden>
-
                         {{-- First name and Last name --}}
                         <div class="row">
                             <div class="form-group col-12 col-md-6">
@@ -54,7 +53,7 @@
                                 <label for="email" class="col-md-7 col-form-label">{{ __('E-Mail Address') }}</label>
 
                                 <div class="col-md-12">
-                                    <input id="email" type="email"
+                                    <input readonly id="email" type="email"
                                         class="m-0 form-control @error('email') is-invalid @enderror" name="email"
                                         value="{{$profile->email}}">
 
@@ -84,14 +83,14 @@
                             </div>
 
                             <div class="form-group col-12 col-md-6">
-                                <label for="address" class="col-md-5 col-form-label">{{ __('Address') }}</label>
+                                <label for="image_path" class="col-md-5 col-form-label">{{ __('Profile Picture') }}</label>
 
                                 <div class="col-md-12">
-                                    <input id="address" type="text"
-                                        class="m-0 form-control @error('address') is-invalid @enderror" name="address"
-                                        value="{{$profile->address}}">
+                                    <input id="image_path" type="file"
+                                        class="m-0 form-control @error('image_path') is-invalid @enderror"
+                                        name="image_path" value="{{$profile->image_path}}" autofocus>
 
-                                    @error('address')
+                                    @error('image_path')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
