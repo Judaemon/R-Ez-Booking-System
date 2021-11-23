@@ -77,12 +77,15 @@ class RentalController extends Controller
 
     public function update(Request $request, Rental $rental)
     {
+        // dd($request->all());
+
         $validated = Validator::make($request->all(), [
-            'rental_type' => 'required|string|max:255|unique:rentals,name,'.$rental->id,
+            'rental_type' => 'required|string|max:255|unique:rentals,rental_type,'.$rental->id,
             'rental_count' => 'required|Numeric',
             'price' => 'required|Numeric',
             'description' => 'required|string|max:255',
-            'image_path' => 'required|mimes:jpg,png,jpeg|max:5048',
+            'image_paths' => 'array|max:5048',
+            'image_paths_original' => 'array',
         ]);
         
         if ($validated->fails()) {
@@ -92,22 +95,49 @@ class RentalController extends Controller
             ]);
         }
         
-        $newImageName = 'uploaded/' . time() . '-' . $request->name . '.' . 
-        $request->image_path->extension();
+        $inputs = $request->all();
+        $fuckNaimage = [];
 
-        $request->image_path->move(public_path('img/uploaded'), $newImageName);
+        if (!empty($inputs['image_paths'])) {
+            
+            if (empty($inputs['image_paths_original'])) {
+                $mergedImagePaths = $inputs['image_paths'];
+            }else{
+                $mergedImagePaths = array_merge($inputs['image_paths_original'], $inputs['image_paths']);
+            }
+
+            foreach($mergedImagePaths as $key => $value){
+                if (is_string($value)) {
+                    $fuckNaimage[] = $value;
+                }else{
+                    $newImageName = 'rentals/' .$request->rental_type. '/' . $request->rental_type .'_'. $key.'.'. $value->extension();
+                    $value->move(public_path('img/rentals/'.$request->rental_type), $newImageName);
+                    $fuckNaimage[] = $newImageName;
+                }
+            }
+        }else{
+            $fuckNaimage = $inputs['image_paths_original'];
+        }
+       
+        // $inputs['image_paths']
+        // $newImageName = 'uploaded/' . time() . '-' . $request->name . '.' . 
+        // $request->image_path->extension();
+
+        // $request->image_path->move(public_path('img/uploaded'), $newImageName);
 
         //$rental->update($request->all());
         $rental->update([
-            'rental_type' => $request->input('name'),
-            'rental_count' => $request->input('count'),
+            'rental_type' => $request->input('rental_type'),
+            'rental_count' => $request->input('rental_count'),
             'description' => $request->input('description'),
             'price' => $request->input('price'),
-            'image_path' => $newImageName,
+            'image_paths' => json_encode($fuckNaimage),
         ]);
 
         return response()->json([
             'status' => 1,
+            // 'original' => $inputs['image_paths_original'],
+            // 'new' => json_encode($fuckNaimage)
             'message' => 'Data Updated successfully!'
         ]);
     }

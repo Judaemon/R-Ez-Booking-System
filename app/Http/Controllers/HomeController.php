@@ -32,7 +32,7 @@ class HomeController extends Controller
             return view('components\customerComponents\home');
         }
         
-        return view('components\adminComponents\home');
+        return view('welcome');
     }
 
     public function viewProfile()

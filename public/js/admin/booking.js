@@ -14,19 +14,17 @@ function errorNotif() {
         'error'
     )
 }
-
-// function addBtnRentalTable() {
-//     const html = <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addBookingModal" style="width: 100%;">Add Booking</button>;
-//     $(".RentalAddBtn").html(html);
-// }
-
+function addBtnBookingTable() {
+    const html = `<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addBookingModal" style="width: 100%;">Add Booking</button>`;
+    $(".BookingAddBtn").html(html);
+}
 
 $(function () {
     //console.log("Working Booking admin js");
-    getRentalTable();
+    getBookingTable();
 });
 
-function getRentalTable(page) {
+function getBookingTable(page) {
     console.log("Working table function");
     $.ajax({
         type: 'GET',
@@ -40,12 +38,12 @@ function getRentalTable(page) {
                     search: '',
                     searchPlaceholder: "Search..."
                 },
-                dom: "<'row mb-3'<'col-md-6'f><'col-md-6' <'RentalAddBtn'>>>" +
+                dom: "<'row mb-3'<'col-md-6'f><'col-md-6' <'BookingAddBtn'>>>" +
                     "<'row'<'col-md-6'l><'col-md-6'i>>" +
                     "<'row'<'col-sm-12'tr>>" +
                     "<'row'<'col-md-12'p>>",
             });
-            addBtnRentalTable();
+            addBtnBookingTable();
         },
         error: function () {
             errorNotif();

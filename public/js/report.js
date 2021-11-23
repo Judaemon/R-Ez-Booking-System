@@ -1,46 +1,12 @@
-// $(document).ready(function() {
-//   displayReportTable("Accepted");
-//   getGraphData();
-// });
 
-// function displayReportTable(filter) {
-//   $.ajax({
-//     url: "classes/reportsPHP/reportView.php",
-//     type: "POST",
-//     data: {status: filter, action: "getReportTbl"},
-//     success:function (response) {
-//       $('#reportTableContainer').html(response);
-//     }
-//   });
-// }
-
-// $(document).on('change', '#reportFilter', function(){
-//   console.log(($(this).val()));
-//   let filter = $(this).val();
-
-//   displayReportTable(filter);
-// });
-
-// var graphData = [];
-
-// function getGraphData() {
-//   $.ajax({
-//     url: "classes/reportsPHP/reportCtrl.php",
-//     type: "POST",
-//     data: {action: "getGraphData"},
-//     success:function (response) {
-//       graphData = response.split(', ');
-//       console.log(graphData);
-//     }
-//   }).then(()=>{
-//     generateGraph();
-//   });
-// }
+$.ajaxSetup({
+  headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  }
+});
 
 function generateGraph(getGraphData) {
   var ctx = document.getElementById('myChart').getContext('2d');
-
-  console.log(getGraphData);
   var myChart = new Chart(ctx, {
       type: 'pie',
       data: {
@@ -77,30 +43,35 @@ function generateGraph(getGraphData) {
 
 // let getGraphData = "1,2,3,4,5";
 let getGraphData = "";
-let stringTest = [];
+let statusArray = [];
 
 
 $(function () {
   // console.log("dashboard js");
+  getReportArray();
   getRentalTable();
+
   // generateGraph(getGraphData);
 });
 
-function getRentalTable(page) {
+function getReportArray() {
   $.ajax({
       type: 'GET',
       url: 'getBookingCount',
+      
       success: function (response) {
         // getGraphData = response.bookingCount;
-          console.log(response.bookingCount);
+          // console.log(response.bookingCount);
+
           response.bookingCount.forEach(booking => {
-            console.log(booking.bookingCount);
-            stringTest.push(booking.bookingCount);
+            // console.log(booking.bookingCount);
+            statusArray.push(booking.bookingCount);
+
             // getGraphData += booking.bookingCount+','
             // console.log(getGraphData);
             
           });
-          console.log(stringTest);
+          console.log(statusArray);
 
           // console.log(getGraphData);
           // genAccountList(response.bookingCount);
@@ -109,7 +80,48 @@ function getRentalTable(page) {
           errorNotif();
       },
   }).then(()=>{
-    generateGraph(stringTest);
+    generateGraph(statusArray);
+  });
+}
+
+function getRentalTable(page) {
+  $.ajax({
+      type: 'GET',
+      url: 'getUserCount',
+      success: function (response) {
+          // console.log(response.userCount[0].userCount);
+          genAccountList(response.userCount);
+      },
+      error: function () {
+          errorNotif();
+      },
+  });
+}
+
+$(document).on('change', '#reportFilter', function(){
+  var reportFilter = document.getElementById('reportFilter').value;
+  console.log(reportFilter);
+
+  getTableData(reportFilter);
+});
+
+$(document).on('click', '#reportTableContainer', function(){
+  console.log("PRINTING BUTTON TEST");
+});
+
+function getTableData(filter) {
+  $.ajax({
+      type: 'POST',
+      url: 'bookingFilter',
+      data: {filter: filter},
+      success: function (response) {
+        console.log(response);
+        $('#reportTableContainer').html(response);
+      },
+      error: function (response) {
+        console.log(response);
+          errorNotif();
+      },
   });
 }
 
@@ -121,13 +133,14 @@ function errorNotif() {
   )
 }
 
+//account counter
 function genAccountList(bookingArray) {
   console.log("genaccountlist");
   let htmlCode = ""
-  bookingArray.forEach(booking => {
+  bookingArray.forEach(account => {
       htmlCode += `<div class="col-4">
-                      <h5>`+booking.booking_status+`</h5>
-                      <h1>`+booking.bookingCount+`</h1>
+                      <h5>`+account.account_type+`</h5>
+                      <h1>`+account.userCount+`</h1>
                   </div>`
       
       // console.log(account.account_type);
@@ -137,8 +150,4 @@ function genAccountList(bookingArray) {
 
   $('#accountContainer').html(htmlCode);
 
-}
-
-function renderChart(roomArray) {
-  //select count(*),room_type from rooms group by room_type;
 }

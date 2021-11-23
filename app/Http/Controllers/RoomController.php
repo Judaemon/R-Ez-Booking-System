@@ -71,10 +71,6 @@ class RoomController extends Controller
             'msg' => "New rental has been successfully created."
         ]);
         
-        return response()->json([
-            'status'=> 1,
-            'msg' => "New rental has been successfully created."
-        ]);
     }
 
     public function show()

@@ -69,8 +69,8 @@
                     @csrf
                     <div class="form-group mb-2">
                         <label>Room Type</label>
-                        <input type="text" class="form-control" id="input_room_type" name="room_type" placeholder="Room Name">
-                        <span class="invalid-feedback fw-bold error-text name_error" role="alert"></span>
+                        <input type="text" class="form-control" id="input_room_type" name="room_type" placeholder="Room Type">
+                        <span class="invalid-feedback fw-bold error-text room_type_error" role="alert"></span>
                     </div>
                     
                     <div class="form-group mb-2">
