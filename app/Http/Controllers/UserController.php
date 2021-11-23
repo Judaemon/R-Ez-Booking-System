@@ -55,6 +55,20 @@ class UserController extends Controller
             'msg' => "New rental has been successfully created."
         ]);
 
+        $request->validate([
+            'image' => 'required|mimes:jpg,png,jpeg|max:5048'
+        ]);
+
+        $newImageName = time() . '-' . $request->name . '-' . $request->image->extension();
+
+        $request->image->move(public_path('img.users', $newImageName));
+
+        $user = User::create([
+            'image_path' => $newImageName
+        ]);
+
+        dd($newImageName);
+
         // User::create($request->all());
         // return response()->json([
         //     'code'=>0
@@ -103,7 +117,6 @@ class UserController extends Controller
             'account_type' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email'.$user->id,
             'contact_number' => 'required|Numeric',
-            //'address' => 'required|string|max:255',
             // 'contact_number' => 'required|regex:/^[(][0-9]{2}[)][\s][0-9]{3}[-][0-9]{4}$/',
             'firstname' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',

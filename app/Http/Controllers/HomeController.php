@@ -59,7 +59,6 @@ class HomeController extends Controller
         //     'username' => ['required', 'string', 'max:255', 'unique:users'],
         //     'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
         //     'contact_number' => ['required', 'string', 'max:255', 'unique:users', 'regex:/^(09)[0-9]{9}$/'],
-        //     'address' => ['required','string', 'max:255'],
         //     'password' => ['required', 'string', 'min:8', 'confirmed'],
         //     'password_confirmation'=> ['required', 'string', 'min:8'],
         // ]);
@@ -68,9 +67,9 @@ class HomeController extends Controller
             'lastname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255'],
             'contact_number' => ['required', 'string', 'max:255'],
-            'address' => ['required','string', 'max:255'],
             'password' => ['nullable', 'string', 'min:8', 'confirmed'],
             'password_confirmation'=> ['nullable', 'string', 'min:8'],
+            'image_path' => 'mimes:jpg,png,jpeg|max:5048'
         ]);
         
         $data = User::find($request->id);
@@ -78,13 +77,18 @@ class HomeController extends Controller
         $data->lastname=$request->lastname;
         $data->email=$request->email;
         $data->contact_number=$request->contact_number;
-        $data->address=$request->address;
         if ($request->password != null) {
             $data->password= Hash::make($request->password);
         }
         $data->save();
+        if (!empty($request->image_path)) {
+            $newImageName = $request->id . '_profile_pic.' .  $request-> image_path->extension();
+            
+            $request->image_path->move(public_path('img/users'),  $newImageName);$user = $data->update([
+
+            'image_path' => $newImageName
+            ]);
+        }
         return redirect()->route('viewProfile');
     }
-
-
 }
