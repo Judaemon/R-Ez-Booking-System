@@ -13,7 +13,10 @@ class CreateBookingsTable extends Migration
             $table->integer('user_id');
             // $table->string('room_id'); // many to many so pivot table
             // $table->string('rental_id'); // many to many so pivot table
-            $table->string('payment_method'); 
+            $table->string('payment_method');
+            $table->string('address');
+            $table->integer('adult');
+            $table->integer('children')->nullable();
             $table->string('amount_paid')->nullable(); // hard coded
             $table->float('total_price');
             $table->String('booking_status');

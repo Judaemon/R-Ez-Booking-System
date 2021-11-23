@@ -8,9 +8,15 @@ const swalWithBootstrapButtons = Swal.mixin({
 });
 
 $(function () {
-    console.log("Booking loaded");
+    //console.log("Booking loaded");
     setMinDateToToday();
 });
+
+function clearErrorText(formID) {
+    $('#' + formID + ' input').removeClass('is-invalid')
+    $('#' + formID + ' select').removeClass('is-invalid')
+    $(document).find('#' + formID + ' span.error-text').text('');
+}
 
 // need to if walang form naginagamit
 $.ajaxSetup({
@@ -53,11 +59,11 @@ function fetchAvailableRooms() {
         },
         success: function (response) {
             // console.log("fetched rooms");
-            console.log(response);
+            //console.log(response);
             $('#roomsContainer').html(response);
         },
         error: function (response) {
-            console.log(response);
+            //console.log(response);
             errorNotif();
         },
     });
@@ -80,7 +86,7 @@ function fetchAvailableRentals() {
             $('#rentalContainer').html(response);
         },
         error: function (response) {
-            console.log(response);
+            //(response);
             errorNotif();
         },
     });
@@ -111,7 +117,7 @@ function resetBookList() {
 
 // --------------------------------End
 $(document).on('change', '#end', function (event) {
-    console.log('Update:' + $('#start').val());
+    //console.log('Update:' + $('#start').val());
     if ($('#start').val()) {
         fetchAvailableRooms()
         fetchAvailableRentals()
@@ -131,7 +137,7 @@ $(document).on('click', '.selectRoomBtn', function (event) {
     let room_price = $(this).attr('room_price')
     let count = updateBookedRoomItem(room_id)
     
-    console.log("id:" + room_id +" | room_type: " + room_type + " | count: "+ count + " | count: "+ room_price);
+    //console.log("id:" + room_id +" | room_type: " + room_type + " | count: "+ count + " | count: "+ room_price);
 
     totalPrice+= parseInt(room_price)
 
@@ -170,7 +176,7 @@ $(document).on('click', '.removeRoomBtn', function (event) {
     let price = $(this).attr('room_price')
  
     SelectedRoomList.forEach(room => {
-        console.log(room[2]); 
+        //console.log(room[2]); 
         if(room[0] == room_id && room[2] == 1){
             SelectedRoomList = removeItemFromArray(SelectedRoomList, room_id)
         }
@@ -180,7 +186,7 @@ $(document).on('click', '.removeRoomBtn', function (event) {
         }
     });
 
-    console.log(price);
+    //(price);
     totalPrice -= price
     updateTotalPrice()
 
@@ -253,7 +259,7 @@ $(document).on('click', '.selectRentalBtn', function (event) {
         SelectedRentalList.push([rental_id, rental_type, 1, parseInt(rental_price)]);
     }
 
-    console.log(totalPrice);
+    //console.log(totalPrice);
     updateTotalPrice()
 
     updateBookedRentalList()
@@ -312,7 +318,7 @@ $(document).on('click', '.removeRentalBtn', function (event) {
     let price = $(this).attr('rental_price')
 
     SelectedRentalList.forEach(rental => {
-        console.log(rental[2]); 
+        //console.log(rental[2]); 
         if(rental[0] == rental_id && rental[2] == 1){
             price = rental[3]
             SelectedRentalList = removeItemFromArray(SelectedRentalList, rental_id)
@@ -321,7 +327,7 @@ $(document).on('click', '.removeRentalBtn', function (event) {
         if (rental[0] == rental_id && rental[2] > 1) {
             rental[2]--
             price = rental[3]
-            console.log(rental[2]);
+            //console.log(rental[2]);
         }
 
     });
@@ -337,3 +343,70 @@ $(document).on('click', '.removeRentalBtn', function (event) {
 function updateTotalPrice() {
     $("#total_price").val(totalPrice)
 }
+
+
+$('#addBookingForm').on('submit', function (event) {
+    event.preventDefault();
+    console.log("test buton");
+
+    swalWithBootstrapButtons.fire({
+        title: 'Are you sure?',
+        text: "This Booking information will be added from the database!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, Add it!',
+        cancelButtonText: 'No, Cancel!',
+        reverseButtons: true
+
+    }).then((result) => {
+        if (result.isConfirmed) {
+            //console.log("Checking Add Form");
+            const form = this;
+            // console.log(form);
+            $.ajax({
+                url: $(form).attr('action'),
+                method: $(form).attr('method'),
+                type: 'POST',
+                dataType: 'JSON',
+                data: new FormData(form),
+                processData: false,
+                contentType: false,
+                beforeSend: function () {
+                    clearErrorText('addBookingForm');
+                },
+                success: function (response) {
+                    //console.log(response);
+                    if (response.status == 0) {
+                        console.log(response);
+                        $.each(response.error, function (prefix, val) {
+                            $('#addBookingForm #input_' + prefix).addClass('is-invalid')
+                            $('#addBookingForm span.' + prefix + '_error').text(val)
+                            console.log("may error");
+                        })
+                    }
+
+                    if (response.status == 1) {
+                        console.log("walang error");
+                        $(form)[0].reset();
+                        swalWithBootstrapButtons.fire(
+                            'Successful!',
+                            response.msg,
+                            'success'
+                        )
+                    }
+                },
+                error: function (response) {
+                    errorWarning()
+                }
+            });
+        } else if (
+            result.dismiss === Swal.DismissReason.cancel // click ayaw
+        ) {
+            swalWithBootstrapButtons.fire(
+                'Cancelled',
+                'Lets pretend that never happend >:)',
+                'error'
+            )
+        }
+    })
+});
