@@ -18,17 +18,16 @@
                         @csrf
 
                         <div class="form-group row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Contact Number') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="Email..." value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                <input id="email" type="number" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="Contact Number..." value="{{ old('email') }}" required autocomplete="email" autofocus>
                                 
                                 <div class="mt-3">
-                                    <a class="col-md-6" href="{{ route('contactnum') }}">
-                                        Recover using contact number
+                                    <a class="col-md-6" href="{{ route('password.request') }}">
+                                        Recover using email
                                     </a>
                                 </div>
-                                
                                 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -38,7 +37,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row mb-0"> 
+                        <div class="form-group row mb-0">                          
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Send Password Reset Link') }}
