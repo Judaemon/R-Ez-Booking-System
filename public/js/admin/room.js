@@ -9,6 +9,7 @@ const swalWithBootstrapButtons = Swal.mixin({
 
 let imageInputArray = [0]
 let amenitiesInputArray = [0]
+let amenitiesItemArray = []
 
 $(function () {
     getAmenities();
@@ -37,14 +38,17 @@ function addAmenitiesInput() {
 }
 
 function amenitiesInput(id) {
-    const amenitiesInputHTML = 
+    let amenitiesInputHTML = 
     `<div class="row mt-2" id="amenitiesInput`+id+`">
         <div class="col-9">
-        <select name="type" class="form-select" id="input_amenities[]" name="amenities[]" placeholder="Amenities">
-            <option value=""></option>
-                @foreach($amenities as $amenities)
-                    <option>{{$amenities}}</option>
-                @endforeach
+        <select class="form-select" id="input_amenities[]" name="amenities[]" placeholder="Amenities">
+        <option value="">Click to open Menu</option>
+            `
+                amenitiesItemArray.forEach(amenities => {
+                    amenitiesInputHTML += `<option value="`+amenities+`">`+amenities+`</option>`
+                    
+                });
+                amenitiesInputHTML += `
         </select>
         </div>
         <div class="col-3">
@@ -116,19 +120,20 @@ function getRoomTable(page) {
     });
 }
 
-// function getAmenities() {
-//     $.ajax({
-//         type: 'GET',
-//         url: 'booking',
-//         success: function (response) {
-//             console.log(response);
-//             //console.log("Room Table Loaded");
-//         },
-//         error: function () {
-//             errorNotif();
-//         },
-//     });
-// }
+function getAmenities() {
+    $.ajax({
+        type: 'GET',
+        url: 'getAmenities',
+        success: function (response) {
+            //console.log(response.message);
+            amenitiesItemArray = response.message
+            
+        },
+        error: function () {
+            errorNotif();
+        },
+    });
+}
 
 function addBtnRoomTable() {
     const html = `<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addRoomModal" style="width: 100%;">Add Room</button>`;
@@ -160,7 +165,7 @@ function errorWarning() {
 // Display Edit Form
 $(document).on('click', '#roomUpdateBtn', function (event) {
     const id = ($(this).attr('room_id'));
-    console.log(id);
+    //console.log(id);
     const form = this;
     $.ajax({
         method: 'GET',
@@ -322,21 +327,11 @@ $('#addRoomForm').on('submit', function (event) {
                 data: new FormData(form),
                 processData: false,
                 contentType: false,
-                // success: function (response) {
-                //     $('#addRoomModal').modal('hide');
-                //     $('body').removeClass('modal-open');
-                //     $('.modal-backdrop').remove();
-                //     console.log(response);
-                //     getTable();
-                // },
-                // error: function (response) {
-                //     console.log(response);
-                // }
                 beforeSend: function () {
                     clearErrorText('addRoomForm');
                 },
                 success: function (response) {
-                    console.log(response);
+                    //console.log(response);
                     if (response.status == 0) {
                         $.each(response.error, function (prefix, val) {
                             $('#addRoomForm #input_' + prefix).addClass('is-invalid')

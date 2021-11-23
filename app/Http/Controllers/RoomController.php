@@ -23,20 +23,18 @@ class RoomController extends Controller
     }
 
     public function store(Request $request)
-    {
-        // Room::create($request->all());
-        // return response()->json([
-        //     'code'=>0
-        // ]);
-        
+    { 
+        $input = $request->all();
 
         $validated = Validator::make($request->all(), [
-            'name' => 'required|string|max:255|unique:rooms',
+            'room_type' => 'required|string|max:255|unique:rooms',
+            'room_count' => 'required|Numeric',
             'description' => 'required|string',
             'price' => 'required|Numeric',
+            'amenities' => 'array',
             'recommended_capacity' => 'required|Numeric',
-            //'picture' => 'required|mimes:jpg,png,jpeg|max:5048',
-            'image_path' => 'required|mimes:jpg,png,jpeg|max:5048', //old- 'required|string|max:255'
+            'maximum_capacity' => 'required|Numeric',
+            'image_paths' => 'required|array', 
         ]);
         
       
@@ -46,22 +44,33 @@ class RoomController extends Controller
                 'error' => $validated->errors()->toArray()
             ]);
         }
-        
-        $newImageName = 'uploaded/' . time() . '-' . $request->name . '.' . 
-        $request->image_path->extension();
 
-        $request->image_path->move(public_path('img/uploaded'), $newImageName);
+        foreach($input['image_paths'] as $key => $value){
+            $newImageName = 'rooms/' .$request->room_type. '/' . $request->room_type .'_'. $key.'.'. $value->extension();
+            $value->move(public_path('img/rooms/'.$request->room_type), $newImageName);
+            $origName[] = $newImageName;
+        }
 
-        //Room::create($request->all());
+        foreach($input['amenities'] as $key => $value){
+            $allAmenities[] = $value;
+        }
+
         Room::create([
-            'name' => $request->input('name'),
+            'room_type' => $request->input('room_type'),
+            'room_count' => $request->input('room_count'),
             'description' => $request->input('description'),
             'price' => $request->input('price'),
-            'recommended_capacity' =>$request->input('recommended_capacity'),
-            'image_path' => $newImageName,
-           // 'picture' => $request->input('name'),
+            'recommended_capacity' => $request->input('recommended_capacity'),
+            'maximum_capacity' => $request->input('maximum_capacity'),
+            'amenities' => json_encode($allAmenities),
+            'image_paths' => json_encode($origName),
         ]);
 
+        return response()->json([
+            'status'=> 1,
+            'msg' => "New rental has been successfully created."
+        ]);
+        
         return response()->json([
             'status'=> 1,
             'msg' => "New rental has been successfully created."
@@ -140,5 +149,13 @@ class RoomController extends Controller
     {
         $rooms = DB::table('rooms')->get();
         return view('components.roomComponents.roomsTable', compact('rooms'));
+    }
+    public function getAmenities()
+    {
+        $amenities = array('Free Wifi','Free Breakfast');
+        return response()->json([
+            'code' => 1,
+            'message' => $amenities
+        ]);
     }
 }

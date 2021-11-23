@@ -80,6 +80,9 @@ Route::group([
     Route::get('showAllRoom', [RoomController::class, 'showAllRoom'])->name('showAllRoom');
     Route::get('getBookingTable', [BookingController::class, 'getBookingTable'])->name('getBookingTable');
 
+    //get Amenities
+    Route::get('getAmenities', [RoomController::class, 'getAmenities'])->name('getAmenities');
+
     Route::get('/getGraphData', [ReportController::class, 'getGraphData'])->name('getGraphData');
 
     
