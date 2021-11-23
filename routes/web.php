@@ -75,6 +75,7 @@ Route::group([
 
     Route::get('/getBookingCount', [ReportController::class, 'getBookingCount'])->name('getBookingCount');
 
+    Route::post('/bookingFilter', [ReportController::class, 'bookingFilter'])->name('bookingFilter');
 
     // Dapat ma move yung mga route ng tables sa ganto kasi mali yung pag gamit ng show method
     Route::get('showAllRental', [RentalController::class, 'showAllRental'])->name('showAllRental');

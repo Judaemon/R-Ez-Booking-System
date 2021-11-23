@@ -108,4 +108,18 @@ class ReportController extends Controller
         ]);
     }
 
+    public function bookingFilter(Request $request)
+    {
+        $filterTables = DB::table('bookings')
+        ->where('booking_status', '=', $request->get('filter'))
+        ->get();
+
+        return view('components.reportComponents.reportTable',compact('filterTables'));
+
+        // return response()->json([
+        //     'status' => $request->get('filter'),
+        //     'bookingCount' => $filterTable
+        // ]);
+    }
+
 }
