@@ -14,33 +14,39 @@ class RoomBookingTableSeeder extends Seeder
         $room_booking = [
             [
                 'booking_id' => 1,
-                'room_id' => 1,
-                'start' => '2021-11-22',
+                'room_id' => 1  ,
+                'start' => '2021-11-17',
                 'end' => '2021-11-26',
             ],
             [
                 'booking_id' => 1,
-                'room_id' => 1,
-                'start' => '2021-11-22',
-                'end' => '2021-11-26',
+                'room_id' => 6,
+                'start' => '2021-11-24',
+                'end' => '2021-12-1',
             ],
             [
                 'booking_id' => 1,
+                'room_id' => 5,
+                'start' => '2021-11-23',
+                'end' => '2021-12-3',
+            ],
+            [
+                'booking_id' => 2,
+                'room_id' => 2,
+                'start' => '2021-12-5',
+                'end' => '2021-12-8',
+            ],
+            [
+                'booking_id' => 2,
+                'room_id' => 4,
+                'start' => '2021-12-1',
+                'end' => '2021-12-4',
+            ],
+            [
+                'booking_id' => 5,
                 'room_id' => 3,
-                'start' => '2021-11-22',
-                'end' => '2021-11-26',
-            ],
-            [
-                'booking_id' => 2,
-                'room_id' => 2,
-                'start' => '2021-12-5',
-                'end' => '2021-12-8',
-            ],
-            [
-                'booking_id' => 2,
-                'room_id' => 2,
-                'start' => '2021-12-5',
-                'end' => '2021-12-8',
+                'start' => '2021-11-1',
+                'end' => '2021-11-6',
             ],
             [
                 'booking_id' => 5,
