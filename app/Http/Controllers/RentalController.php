@@ -116,7 +116,7 @@ class RentalController extends Controller
                 }
             }
         }else{
-            $fuckNaimage[] = $inputs['image_paths_original'];
+            $fuckNaimage = $inputs['image_paths_original'];
         }
        
         // $inputs['image_paths']
