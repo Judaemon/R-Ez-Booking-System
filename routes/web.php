@@ -18,6 +18,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::view('/termsandconditions', 'termsandconditions')->name('termsandconditions');
+
 Auth::routes(['verify' => true]);
 
 // paths going to home 

@@ -1,5 +1,22 @@
 @extends('layouts.app')
 
+<script>
+
+    function doalert(checkboxElem) {
+        if (checkboxElem.checked) {
+            // console.log(checkboxElem.id);
+            $("#registerbtn").removeClass('disabled');
+
+        } else {
+            // console.log(checkboxElem.id);
+
+            $("#registerbtn").addClass('disabled');
+
+        }
+    }
+    
+</script>
+
 @section('content')
 <div class="container p-5">
     <div class="row justify-content-center">
@@ -132,13 +149,23 @@
                             </div>
                         </div>
 
+                        <div class="form-check mt-3">
+                            {{-- <input type="checkbox" id="checkme"/>
+                            <input type="submit" name="sendNewSms" class="inputButton" disabled="disabled" id="sendNewSms" value=" Send " /> --}}
+                            <input onclick="doalert(this)" class="form-check-input" type="checkbox" id="checkbox" value="">
+                            <a href="{{ route('termsandconditions')}}" target="_blank" class="form-check-label" for="flexCheckDefault" style="cursor: pointer;">
+                              Terms And Conditions
+                            </a>
+                          </div>
+
                         <div class="form-group row mt-3">
                             <div class="col-md-12 text-right">
-                                <button type="submit" class="mr-3 btn btn-primary">
+                                <button id="registerbtn" type="submit" class="mr-3 btn btn-primary disabled">
                                     {{ __('Register') }}
                                 </button>
                             </div>
                         </div>
+
                     </form>
                 </div>
             </div>
