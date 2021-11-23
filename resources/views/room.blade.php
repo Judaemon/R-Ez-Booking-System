@@ -123,6 +123,7 @@
                            <div class="col-3">
                                <button class="btn btn-success w-100" id='addAmenitiesBtn' type="button">Add</button>
                            </div>
+                           
                        </div>
                        {{-- <span class="invalid-feedback fw-bold error-text image_paths_error" role="alert"></span> --}}
                    </div>
