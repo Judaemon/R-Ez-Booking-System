@@ -54,7 +54,7 @@ class BookingSeeder extends Seeder
                 'payment_method' => 'Bank Transfer',
                 'amount_paid' => '1',
                 'total_price' => '1',
-                'booking_status' => 'Decline',
+                'booking_status' => 'Declined',
                 'address' => 'Baguio',
                 'adult' => '5',
                 'children' => '3',

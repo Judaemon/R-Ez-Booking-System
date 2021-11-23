@@ -84,7 +84,7 @@ class BookingController extends Controller
                 case 'Declined':
                     $booking->color = '#f8c753';
                     break;
-                case 'On-Going':
+                case 'On-going':
                     $booking->color = '#eb7e30';
                     break;
                 case 'Finished':
