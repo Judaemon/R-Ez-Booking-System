@@ -7,6 +7,12 @@ const swalWithBootstrapButtons = Swal.mixin({
     buttonsStyling: false
 });
 
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
 $(function () {
     console.log("Transaction loaded");
     // const event = getEvents()
@@ -94,7 +100,7 @@ async function getEvents() {
     return new Promise((resolve, reject) => {
         $.ajax({
             type: 'GET',
-            url: 'admin/getAllTransaction',
+            url: 'admin/getAllBooking',
             success: (response) => {
                 //console.log("idk how this works but yeah");
                 
@@ -116,9 +122,10 @@ async function getEvents() {
 
 function renderCalendar() {
     var calendarEl = document.getElementById('calendar');
+
     const date = new Date();
     const strDate = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate();
-    var Color = "";
+    
     var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
         initialDate: strDate,
@@ -128,10 +135,11 @@ function renderCalendar() {
             center: 'title',
             right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
         },
+
         selectable: true,
      
         //events: events
-        events: "admin/getAllTransaction",
+        events: "getAllBooking",
         
         eventDidMount: function(events,element) {
             console.log(events.event.extendedProps.transaction_status);
@@ -160,3 +168,4 @@ function renderCalendar() {
     });
     calendar.render();
 }
+

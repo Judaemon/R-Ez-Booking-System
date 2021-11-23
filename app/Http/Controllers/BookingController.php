@@ -64,62 +64,44 @@ class BookingController extends Controller
         //
     }
 
+    // Scheduller
     public function getAllBooking()
     {
-        $transactions = DB::table('transactions')->get();
-        $color = '#000';
-        //dd($transactions);
-        // if ($transactions->-items->id == 4) {
-        //     $color = "#FFFF00";
-        // }
- //        created_at->format('Y-m-d')
-          foreach ($transactions as $transaction)
-          {
-            if ($transaction->transaction_status == "Booked") {
-                $color = "#FFA500";
-            }else if ($transaction->transaction_status == "On-going"){
-                $color = "#0000FF";
-            }else if ($transaction->transaction_status == "Finished"){
-                $color = "#00FF00";
-            }else if ($transaction->transaction_status == "Cancelled"){
-                $color = "#FF0000";
+        $bookings = DB::select('SELECT *, CONCAT(`bookings`.`id`, " ", users.firstname, " ", users.lastname) AS "title" FROM `bookings` 
+        INNER JOIN `users` ON `bookings`.`user_id` = `users`.`id`');
+
+        foreach($bookings as $booking){
+            switch ($booking->booking_status) {
+                case 'Pending':
+                    $booking->color = '#2f8dfa';
+                    break;
+                case 'Booked':
+                    $booking->color = '#1fd0bf';
+                    break;
+                case 'Canceled':
+                    $booking->color = '#eb648b';
+                    break;
+                case 'Declined':
+                    $booking->color = '#f8c753';
+                    break;
+                case 'On-going':
+                    $booking->color = '#eb7e30';
+                    break;
+                case 'Finished':
+                    $booking->color = '#a93790';
+                    break;
+                default:
+                    $booking->color = 'red';
+                    break;
             }
-           $events[] = [
-            'id'=>$transaction->id,
-            'user_id'=>$transaction->user_id,
-            'room_id'=>$transaction->room_id,
-            'rental_id'=>$transaction->rental_id,
-            'payment_method'=>$transaction->payment_method,
-            'total_price'=>$transaction->total_price,
-            'transaction_status'=>$transaction->transaction_status,
-            'title'=>$transaction->title,
-            'start'=>$transaction->start,
-            'end'=>$transaction->end,
-            'description'=>$transaction->description,
-            'color'=>$color
-           ];
         }
-       return $events;
 
-        // $events[] = [
-        //     'title' => trim($source['prefix'] . " " . $model->{$source['field']}
-        //         . " " . $source['suffix']),
-        //     'start' => $crudFieldValue,
-        //     'url'   => route($source['route'], $model->id),
-        // ];
+       return $bookings;
 
-        // foreach ($transactions as $key => $transaction) {
-        //     // array_push($event, 1, 2);
-
-        // }
-
-        // return response()->json($transactions);
-        // // $events->toJson(JSON_PRETTY_PRINT);
-
-        // return response()->json([
-        //     'status'=> 1,
-        //     'transactions' => $transactions
-        // ]);
+        return response()->json([
+            'status'=> 1,
+            'transactions' => $bookings
+        ]);
     }
 
     public function showAllTransaction()
@@ -170,8 +152,51 @@ class BookingController extends Controller
 
         return view('components.bookingComponents.rentalList', compact('rentals'));
     }
+
     public function getBookingTable(){
-        $bookings = DB::table('bookings')->get();
+        $bookings = DB::select("SELECT * FROM bookings WHERE booking_status = 'On-Going' OR booking_status = 'Booked' OR booking_status = 'Pending'");
+
         return view('components.BookingComponents.bookingTable',compact('bookings'));
+    }
+    public function declineBooking(Request $request){
+        $query = DB::table('bookings')
+        ->where('id', $request->id)
+        ->update(['booking_status' => 'Declined']);
+
+        return response()->json([
+            'status' => 1,
+            'msg' => 'Booking has been declined'
+        ]);        
+    }
+
+    public function acceptBooking(Request $request){
+        $query = DB::table('bookings')
+        ->where('id', $request->id)
+        ->update(['booking_status' => 'Booked']);
+
+        return response()->json([
+            'status' => 1,
+            'msg' => 'Booking has been booked'
+        ]);        
+    }
+    public function ongoingBooking(Request $request){
+        $query = DB::table('bookings')
+        ->where('id', $request->id)
+        ->update(['booking_status' => 'On-Going']);
+
+        return response()->json([
+            'status' => 1,
+            'msg' => 'The Booked is now on-going'
+        ]);        
+    }
+    public function finishBooking(Request $request){
+        $query = DB::table('bookings')
+        ->where('id', $request->id)
+        ->update(['booking_status' => 'Finished']);
+
+        return response()->json([
+            'status' => 1,
+            'msg' => 'Booking has been finished'
+        ]);        
     }
 }

@@ -5,7 +5,8 @@
             <th class="col-md-2" scope="col">Name</th>
             <th class="col-md-2" scope="col">Description</th>
             <th class="col-md-2" scope="col">Price</th>
-            <th class="col-md-2" scope="col">Recommended Capacity</th>
+            <th class="col-md-2" scope="col">Minimum Capacity</th>
+            <th class="col-md-2" scope="col">Maximum Capacity</th>
             <th class="col-md-2" scope="col">Action</th>
         </tr>
     </thead>
@@ -17,6 +18,7 @@
             <td>{{$room->room_count}}</td>
             <td>{{$room->price}}</td>
             <td>{{$room->recommended_capacity}}</td>
+            <td>{{$room->maximum_capacity}}</td>
             <td>
                 <div class='d-flex justify-content-around'>
                     <button class="btn btn-success" type="button" data-bs-toggle="modal"

@@ -53,6 +53,17 @@ class UserSeeder extends Seeder
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
+            [
+                'account_type' => 'user',
+                'firstname' => 'Second FUser',
+                'lastname' => 'Second LUser',
+                'contact_number' => '0912312319',
+                'email' => 'user2@gmail.com',
+                'password' => Hash::make('user'),
+                'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
         ];
     
         User::insert($users);

@@ -30,6 +30,12 @@ class BookingRentalTableSeeder extends Seeder
                 'start' => '2021-12-05',
                 'end' => '2021-12-08',
             ],
+            [
+                'booking_id' => 2,
+                'rental_id' => 5,
+                'start' => '2021-11-23',
+                'end' => '2021-12-1',
+            ],
         ];
 
         DB::table('booking_rental')->insert($booking_rental);
