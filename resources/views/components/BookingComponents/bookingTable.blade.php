@@ -20,46 +20,56 @@
             {{-- <td> {{$booking->start}} </td>
             <td> {{$booking->end}} </td> --}}
             <td>
-                <div class='d-flex  justify-content-around'>
-                    <button class="btn btn-info" type="button" data-bs-toggle="modal" 
+                <div class='row'>
+                    <div class="col">
+                        <button class="btn btn-info w-100" type="button" data-bs-toggle="modal"
                         data-bs-target="#viewBookingModal{{$booking->id}}">View</button>
-
-                        @if ($booking->booking_status == "Pending")
+                      </div>
+                </div>
+                               
+                    @if ($booking->booking_status == "Pending")
+                    <div class="row pt-2">  
+                        <div class="col">
                             <form method="POST" class="acceptForm" action="{{route('acceptBooking',$booking->id)}}" id="acceptForm">
                                 @csrf
                                 @method('POST')
                                 <input hidden value='{{$booking->id}}' type='text' name='id' required>
                                 <button booking_id="{{$booking->id}}" type='submit' class='btn btn-success 
-                                    mx-2 myButton' style="background-color: #1fd0bf; color:#fff">Accept</button>
+                                     myButton w-100' style="background-color: #1fd0bf; color:#fff">Accept</button>
                             </form>
-
+                        </div>
+                        <div class="col">
                             <form method="POST" class="declineForm" action="{{route('declineBooking',$booking->id)}}" id="declineForm">
                                 @csrf
                                 @method('POST')
                                 <input hidden value='{{$booking->id}}' type='text' name='id' required>
-                                <button booking_id="{{$booking->id}}" type='submit' class='btn mx-2 myButton' 
+                                <button booking_id="{{$booking->id}}" type='submit' class='btn  myButton w-100' 
                                         id='bookingCancelBtn' style="background-color: #f8c753; color:#fff">Decline</button>
                             </form>
-                        @elseif($booking->booking_status == "Booked")
+                        </div>
+                    </div>
+
+                    @elseif($booking->booking_status == "Booked")
+                        <div class="col pt-2">
                             <form method="POST" class="ongoingForm" action="{{route('ongoingBooking',$booking->id)}}" id="declineForm">
                                 @csrf
                                 @method('POST')
                                 <input hidden value='{{$booking->id}}' type='text' name='id' required>
-                                <button booking_id="{{$booking->id}}" type='submit' class='btn btn-danger mx-2 myButton' 
+                                <button booking_id="{{$booking->id}}" type='submit' class='btn btn-danger myButton w-100' 
                                         id='bookingOngoingBtn' style="background-color: #eb7e30; color:#fff">On-Going</button>
                             </form>
-                        @elseif($booking->booking_status == "On-going")
+                        </div>
+                    @elseif($booking->booking_status == "On-going")
+                        <div class="col pt-2">
                             <form method="POST" class="finishForm" action="{{route('finishBooking',$booking->id)}}" id="declineForm">
                                 @csrf
                                 @method('POST')
                                 <input hidden value='{{$booking->id}}' type='text' name='id' required>
-                                <button booking_id="{{$booking->id}}" type='submit' class='btn btn-danger mx-2 myButton' 
+                                <button booking_id="{{$booking->id}}" type='submit' class='btn btn-danger myButton w-100' 
                                         id='bookingAcceptBtn' style="background-color: #a93790; color:#fff">Finish</button>
                             </form>
-                        @endif
-                        
-                        
-                        
+                        </div>
+                    @endif       
                 </div>
             </td>
         </tr>
