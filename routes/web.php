@@ -19,6 +19,8 @@ Route::get('/', function () {
 });
 
 Route::view('/termsandconditions', 'termsandconditions')->name('termsandconditions');
+Route::view('auth/passwords/contactnum', 'auth/passwords/contactnum')->name('contactnum');
+
 
 Auth::routes(['verify' => true]);
 
