@@ -171,7 +171,7 @@ class BookingController extends Controller
         return view('components.bookingComponents.rentalList', compact('rentals'));
     }
     public function getBookingTable(){
-        $bookings = DB::select("SELECT * FROM bookings WHERE booking_status != 'Finished' OR booking_status != 'Decline' OR booking_status != 'Cancelled'");
+        $bookings = DB::select("SELECT * FROM bookings WHERE booking_status = 'On-Going' OR booking_status = 'Booked' OR booking_status = 'Pending'");
 
         return view('components.BookingComponents.bookingTable',compact('bookings'));
     }
@@ -194,6 +194,26 @@ class BookingController extends Controller
         return response()->json([
             'status' => 1,
             'msg' => 'Booking has been booked'
+        ]);        
+    }
+    public function ongoingBooking(Request $request){
+        $query = DB::table('bookings')
+        ->where('id', $request->id)
+        ->update(['booking_status' => 'On-Going']);
+
+        return response()->json([
+            'status' => 1,
+            'msg' => 'The Booked is now on-going'
+        ]);        
+    }
+    public function finishBooking(Request $request){
+        $query = DB::table('bookings')
+        ->where('id', $request->id)
+        ->update(['booking_status' => 'Finished']);
+
+        return response()->json([
+            'status' => 1,
+            'msg' => 'Booking has been finished'
         ]);        
     }
 }

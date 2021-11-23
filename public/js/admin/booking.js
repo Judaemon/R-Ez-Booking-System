@@ -155,3 +155,99 @@ $(document).on('submit', '#acceptForm', function (event) {
         }
     })
 });
+
+// On-Going
+$(document).on('submit', '#ongoingForm', function (event) {
+    event.preventDefault();
+    //console.log("update btn test");
+    swalWithBootstrapButtons.fire({
+        title: 'Are you sure?',
+        text: "This reservation will Start!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, Start it!',
+        cancelButtonText: 'No, Cancel!',
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const form = this;
+            $.ajax({
+                url: $(form).attr('action'),
+                method: $(form).attr('method'),
+                dataType: 'JSON',
+                data: new FormData(form),
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    if (response.status == 1) {
+                        getBookingTable();
+                        swalWithBootstrapButtons.fire(
+                            'Successful!',
+                            response.msg,
+                            'success'
+                        )
+                    }
+                },
+                error: function (response) {
+                    errorWarning()
+                }
+            });
+        } else if (
+            result.dismiss === Swal.DismissReason.cancel // click ayaw
+        ) {
+            swalWithBootstrapButtons.fire(
+                'Cancelled',
+                'Lets pretend that never happend >:)',
+                'error'
+            )
+        }
+    })
+});
+
+// Finished
+$(document).on('submit', '#finishForm', function (event) {
+    event.preventDefault();
+    //console.log("update btn test");
+    swalWithBootstrapButtons.fire({
+        title: 'Are you sure?',
+        text: "This reservation will be Finish!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, Finish it!',
+        cancelButtonText: 'No, Cancel!',
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const form = this;
+            $.ajax({
+                url: $(form).attr('action'),
+                method: $(form).attr('method'),
+                dataType: 'JSON',
+                data: new FormData(form),
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    if (response.status == 1) {
+                        getBookingTable();
+                        swalWithBootstrapButtons.fire(
+                            'Successful!',
+                            response.msg,
+                            'success'
+                        )
+                    }
+                },
+                error: function (response) {
+                    errorWarning()
+                }
+            });
+        } else if (
+            result.dismiss === Swal.DismissReason.cancel // click ayaw
+        ) {
+            swalWithBootstrapButtons.fire(
+                'Cancelled',
+                'Lets pretend that never happend >:)',
+                'error'
+            )
+        }
+    })
+});

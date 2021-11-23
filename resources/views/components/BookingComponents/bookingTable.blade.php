@@ -20,7 +20,7 @@
             {{-- <td> {{$booking->start}} </td>
             <td> {{$booking->end}} </td> --}}
             <td>
-                <div class='d-flex justify-content-around'>
+                <div class='d-flex  justify-content-around'>
                     <button class="btn btn-info" type="button" data-bs-toggle="modal" 
                         data-bs-target="#viewBookingModal{{$booking->id}}">View</button>
 
@@ -41,7 +41,7 @@
                                         id='bookingCancelBtn' style="background-color: #f8c753; color:#fff">Decline</button>
                             </form>
                         @elseif($booking->booking_status == "Booked")
-                            <form method="POST" class="ongoingForm" action="{{route('declineBooking',$booking->id)}}" id="declineForm">
+                            <form method="POST" class="ongoingForm" action="{{route('ongoingBooking',$booking->id)}}" id="declineForm">
                                 @csrf
                                 @method('POST')
                                 <input hidden value='{{$booking->id}}' type='text' name='id' required>
@@ -49,12 +49,12 @@
                                         id='bookingOngoingBtn' style="background-color: #eb7e30; color:#fff">On-Going</button>
                             </form>
                         @elseif($booking->booking_status == "On-going")
-                            <form method="POST" class="ongoingForm" action="{{route('declineBooking',$booking->id)}}" id="declineForm">
+                            <form method="POST" class="finishForm" action="{{route('finishBooking',$booking->id)}}" id="declineForm">
                                 @csrf
                                 @method('POST')
                                 <input hidden value='{{$booking->id}}' type='text' name='id' required>
                                 <button booking_id="{{$booking->id}}" type='submit' class='btn btn-danger mx-2 myButton' 
-                                        id='bookingOngoingBtn' style="background-color: #eb7e30; color:#fff">On-Going</button>
+                                        id='bookingAcceptBtn' style="background-color: #a93790; color:#fff">Finish</button>
                             </form>
                         @endif
                         

@@ -90,7 +90,9 @@ Route::group([
     // Booking Action Buttons
     Route::post('declineBooking', [BookingController::class, 'declineBooking'])->name('declineBooking');
     Route::post('acceptBooking', [BookingController::class, 'acceptBooking'])->name('acceptBooking');
-    
+    Route::post('ongoingBooking', [BookingController::class, 'ongoingBooking'])->name('ongoingBooking');
+    Route::post('finishBooking', [BookingController::class, 'finishBooking'])->name('finishBooking');
+
     //get Amenities
     Route::get('getAmenities', [RoomController::class, 'getAmenities'])->name('getAmenities');
 
