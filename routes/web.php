@@ -39,6 +39,7 @@ Route::view('/contact', 'contact')->name('contact');
 // Booking links
 Route::post('getAvailableRooms', [BookingController::class, 'getAvailableRooms'])->name('getAvailableRooms');
 Route::post('getAvailableRentals', [BookingController::class, 'getAvailableRentals'])->name('getAvailableRentals');
+Route::resource('booking', BookingController::class);
 
 // Booking links
 // Route::get('showAllBooking', [BookingController::class, 'showAllBooking'])->name('showAllBooking');
@@ -50,7 +51,6 @@ Route::group([
 ],function () {
     // all paths for customer only
     Route::resource('customer', customerController::class);
-    Route::resource('booking', BookingController::class);
 });
 
 // for admin only links
@@ -61,7 +61,6 @@ Route::group([
     Route::resource('user', UserController::class);
     Route::resource('rental', RentalController::class);
     Route::resource('room', RoomController::class);
-    Route::resource('booking', BookingController::class);
 
 
     Route::view('/booking', 'booking')->name('booking');
@@ -69,15 +68,19 @@ Route::group([
 
     // report paths
     Route::view('/report', 'report')->name('report');
-    Route::get('/getGraphData', [ReportController::class, 'getGraphData'])->name('getGraphData');
+    // Route::get('/getGraphData', [ReportController::class, 'getGraphData'])->name('getGraphData');
 
     // dashboard paths
     Route::get('/getUserCount', [DashboardController::class, 'getUserCount'])->name('getUserCount');
+
+    Route::get('/getBookingCount', [ReportController::class, 'getBookingCount'])->name('getBookingCount');
+
 
     // Dapat ma move yung mga route ng tables sa ganto kasi mali yung pag gamit ng show method
     Route::get('showAllRental', [RentalController::class, 'showAllRental'])->name('showAllRental');
     Route::get('showAllUser', [UserController::class, 'showAllUser'])->name('showAllUser');
     Route::get('showAllRoom', [RoomController::class, 'showAllRoom'])->name('showAllRoom');
+    // Route::get('/getGraphData', [ReportController::class, 'getGraphData'])->name('getGraphData');
     Route::get('getBookingTable', [BookingController::class, 'getBookingTable'])->name('getBookingTable');
 
     //get Amenities

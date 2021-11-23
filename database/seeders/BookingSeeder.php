@@ -67,6 +67,30 @@ class BookingSeeder extends Seeder
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
+            [
+                'user_id' => '2',
+                'payment_method' => 'GCash',
+                'amount_paid' => '1',
+                'total_price' => '5',
+                'booking_status' => 'Pending',
+                'start' => '2021-12-9',
+                'end' => '2021-12-11',
+                'description' => 'Transaction Description',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+            [
+                'user_id' => '2',
+                'payment_method' => 'GCash',
+                'amount_paid' => '1',
+                'total_price' => '5',
+                'booking_status' => 'Pending',
+                'start' => '2021-12-12',
+                'end' => '2021-12-13',
+                'description' => 'Transaction Description',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
         ];
 
         Booking::insert($bookings);
