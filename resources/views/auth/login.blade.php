@@ -17,7 +17,7 @@
                             </label>
 
                             <div class="col-md-6">
-                                <input id="login" type="text"
+                                <input id="login" type="email"
                                     class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
                                     name="login" value="{{ old('email') }}"  autofocus placeholder="Email">
 
