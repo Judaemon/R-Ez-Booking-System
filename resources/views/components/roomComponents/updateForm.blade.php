@@ -3,8 +3,8 @@
     @method('PUT')
     <div class="form-group">
         <label>Name</label>
-        <input type="text" class="form-control" id="input_name" name="name" value="{{$room->name}}" >
-        <span class="invalid-feedback fw-bold error-text name_error" role="alert"></span>
+        <input type="text" class="form-control" id="input_room_type" name="room_type" value="{{$room->room_type}}" >
+        <span class="invalid-feedback fw-bold error-text room_type_error" role="alert"></span>
     </div>
 
     <div class="form-group">
@@ -23,6 +23,12 @@
         <label>Recommended Capacity</label>
         <input type="number" class="form-control" id="input_recommended_capacity" name="recommended_capacity" value="{{$room->recommended_capacity}}">
         <span class="invalid-feedback fw-bold error-text recommended_capacity_error" role="alert"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Maximum Capacity</label>
+        <input type="number" class="form-control" id="input_maximum_capacity" name="maximum_capacity" value="{{$room->maximum_capacity}}">
+        <span class="invalid-feedback fw-bold error-text maximum_capacity_error" role="alert"></span>
     </div>
 
     <!-- <div class="form-group">
