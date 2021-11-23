@@ -154,8 +154,29 @@ class BookingController extends Controller
     }
 
     public function getBookingTable(){
-        $bookings = DB::table('bookings')->get();
-    
+        $bookings = DB::select("SELECT * FROM bookings WHERE booking_status != 'Finished' OR booking_status != 'Decline' OR booking_status != 'Cancelled'");
+
         return view('components.BookingComponents.bookingTable',compact('bookings'));
+    }
+    public function declineBooking(Request $request){
+        $query = DB::table('bookings')
+        ->where('id', $request->id)
+        ->update(['booking_status' => 'Declined']);
+
+        return response()->json([
+            'status' => 1,
+            'msg' => 'Booking has been declined'
+        ]);        
+    }
+
+    public function acceptBooking(Request $request){
+        $query = DB::table('bookings')
+        ->where('id', $request->id)
+        ->update(['booking_status' => 'Booked']);
+
+        return response()->json([
+            'status' => 1,
+            'msg' => 'Booking has been booked'
+        ]);        
     }
 }

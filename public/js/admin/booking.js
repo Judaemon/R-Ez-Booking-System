@@ -7,6 +7,14 @@ const swalWithBootstrapButtons = Swal.mixin({
     buttonsStyling: false
 });
 
+function errorWarning() {
+    swalWithBootstrapButtons.fire(
+        'Error! ',
+        'Something went wrong! Please try agan later.',
+        'error'
+    )
+}
+
 function errorNotif() {
     swalWithBootstrapButtons.fire(
         'Error! ',
@@ -25,7 +33,7 @@ $(function () {
 });
 
 function getBookingTable(page) {
-    console.log("Working table function");
+    //console.log("Working table function");
     $.ajax({
         type: 'GET',
         url: 'getBookingTable',
@@ -50,3 +58,100 @@ function getBookingTable(page) {
         },
     });
 }
+
+// Decline
+$(document).on('submit', '#declineForm', function (event) {
+    event.preventDefault();
+    //console.log("update btn test");
+    swalWithBootstrapButtons.fire({
+        title: 'Are you sure?',
+        text: "This reservation will be declined!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, Decline it!',
+        cancelButtonText: 'No, Cancel!',
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const form = this;
+           
+            $.ajax({
+                url: $(form).attr('action'),
+                method: $(form).attr('method'),
+                dataType: 'JSON',
+                data: new FormData(form),
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    if (response.status == 1) {
+                        getBookingTable();
+                        swalWithBootstrapButtons.fire(
+                            'Successful!',
+                            response.msg,
+                            'success'
+                        )
+                    }
+                },
+                error: function (response) {
+                    errorWarning()
+                }
+            });
+        } else if (
+            result.dismiss === Swal.DismissReason.cancel // click ayaw
+        ) {
+            swalWithBootstrapButtons.fire(
+                'Cancelled',
+                'Lets pretend that never happend >:)',
+                'error'
+            )
+        }
+    })
+});
+
+// Accept
+$(document).on('submit', '#acceptForm', function (event) {
+    event.preventDefault();
+    //console.log("update btn test");
+    swalWithBootstrapButtons.fire({
+        title: 'Are you sure?',
+        text: "This reservation will be accepted!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, Accept it!',
+        cancelButtonText: 'No, Cancel!',
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const form = this;
+            $.ajax({
+                url: $(form).attr('action'),
+                method: $(form).attr('method'),
+                dataType: 'JSON',
+                data: new FormData(form),
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    if (response.status == 1) {
+                        getBookingTable();
+                        swalWithBootstrapButtons.fire(
+                            'Successful!',
+                            response.msg,
+                            'success'
+                        )
+                    }
+                },
+                error: function (response) {
+                    errorWarning()
+                }
+            });
+        } else if (
+            result.dismiss === Swal.DismissReason.cancel // click ayaw
+        ) {
+            swalWithBootstrapButtons.fire(
+                'Cancelled',
+                'Lets pretend that never happend >:)',
+                'error'
+            )
+        }
+    })
+});

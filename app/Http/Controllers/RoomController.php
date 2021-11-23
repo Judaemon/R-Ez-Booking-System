@@ -81,18 +81,25 @@ class RoomController extends Controller
 
     public function edit(Room $room)
     {
-        return view('components.roomComponents.updateForm',compact('room'));
+        $amenitiesLists = array('Free Wifi','Free Breakfast');
+
+        return view('components.roomComponents.updateForm',compact('room','amenitiesLists'));
     }
 
     public function update(Request $request, Room $room)
     {
+
+        // dd($request->all());
+
         $validated = Validator::make($request->all(), [
-            'name' => 'required|string|max:255|unique:rooms,name,'.$room->id,
+            'room_type' => 'required|string|max:255|unique:rooms,room_type,'.$room->id,
+            'room_count' => 'required|Numeric',
             'description' => 'required|string',
             'price' => 'required|Numeric',
             'recommended_capacity' => 'required|Numeric',
-            //'picture' => 'required|string|max:255',
-            'image_path' => 'required|mimes:jpg,png,jpeg|max:5048',
+            'maximum_capacity' => 'required|Numeric',
+            'image_paths' => 'max:5048',
+            'image_paths_original' => 'array',
         ]);
         
         if ($validated->fails()) {
@@ -102,25 +109,66 @@ class RoomController extends Controller
             ]);
         }
 
-        $newImageName = 'uploaded/' . time() . '-' . $request->name . '.' . 
-        $request->image_path->extension();
+        $inputs = $request->all();
+        $fuckNaimage = [];
 
-        $request->image_path->move(public_path('img/uploaded'), $newImageName);
+        if (!empty($inputs['image_paths'])) {
+            
+            if (empty($inputs['image_paths_original'])) {
+                $mergedImagePaths = $inputs['image_paths'];
+            }else{
+                $mergedImagePaths = array_merge($inputs['image_paths_original'], $inputs['image_paths']);
+            }
 
-        //$room->update($request->all());
+            foreach($mergedImagePaths as $key => $value){
+                if (is_string($value)) {
+                    $fuckNaimage[] = $value;
+                }else{
+                    $newImageName = 'rooms/' .$request->room_type. '/' . $request->room_type .'_'. $key.'.'. $value->extension();
+                    $value->move(public_path('img/rooms/'.$request->room_type), $newImageName);
+                    $fuckNaimage[] = $newImageName;
+                }
+            }
+        }else{
+            $fuckNaimage = $inputs['image_paths_original'];
+        }
+
         $room->update([
-            'name' => $request->input('name'),
+            'room_type' => $request->input('room_type'),
+            'room_count' => $request->input('room_count'),
             'description' => $request->input('description'),
             'price' => $request->input('price'),
-            'recommended_capacity' =>$request->input('recommended_capacity'),
-            'image_path' => $newImageName,
+            'recommended_capacity' => $request->input('recommended_capacity'),
+            'maximum_capacity' => $request->input('maximum_capacity'),
+            'image_paths' => json_encode($fuckNaimage),
         ]);
-        
 
         return response()->json([
             'status' => 1,
+            // 'original' => $inputs['image_paths_original'],
+            // 'new' => json_encode($fuckNaimage)
             'message' => 'Data Updated successfully!'
         ]);
+
+        // $newImageName = 'uploaded/' . time() . '-' . $request->name . '.' . 
+        // $request->image_path->extension();
+
+        // $request->image_path->move(public_path('img/uploaded'), $newImageName);
+
+        // $room->update($request->all());
+        // $room->update([
+        //     'name' => $request->input('name'),
+        //     'description' => $request->input('description'),
+        //     'price' => $request->input('price'),
+        //     'recommended_capacity' =>$request->input('recommended_capacity'),
+        //     'image_path' => $newImageName,
+        // ]);
+        
+
+        // return response()->json([
+        //     'status' => 1,
+        //     'message' => 'Data Updated successfully!'
+        // ]);
     }
 
     public function destroy(Room $room)
