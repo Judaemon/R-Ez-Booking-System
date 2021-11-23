@@ -115,8 +115,17 @@ class RentalController extends Controller
                     $fuckNaimage[] = $newImageName;
                 }
             }
+        }else{
+            $fuckNaimage[] = $inputs['image_paths_original'];
         }
+       
+        // $inputs['image_paths']
+        // $newImageName = 'uploaded/' . time() . '-' . $request->name . '.' . 
+        // $request->image_path->extension();
 
+        // $request->image_path->move(public_path('img/uploaded'), $newImageName);
+
+        //$rental->update($request->all());
         $rental->update([
             'rental_type' => $request->input('rental_type'),
             'rental_count' => $request->input('rental_count'),
