@@ -99,16 +99,16 @@
                         <input type="number" class="form-control" id="input_recommended_capacity" name="recommended_capacity"
                         placeholder="Recommended Capacity">
                         <span class="invalid-feedback fw-bold error-text recommended_capacity_error" role="alert"></span>
-                     </div>
+                    </div>
 
-                     <div class="form-group">
+                    <div class="form-group">
                         <label>Maximum Capacity</label>
                         <input type="number" class="form-control" id="input_maximum_capacity" name="maximum_capacity"
                         placeholder="Maximum Capacity">
                         <span class="invalid-feedback fw-bold error-text maximum_capacity_error" role="alert"></span>
-                     </div>
+                    </div>
 
-                     <div id="amenitiesInputs" class="form-group mb-2 mt-3">
+                    <div id="amenitiesInputs" class="form-group mb-2 mt-3">
                         <label for="exampleSelect1" class="form-label">Amenities</label>
                        <div class="row" id="amenitiesInput0">
                            <div class="col-9">
@@ -150,7 +150,7 @@
 
 <!-- Update Modal -->
 <div class="modal fade" id="updateRoomModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Edit Room</h5>
