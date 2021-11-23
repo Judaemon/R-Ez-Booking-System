@@ -81,15 +81,18 @@ Route::group([
     Route::get('showAllRental', [RentalController::class, 'showAllRental'])->name('showAllRental');
     Route::get('showAllUser', [UserController::class, 'showAllUser'])->name('showAllUser');
     Route::get('showAllRoom', [RoomController::class, 'showAllRoom'])->name('showAllRoom');
+
     // Route::get('/getGraphData', [ReportController::class, 'getGraphData'])->name('getGraphData');
     Route::get('getBookingTable', [BookingController::class, 'getBookingTable'])->name('getBookingTable');
 
+    // Booking Action Buttons
+    Route::post('declineBooking', [BookingController::class, 'declineBooking'])->name('declineBooking');
+    Route::post('acceptBooking', [BookingController::class, 'acceptBooking'])->name('acceptBooking');
+    
     //get Amenities
     Route::get('getAmenities', [RoomController::class, 'getAmenities'])->name('getAmenities');
 
     Route::get('/getGraphData', [ReportController::class, 'getGraphData'])->name('getGraphData');
-
-    
 
     Route::get('showAllBooking', [BookingController::class, 'showAllBooking'])->name('showAllBooking');
     

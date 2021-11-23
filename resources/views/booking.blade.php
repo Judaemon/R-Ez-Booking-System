@@ -29,8 +29,6 @@
                 <form id="addRentalForm" method="POST" enctype="multipart/form-data" action="{{route('booking.store')}}">
                     @csrf
 
-
-
                     <div class="mt-2">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Add New Rental</button>
