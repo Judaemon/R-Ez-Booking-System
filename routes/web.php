@@ -84,6 +84,9 @@ Route::group([
     // Route::get('/getGraphData', [ReportController::class, 'getGraphData'])->name('getGraphData');
     Route::get('getBookingTable', [BookingController::class, 'getBookingTable'])->name('getBookingTable');
 
+    //get Amenities
+    Route::get('getAmenities', [RoomController::class, 'getAmenities'])->name('getAmenities');
+
     Route::get('/getGraphData', [ReportController::class, 'getGraphData'])->name('getGraphData');
 
     

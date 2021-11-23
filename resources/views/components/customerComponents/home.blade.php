@@ -29,14 +29,14 @@
                         <div class="row">
                             <div class="form-group col-12 col-md-6 ">
                                 <label for="start" class="col-md-5 col-form-label">Check In</label>
-                                <input id="start" type="date" min class="m-0 form-control" name="start"
+                                <input id="input_start" type="date" min class="m-0 form-control" name="start"
                                     placeholder="yyyy/mm/dd">
 
-                                <span class="invalid-feedback fw-bold error-text start_error"></span>
+                                <span class="invalid-feedback fw-bold error-text start_error" role="alert"></span>
                             </div>
                             <div class="form-group col-12 col-md-6 ">
                                 <label for="end" class="col-md-5 col-form-label">Check Out</label>
-                                <input id="end" type="date" min="2021-10-17" class="m-0 form-control" name="end"
+                                <input id="input_end" type="date" min="2021-10-17" class="m-0 form-control" name="end"
                                     placeholder="yyyy/mm/dd">
 
                                 <span class="invalid-feedback fw-bold error-text end_error"></span>
@@ -45,14 +45,14 @@
                         <div class="row">
                             <div class="form-group col-12 col-md-6">
                                 <label for="adult" class="col-md-5 col-form-label">Adult (18+)</label>
-                                <input id="adult" type="number" class="m-0 form-control" name="adult" placeholder="1"
+                                <input id="input_adult" type="number" class="m-0 form-control" name="adult" placeholder="1"
                                     value="1">
 
                                 <span class="invalid-feedback fw-bold error-text adult_error"></span>
                             </div>
                             <div class="form-group col-12 col-md-6">
                                 <label for="children" class="col-md-5 col-form-label">Children (0-17)</label>
-                                <input id="children" type="text" class="m-0 form-control" name="children"
+                                <input id="input_children" type="text" class="m-0 form-control" name="children"
                                     placeholder="0" value="0">
 
                                 <span class="invalid-feedback fw-bold error-text children_error"></span>
@@ -60,18 +60,18 @@
                         </div>
                         <div class="form-group col-12">
                             <label for="description" class="col-md-5 col-form-label">Description</label>
-                            <textarea id="description" placeholder="Description (max 250 word)" class="m-0 form-control"
+                            <textarea id="input_description" placeholder="Description (max 250 word)" class="m-0 form-control"
                                 style="height: 120px" maxlength="250" name="description"></textarea>
 
                             <span class="invalid-feedback fw-bold error-text description_error"></span>
                         </div>
 
                         <div class="form-group col-12">
-                            <label for="adress" class="col-md-5 col-form-label">Adress</label>
-                            <input id="adress" type="text" class="m-0 form-control" name="adress"
+                            <label for="address" class="col-md-5 col-form-label">Address</label>
+                            <input id="input_address" type="text" class="m-0 form-control" name="address"
                                     placeholder="Address">
                             
-                            <span class="invalid-feedback fw-bold error-text description_error"></span>
+                            <span class="invalid-feedback fw-bold error-text address_error"></span>
                             <div class="px-1">
                                 <p class="small text-danger">*For covid protocol.</p>
                             </div>

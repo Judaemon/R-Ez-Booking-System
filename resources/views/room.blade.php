@@ -69,8 +69,8 @@
                     @csrf
                     <div class="form-group mb-2">
                         <label>Room Type</label>
-                        <input type="text" class="form-control" id="input_name" name="name" placeholder="Room Name">
-                        <span class="invalid-feedback fw-bold error-text name_error" role="alert"></span>
+                        <input type="text" class="form-control" id="input_room_type" name="room_type" placeholder="Room Type">
+                        <span class="invalid-feedback fw-bold error-text room_type_error" role="alert"></span>
                     </div>
                     
                     <div class="form-group mb-2">
@@ -101,12 +101,19 @@
                         <span class="invalid-feedback fw-bold error-text recommended_capacity_error" role="alert"></span>
                      </div>
 
+                     <div class="form-group">
+                        <label>Maximum Capacity</label>
+                        <input type="number" class="form-control" id="input_maximum_capacity" name="maximum_capacity"
+                        placeholder="Maximum Capacity">
+                        <span class="invalid-feedback fw-bold error-text maximum_capacity_error" role="alert"></span>
+                     </div>
+
                      <div id="amenitiesInputs" class="form-group mb-2 mt-3">
                         <label for="exampleSelect1" class="form-label">Amenities</label>
                        <div class="row" id="amenitiesInput0">
                            <div class="col-9">
                                {{-- <input type="text" class="form-control" id="input_amenities[]" name="amenities[]" placeholder="Amenities"> --}}
-                                <select name="type" class="form-select" id="input_amenities[]" name="amenities[]" placeholder="Amenities">
+                                <select class="form-select" id="input_amenities[]" name="amenities[]" placeholder="Amenities">
                                     <option value=""></option>
                                         @foreach($amenities as $amenities)
                                             <option>{{$amenities}}</option>
@@ -131,9 +138,7 @@
                                 <button class="btn btn-success w-100" id='addImageBtn' type="button">Add</button>
                             </div>
                         </div>
-                        {{-- <span class="invalid-feedback fw-bold error-text image_paths_error" role="alert"></span> --}}
                     </div>
-
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">Add New Room</button>
                 </form>
