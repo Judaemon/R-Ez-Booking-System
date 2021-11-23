@@ -302,4 +302,43 @@ $(document).on('submit', '#updateRentalForm', function (event) {
     })
 });
 
-           
+// Update Functions Putangina
+
+// add click
+$(document).on('click', '.addImageBtn', function (event) {
+    let counter = parseInt($(this).attr('imageCounter'))
+    let rental_type = $(this).attr('rental_type')
+
+    console.log(counter);
+    counter += 1
+    console.log("added: " + counter);
+{/* <img class="card-img-top" src="{{asset('/img/'.$image_path) }}" alt="{{$rental->rental_type}}"> */}
+    htmlCode = `<div class="col-4 my-2" id="`+rental_type+`Image`+counter+`">
+                    <div class="">
+                        <input type="file" name="image_paths[]" class="form-control">
+                        <button class="btn btn-danger w-100 removeImageBtn" ImageContainer="`+rental_type+`Image`+counter+`" addImageBtnId="addImageBtn`+rental_type+`" type="button">remove</button>
+                    </div>
+                </div>`
+
+    $('#addImageBtn'+rental_type).attr('imageCounter', counter);
+
+    $('#addImageAfterLol').after(htmlCode);
+})
+
+// remove click
+$(document).on('click', '.removeImageBtn', function (event) {
+    let element_id = $(this).attr('ImageContainer')
+    let addImageBtnId = $(this).attr('addImageBtnId')
+
+    removeElementByID(element_id, addImageBtnId)
+})
+
+function removeElementByID(element_id, addImageBtnId) {
+    let counter = parseInt($('#'+addImageBtnId).attr('imageCounter'))
+    counter -= 1
+    console.log("removed: " + counter);
+
+    $('#'+addImageBtnId).attr('imageCounter', counter);
+    console.log(counter);
+    $("#"+element_id).remove();
+}
