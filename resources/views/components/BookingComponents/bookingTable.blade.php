@@ -1,6 +1,6 @@
 <table id="bookingTable" class="table table-tripped table-hover table-light">
     <thead class="table-dark text-center">
-        <th>Booking Id</th>
+        <th>Booking Id hello</th>
         <th>Payment Method</th>
         <th>Amount Paid</th>
         <th>Total Price</th>

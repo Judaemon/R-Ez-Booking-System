@@ -195,24 +195,35 @@ class BookingController extends Controller
     }
 
     public function getBookingTable(){
-        $bookings = Booking::with(['rooms', 'rentals'])->get();
 
+        $bookings = Booking::with(['rooms', 'rentals'])->get();
+        // pamakita yung itsura
+        // http://127.0.0.1:8000/admin/getBookingTable
+        return view('components.BookingComponents.bookingTable',compact('bookings'));
+        
+    }
+
+    public function getUserBookingTable(){
+
+        $bookings = Booking::with(['rooms', 'rentals'])
+        ->join('users', 'users.id', '=', 'bookings.user_id')
+        ->where('users.id', '=', Auth::user()->id)
+        ->get();
+        
         // pamakita yung itsura
         // http://127.0.0.1:8000/admin/getBookingTable
         
 
-        return view('components.BookingComponents.bookingTable',compact('bookings'));
+        return view('components.BookingComponents.userbookingstable',compact('bookings'));
     }
 
     public function getUserBooking(){
-        $bookings = Booking::with(['rooms', 'rentals'])->get();
-
-        $bookings->where('id', '=' , Auth::user()->id);
+        // $bookings = Booking::with(['rooms', 'rentals'])->get();
+        // $userid = Auth::user()->id;
+        // $bookings = $bookings->select('SELECT * FROM bookings WHERE id =',$userid);
+        // $bookings->where('id', '=' , Auth::user()->id);
         // dd($bookings);
-        return view('userbookings',compact('bookings'));
-
-        // $bookings = DB::table("bookings")->where('user_id', '=' , Auth::user()->id)->get();
-        // return view('components.BookingComponents.userbookings',compact('bookings'));
+        return view('userbookings');
     }
 
     public function declineBooking(Request $request){

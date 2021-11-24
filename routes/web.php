@@ -57,7 +57,7 @@ Route::group([
     Route::resource('customer', customerController::class);
 
     Route::get('/userbookings', [BookingController::class, 'getUserBooking'])->name('userbookings');
-    Route::get('/userbookingstable', [BookingController::class, 'getBookingTable'])->name('userbookingstable');
+    Route::get('/getUserBookingTable', [BookingController::class, 'getUserBookingTable'])->name('getUserBookingTable');
 
 });
 

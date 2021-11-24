@@ -5,7 +5,7 @@ $(function () {
 function getUserBookingTable(page) {
     $.ajax({
         type: 'GET',
-        url: 'userbookingstable',
+        url: 'getUserBookingTable',
         success: function (response) {
             //console.log(response);
             //console.log("Rental Table Loaded");
