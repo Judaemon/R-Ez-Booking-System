@@ -83,11 +83,11 @@
         <div class="row" style="margin-top: 5rem;">
             <div class="col-12 col-md-4">
                 <a href="{{ route('gallery') }}"><img  id="trioimg" src="{{ URL::asset('/img/welcome_page/standinggallery.png') }}" style="width: 100%;margin-top: -24px;"></a>
-                <p id="triotext" style="color: black; margin-top: 0.5rem;" class="display-6 text-center">Gallery?</p>
+                <p id="triotext" style="color: black; margin-top: 0.5rem;" class="display-6 text-center">Rooms</p>
             </div>
             <div class="col-12 col-md-4">
                 <a href="{{ route('activities') }}"><img id="trioimg" src="{{ URL::asset('/img/welcome_page/standingrentals.png') }}" style="width: 100%;margin-top: -24px;"></a>
-                <p id="triotext" style="color: black; margin-top: 0.5rem;" class="display-6 text-center">Rentals?</p>
+                <p id="triotext" style="color: black; margin-top: 0.5rem;" class="display-6 text-center">Rentals</p>
             </div>
             <div class="col-12 col-md-4">
                 <a href="{{ route('contact') }}"><img id="trioimg" src="{{ URL::asset('/img/welcome_page/standinglocation.png') }}" style="width: 100%;margin-top: -24px;"></a>
