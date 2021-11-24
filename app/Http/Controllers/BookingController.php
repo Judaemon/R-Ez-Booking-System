@@ -240,7 +240,7 @@ class BookingController extends Controller
     public function ongoingBooking(Request $request){
         $query = DB::table('bookings')
         ->where('id', $request->id)
-        ->update(['booking_status' => 'On-Going']);
+        ->update(['booking_status' => 'On-going']);
 
         return response()->json([
             'status' => 1,
