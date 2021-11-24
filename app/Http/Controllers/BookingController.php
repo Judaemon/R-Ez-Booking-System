@@ -207,11 +207,12 @@ class BookingController extends Controller
     public function getUserBooking(){
         $bookings = Booking::with(['rooms', 'rentals'])->get();
 
-        // pamakita yung itsura
-        // http://127.0.0.1:8000/admin/getBookingTable
-        
-        //dd($bookings);
+        $bookings->where('id', '=' , Auth::user()->id);
+        // dd($bookings);
         return view('userbookings',compact('bookings'));
+
+        // $bookings = DB::table("bookings")->where('user_id', '=' , Auth::user()->id)->get();
+        // return view('components.BookingComponents.userbookings',compact('bookings'));
     }
 
     public function declineBooking(Request $request){
