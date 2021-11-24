@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Models;
+use App\Models\Room;
+use App\Models\Rental;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -29,11 +31,11 @@ class Booking extends Model
 
     public function rooms()
     {
-        return $this->hasMany(Rooms::class);
+        return $this->belongsToMany(Room::class);
     }
 
     public function rentals()
     {
-        return $this->hasMany(Rental::class);
+        return $this->belongsToMany(Rental::class);
     }
 }

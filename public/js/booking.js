@@ -10,6 +10,7 @@ const swalWithBootstrapButtons = Swal.mixin({
 $(function () {
     //console.log("Booking loaded");
     setMinDateToToday();
+    updateTotalPrice()
 });
 
 function clearErrorText(formID) {
@@ -28,14 +29,15 @@ $.ajaxSetup({
 function setMinDateToToday() {
     const dateToday = new Date().toJSON().slice(0, 10).replace(/-/g, '-');
 
-    $("#start").attr("min", dateToday);
-    $("#start").val(dateToday);
+    $("#input_start").attr("min", dateToday);
+    $("#input_start").val(dateToday);
 
     setMinDateCheckOut(dateToday)
+    console.log("wadscs");
 }
 
 function setMinDateCheckOut(date) {
-    $("#end").attr("min", date);
+    $("#input_end").attr("min", date);
 }
 
 function errorNotif() {
@@ -47,8 +49,8 @@ function errorNotif() {
 }
 
 function fetchAvailableRooms() {
-    const checkIn = $('#start').val();
-    const checkOut = $('#end').val();
+    const checkIn = $('#input_start').val();
+    const checkOut = $('#input_end').val();
 
     $.ajax({
         type: "POST",
@@ -70,8 +72,8 @@ function fetchAvailableRooms() {
 }
 
 function fetchAvailableRentals() {
-    const checkIn = $('#start').val();
-    const checkOut = $('#end').val();
+    const checkIn = $('#input_start').val();
+    const checkOut = $('#input_end').val();
 
     $.ajax({
         type: "POST",
@@ -93,42 +95,46 @@ function fetchAvailableRentals() {
 }
 
 // --------------------------------Start
-$(document).on('change', '#start', function (event) {
-    const checkIn = $('#start').val();
+$(document).on('change', '#input_start', function (event) {
+    const checkIn = $('#input_start').val();
 
-    if (new Date(checkIn) > new Date($('#end').val()) || !$('#end').val()) {
-        $('#end').val(checkIn);
+    if (new Date(checkIn) > new Date($('#input_end').val()) || !$('#input_end').val()) {
+        $('#input_end').val(checkIn);
     }
 
     setMinDateCheckOut(checkIn)
     
     resetBookList()
-
-    fetchAvailableRooms()
-    fetchAvailableRentals()
 })
 
 function resetBookList() {
     SelectedRoomList = []
     SelectedRentalList = []
 
+    totalPrice = 0
+    totalPrice = childPrice + AdultPrice
+    updateTotalPrice()
+    
     updateBookedRoomList()
+    updateBookedRentalList()
 }
 
 // --------------------------------End
-$(document).on('change', '#end', function (event) {
+$(document).on('change', '#input_end', function (event) {
     //console.log('Update:' + $('#start').val());
-    if ($('#start').val()) {
+    if ($('#input_start').val()) {
         fetchAvailableRooms()
         fetchAvailableRentals()
     }
+    
+    resetBookList()
 })
 
 // ----------------------------------clicks
 let SelectedRoomList = new Array
 let SelectedRentalList = new Array
 
-let totalPrice = 0
+let totalPrice = 100
 
 // add room
 $(document).on('click', '.selectRoomBtn', function (event) {
@@ -345,68 +351,99 @@ function updateTotalPrice() {
 }
 
 
-$('#addBookingForm').on('submit', function (event) {
-    event.preventDefault();
-    console.log("test buton");
+// $('#addBookingForm').on('submit', function (event) {
+//     event.preventDefault();
+//     console.log("test buton");
 
-    swalWithBootstrapButtons.fire({
-        title: 'Are you sure?',
-        text: "This Booking information will be added from the database!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Yes, Add it!',
-        cancelButtonText: 'No, Cancel!',
-        reverseButtons: true
+//     swalWithBootstrapButtons.fire({
+//         title: 'Are you sure?',
+//         text: "This Booking information will be added from the database!",
+//         icon: 'warning',
+//         showCancelButton: true,
+//         confirmButtonText: 'Yes, Add it!',
+//         cancelButtonText: 'No, Cancel!',
+//         reverseButtons: true
 
-    }).then((result) => {
-        if (result.isConfirmed) {
-            //console.log("Checking Add Form");
-            const form = this;
-            // console.log(form);
-            $.ajax({
-                url: $(form).attr('action'),
-                method: $(form).attr('method'),
-                type: 'POST',
-                dataType: 'JSON',
-                data: new FormData(form),
-                processData: false,
-                contentType: false,
-                beforeSend: function () {
-                    clearErrorText('addBookingForm');
-                },
-                success: function (response) {
-                    //console.log(response);
-                    if (response.status == 0) {
-                        console.log(response);
-                        $.each(response.error, function (prefix, val) {
-                            $('#addBookingForm #input_' + prefix).addClass('is-invalid')
-                            $('#addBookingForm span.' + prefix + '_error').text(val)
-                            console.log("may error");
-                        })
-                    }
+//     }).then((result) => {
+//         if (result.isConfirmed) {
+//             //console.log("Checking Add Form");
+//             const form = this;
+//             // console.log(form);
+//             $.ajax({
+//                 url: $(form).attr('action'),
+//                 method: $(form).attr('method'),
+//                 type: 'POST',
+//                 dataType: 'JSON',
+//                 data: new FormData(form),
+//                 processData: false,
+//                 contentType: false,
+//                 beforeSend: function () {
+//                     clearErrorText('addBookingForm');
+//                 },
+//                 success: function (response) {
+//                     //console.log(response);
+//                     if (response.status == 0) {
+//                         console.log(response);
+//                         $.each(response.error, function (prefix, val) {
+//                             if (prefix == "room_id") {
+//                                 swalWithBootstrapButtons.fire(
+//                                     'Invalid!',
+//                                     "You need at least 1 room to be able to book",
+//                                     'error'
+//                                 )
+//                             }
+//                             $('#addBookingForm #input_' + prefix).addClass('is-invalid')
+//                             $('#addBookingForm span.' + prefix + '_error').text(val)
+//                             console.log("may error");
+//                         })
+//                     }
 
-                    if (response.status == 1) {
-                        console.log("walang error");
-                        $(form)[0].reset();
-                        swalWithBootstrapButtons.fire(
-                            'Successful!',
-                            response.msg,
-                            'success'
-                        )
-                    }
-                },
-                error: function (response) {
-                    errorWarning()
-                }
-            });
-        } else if (
-            result.dismiss === Swal.DismissReason.cancel // click ayaw
-        ) {
-            swalWithBootstrapButtons.fire(
-                'Cancelled',
-                'Lets pretend that never happend >:)',
-                'error'
-            )
-        }
-    })
-});
+//                     if (response.status == 1) {
+//                         console.log("walang error");
+//                         $(form)[0].reset();
+//                         swalWithBootstrapButtons.fire(
+//                             'Successful!',
+//                             response.msg,
+//                             'success'
+//                         )
+//                     }
+//                 },
+//                 error: function (response) {
+//                     errorWarning()
+//                 }
+//             });
+//         } else if (
+//             result.dismiss === Swal.DismissReason.cancel // click ayaw
+//         ) {
+//             swalWithBootstrapButtons.fire(
+//                 'Cancelled',
+//                 'Lets pretend that never happend >:)',
+//                 'error'
+//             )
+//         }
+//     })
+// });
+
+// adult and child input -----------------------------------------
+let AdultPrice = 100
+let childPrice = 0
+
+$('#input_children').on('keyup', function (event) {
+    totalPrice -=childPrice
+
+    childPrice = $(this).val() * 75
+  
+    totalPrice += childPrice
+
+    updateTotalPrice()
+})
+
+$('#input_adult').on('keyup', function (event) {
+    totalPrice -= AdultPrice
+
+    AdultPrice = $(this).val() * 100
+  
+    totalPrice += AdultPrice
+
+    updateTotalPrice()
+})

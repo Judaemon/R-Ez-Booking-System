@@ -52,7 +52,7 @@
                             </div>
                             <div class="form-group col-12 col-md-6">
                                 <label for="children" class="col-md-5 col-form-label">Children (0-17)</label>
-                                <input id="input_children" type="text" class="m-0 form-control" name="children"
+                                <input id="input_children" type="number" class="m-0 form-control" name="children"
                                     placeholder="0" value="0">
 
                                 <span class="invalid-feedback fw-bold error-text children_error"></span>
@@ -67,11 +67,11 @@
                         </div>
 
                         <div class="form-group col-12">
-                            <label for="adress" class="col-md-5 col-form-label">Adress</label>
-                            <input id="adress" type="text" class="m-0 form-control" name="adress"
+                            <label for="adress" class="col-md-5 col-form-label">Address</label>
+                            <input id="input_address" type="text" class="m-0 form-control" name="address"
                                     placeholder="Address">
 
-                            <span class="invalid-feedback fw-bold error-text description_error"></span>
+                            <span class="invalid-feedback fw-bold error-text address_error"></span>
                             <div class="px-1">
                                 <p class="small text-danger">*For covid protocol.</p>
                             </div>
@@ -134,7 +134,7 @@
                                     data-bs-parent="#menu">
                                     <label class="col-form-label text-white">Select
                                         Rentals</label>
-                                    <span class="m-2 bi bi-bucket-fill text-white"></span>
+                                    <span class="m-2 bi bi-bucket-fill text-white room_id_error"></span>
 
                                 </a>
                                 <div id="rentalContainer" class="sublinks collapse show">

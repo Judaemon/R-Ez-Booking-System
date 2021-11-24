@@ -9,9 +9,9 @@ class RoomBookingTableSeeder extends Seeder
 {
     public function run()
     {
-        DB::table('room_booking')->delete();
+        DB::table('booking_room')->delete();
         
-        $room_booking = [
+        $booking_room = [
             [
                 'booking_id' => 1,
                 'room_id' => 1  ,
@@ -62,6 +62,6 @@ class RoomBookingTableSeeder extends Seeder
             ],
         ];
 
-        DB::table('room_booking')->insert($room_booking);
+        DB::table('booking_room')->insert($booking_room);
     }
 }
