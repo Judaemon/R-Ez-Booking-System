@@ -1,48 +1,65 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+div.lmao {
+  text-indent: 50px;
+}
+</style>
+
 <div class="container">
     <div class="mt-4">
         <h1>Policies, Terms & Conditions</h1>
-        <h4>When you book accommodations or services in Eskaya Beach Resort & Spa, you agree to the following terms and conditions. The terms & conditions herein stated should not be construed to be complete and exclusive.</h4>
-        <h5>1. Confirmed Bookings</h5>
-        <p>All bookings are held in good faith for the arrival to the departure dates listed in the reservation system, at the rate specified at the time of booking. A full payment for your booking should be received by the Resort in advance of your arrival. A reservation is confirmed with a valid accepted credit card. You undertake that you are of legal age; that all details you provide as part of the booking process, payment process or any purchase on this website are correct; that the credit card used is your own; and that there are sufficient funds to cover the cost of the accommodations and other products & services. Reservations may be cancelled if any of the above conditions cannot be met and verified. Any reservation made is not confirmed or held until replied with a Letter of Confirmation or a Voucher thru email by the Resort Reservations. Once a booking is confirmed and the guest does not occupy the room on the due date, the advance payment would be forfeited. Confirmed bookings may be rescheduled at your request by email, subject to availability, except for Peak season at the rate of USD75 per villa. This doesn’t mean that advance payment would be offset for another guest for the same date(s).</p>
-        <h5>2.Package deals, add-ons and PROMOS</h5>
-        <p>These are offered from time to time and are subject to further terms and conditions that may or may not be detailed in the website. These terms and conditions may be confirmed by contacting the Resort Reservations prior to booking. Bookings for these packages indicate acceptance of all additional specific terms and conditions. Any and all package deals, add-ons and PROMOS may be withdrawn at any time without notice. Bookings of package deals, add-ons & PROMO purchases are non-refundable non-exchangeable, and non transferable.</p>
-        <h5>3.Minimum Stay</h5>
-        <p>Package deals and some standard rate bookings during peak periods require minimum nightly stay. Changes to reservations that do not meet minimum stay may be refused. Early check-out’s for reservations with minimum stay requirements may not be refunded. While we do our best to inform the guests of our policies, it is ultimately the guests’ responsibility to be aware of any minimum stay requirements of their reservation.</p>
-        <h5>4.Meals, Spa services & incidentals</h5>
-        <p>not mentioned in the inclusions are additional charges.</p>
-        <h5>5.Children</h5>
-        <p>under 12 years old are free of accommodations only.</p>
-        <h5>6.All rates</h5>
-        <p>are subject to change, without prior notice. All rates are for:</p>
+        <h5>When you make a reservation at Promised Land Beach resort using our website, these policies, terms & conditions provided below shall be informed to you before we confirm your reservation, once agreed upon, these policies, terms & conditions will be applied.</h5>
+        <br>
+        <h5>So please do take your time and read these conditions carefully as they inform you the important things and our rights and responsibilities.</h5>
 
-        {{-- Cancellation --}}
-        <h5>Cancellation of bookings</h5>
-        <p>Cancellation must be informed thru email,phone or the facebook page. Cancellation made:</p>
-        <p>- If the guest canceled at least five days before the reservation date, they would be eligible for a full refund</p>
-        <p>- Guests who canceled at least one day before their reservation date will be fined 10% of their payment.</p>
-        <p>- Guests who cancel on the same date as their reservation date are not eligible for any refund.</p>
-
-        <h5></h5>
-        <p></p>
-        <h5></h5>
-        <p></p>
-        <h5></h5>
-        <p></p>
-        <h5></h5>
-        <p></p>
-        <h5></h5>
-        <p></p>
-        <h5></h5>
-        <p></p>
-        <h5></h5>
-        <p></p>
-    
+        <h5>1. Booking Policy</h5>
+        <h6>Online</h6>
+        <p>- Customers that did not book in advance are considered walk-in customers.</p>
+        <p>- When booking online, there is a 50% down payment required to confirm the reservation.</p>
+        <p>- If the mentioned 50% down payment was not recieved within 36 hours, the reservation will be therefore considered cancelled.</p>
+        <p>- Customers are required to prove their identity upon arrival in any means to confirm their booking reservation.</p>
+        <h6>Walk-in</h6>
+        <p>- We require the customers to pay in full before the can enter the resort.</p>
+        <p>- Walk-in customers can only choose from the available rooms provided.</p>
+        
+        <h5>2. Cancellation Policy</h5>
+        <p>- Booking cancellations that are made at least five days before their reservation will get a full refund.</p>
+        <p>- Booking cancellations that are made at least a day before their reservation will be subjected to a 10% cancellation fee.</p>
+        <p>- Booking cancellations that are made on the day of the reservation is not eligible for any refund.</p>
+        
+        <h5>3. Covid-19 Related Policy</h5>
+        <p>As our customers, your health and well-being is also our top priority. And this policy helps us to keep our resort safe for people to still enjoy their stay with no worries. Prior to their arrival, customers are required to confirm their city of origin and be informed regarding the LGU of San Felipe's latest protocol. All resorts in North Zambales ( from Subic to Sta. Cruz) are only allowed to accept Zambales residents ages 15 to 65. Guests are required to have a valid ID to show proof of their residency. Guests shuld provide a medical certificate from their local RHU.</p>
+        
+        <h5>4. Resort Policy</h5>
+        <p>- Upon arrival, guests should already have adequately filled out the Guest Information Sheet and Health Declaration Form ready for the DOT inspection.</p>
+        <p>- You break it; you pay it.</p>
+        
+        <h5>5. Discount Policy</h5>
+        <p>- Children at the age of 4 to 12, PWD and senior citizens, has a 25% discount entrance fee.</p>
+        <p>- Children under the age of 3 below has no entrance fee.</p>
+        
+        <h5>6. Event Booking Policy</h5>
+        <p>- A maximum of 50 people are allowed to attend, and the venue is with enough for a lot of guests, social distancing is still implemented. This includes all guests, the officiant, staff that are not employed bye the venue, like the photographer & HMUA team.</p>
+        <p>- All attendees should be Zambales residents only.</p>
+        <p>- Guest/s ages 15 below, 65 and above, and those with Immunodeficiency Comorbidity, or other health risks are not allowed in the venue.</p>
+        <p>- Medical Certificate issued by the municipal health officers is mandatory.</p>
+        <p>- Health declaration checklists must be filled out completely and written legibly upon arrival.</p>
+        <p>- No face mask, no entry.</p>
+        <p>- Temperature of every guest must be checked.</p>
+        <p>- We maintain social distancing, tables are 1 meter apart with 2 seats (4 seaters).</p>
+        <p>- Food will be served at tables (plated style).</p>
+        <p>- Guest/s who recently travelled outside Zambales (14 days) to date shall not be allowed in the venue/resort.</p>
+        
+        <h5>7. Reason of Data Gathering</h5>
+        <p>The Promised Land Beach resort is responsible for the safety of our guests. The data given to us is used on a legal basis. Your personal information is used to process bookings and facilitate the resort's product necessities as well. So we could provide you with the best possible service we could offer.</p>
+        <p>We rely on your consent, for marketing purposes and our services given to you, Rest assured that your personal data will be safe and secured in our database. And you may withraw you consent at anytime.</p>
+        
+        <h5>8. Modification of Booking Conditions</h5>
+        <p> These booking condtions may be modified or changed at any time by the resort. Changes made of the booking conditions will be put online as soon as possible with immediate effect.</p>
+        
     </div>
-    
-
 </div>
 
 @endsection
