@@ -19,7 +19,7 @@ class CreateBookingsTable extends Migration
             $table->integer('children')->nullable();
             $table->string('amount_paid')->nullable(); // hard coded
             $table->float('total_price');
-            $table->String('booking_status');
+            $table->String('booking_status')->default("Pending");
             $table->String('description')->nullable();
             $table->Date('start');
             $table->Date('end');

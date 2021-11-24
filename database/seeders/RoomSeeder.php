@@ -28,7 +28,7 @@ class RoomSeeder extends Seeder
                 enough room for you and up to three other persons. And there is no need to worry about privacy, with the simple yet sturdy
                 design of our kubo, we implemented a door inside and actual glass pane windows to have a safe and secluded place inside the kubo room.', //Capacity: 2-4 persons
                 'price' => '2500.00',
-                'amenities' => json_encode(['lol toothbrush', 'towel']),
+                'amenities' => json_encode(['Free Wifi', 'Free Breakfast']),
                 'recommended_capacity' => '2',
                 'maximum_capacity' => '5',
                 'image_paths' => json_encode(['rooms/kubo_fan_room/kubo1.jpg', 'rooms/kubo_fan_room/kubo2.jpg', 'rooms/kubo_fan_room/kubo3.jpg']),
@@ -44,7 +44,7 @@ class RoomSeeder extends Seeder
                 superior room an amazing choice for a family or a group of friends. With its sound proof walls, you can rest all night long in
                 peace and quiet space. Or just stay up all night binge watching your favorite show.', //Capacity: 3-6 persons
                 'price' => '5000.00',
-                'amenities' => json_encode(['lol toothbrush', 'towel']),
+                'amenities' => json_encode(['Free Wifi', 'Free Breakfast']),
                 'recommended_capacity' => '3',
                 'maximum_capacity' => '5',
                 'image_paths' => json_encode(['rooms/superior_room/superior1.jpg', 'rooms/superior_room/superior2.jpg', 'rooms/superior_room/superior3.jpg']),
@@ -59,7 +59,7 @@ class RoomSeeder extends Seeder
                 sunset with a delicious meal and down them with a drink then headback down to the airconditioned room with its 2 bunk beds,
                 and with a bathroom already provided, the villa could easily accommodate up to 6 persons and still have plenty of floorspace.', //Capacity: 4-6 persons
                 'price' => '7000.00',
-                'amenities' => json_encode(['lol toothbrush', 'towel']),
+                'amenities' => json_encode(['Free Wifi', 'Free Breakfast']),
                 'recommended_capacity' => '4',
                 'maximum_capacity' => '5',
                 'image_paths' => json_encode(['rooms/villa_room/villa1.jpg', 'rooms/villa_room/villa2.jpg', 'rooms/villa_room/villa3.jpg']),
@@ -74,7 +74,7 @@ class RoomSeeder extends Seeder
                 long day at the beach and have a romantic retreat with your significant other in our couples beach hut. After having fun during
                 the day, end it with an intimate and cozy night stay with this beach hut built for couples to enjoy and relax.', //Capacity: 2
                 'price' => '3300.00',
-                'amenities' => json_encode(['lol toothbrush', 'towel']),
+                'amenities' => json_encode(['Free Wifi', 'Free Breakfast']),
                 'recommended_capacity' => '2',
                 'maximum_capacity' => '5',
                 'image_paths' => json_encode(['rooms/couple_bhut/couple1.jpg', 'rooms/couple_bhut/couple2.jpg', 'rooms/couple_bhut/couple3.jpg']),
@@ -89,7 +89,7 @@ class RoomSeeder extends Seeder
                 to experience this style of a modern kubo. It has a built in TV and a mini fridge and an aircon as well. Accommodating up to
                 4 persons the Beach Hut is sure to deliver.', //Capacity: 2-4 persons
                 'price' => '4300.00',
-                'amenities' => json_encode(['lol toothbrush', 'towel']),
+                'amenities' => json_encode(['Free Wifi', 'Free Breakfast']),
                 'recommended_capacity' => '2',
                 'maximum_capacity' => '5',
                 'image_paths' => json_encode(['rooms/regular_bhut/regular1.jpg', 'rooms/regular_bhut/regular2.jpg', 'rooms/regular_bhut/regular3.jpg', 'rooms/regular_bhut/regular4.jpg', 'rooms/regular_bhut/regular5.jpg']),
@@ -105,7 +105,7 @@ class RoomSeeder extends Seeder
                 settle down and relax as the night grows ever deeper. With the basic necessities already provided,this hut is able to accomodate
                 up to 8 people we made sure that theres no one getting left behind.', //Capacity: 8 persons
                 'price' => '8000.00',
-                'amenities' => json_encode(['lol toothbrush', 'towel']),
+                'amenities' => json_encode(['Free Wifi', 'Free Breakfast']),
                 'recommended_capacity' => '5',
                 'maximum_capacity' => '5',
                 'image_paths' => json_encode(['rooms/barkada_bhut/barkada1.jpg', 'rooms/barkada_bhut/barkada2.jpg', 'rooms/barkada_bhut/barkada3.jpg', 'rooms/barkada_bhut/barkada4.jpg', 'rooms/barkada_bhut/barkada5.jpg']),
