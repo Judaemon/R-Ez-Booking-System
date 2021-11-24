@@ -55,6 +55,10 @@ Route::group([
 ],function () {
     // all paths for customer only
     Route::resource('customer', customerController::class);
+
+    Route::get('/userbookings', [BookingController::class, 'getUserBooking'])->name('userbookings');
+    Route::get('/userbookingstable', [BookingController::class, 'getBookingTable'])->name('userbookingstable');
+
 });
 
 // for admin only links

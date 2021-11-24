@@ -39,6 +39,11 @@
                         <li class="nav-item">
                             <a class="nav-link @if(Route::is('home')) active @endif" href="{{ route('home') }}">{{ __('Home') }}</a>
                         </li>
+                        @if (Auth::user()->account_type == 'user')
+                        <li class="nav-item">
+                            <a class="nav-link @if(Route::is('userbookings')) active @endif" href="{{ route('userbookings') }}">{{ __('user bookings') }}</a>
+                        </li>
+                        @endif
                         @if (Auth::user()->account_type == 'admin' || Auth::user()->account_type == 'employee' )
                             <li class="nav-item">
                                 <a class="nav-link @if(Route::is('scheduler')) active @endif" href="{{ route('scheduler') }}">{{ __('Scheduler') }}</a>
