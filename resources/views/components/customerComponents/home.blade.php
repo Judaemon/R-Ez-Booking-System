@@ -73,8 +73,18 @@
 
                             <span class="invalid-feedback fw-bold error-text address_error"></span>
                             <div class="px-1">
-                                <p class="small text-danger">*For covid protocol.</p>
+                                <p class="small text-danger mb-0">*For covid protocol.</p>
                             </div>
+                        </div>
+
+                        <div class="form-group col-12">
+                            <label for="payment_method" class="col-md-5 col-form-label">Method of payment</label>
+                            <select class="form-select" aria-label="payment option" id="input_payment_method" name="payment_method">
+                                <option selected value="G-cash">G-cash</option>
+                                <option value="Bank Tranfer">Bank Tranfer</option>
+                                </select>
+
+                            <span class="invalid-feedback fw-bold error-text payment_method_error"></span>
                         </div>
 
                         {{-- href of btn here for easy viewing of btn --}}
