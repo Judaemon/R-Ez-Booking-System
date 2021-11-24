@@ -95,13 +95,15 @@ class BookingController extends Controller
                     break;
             }
         }
-
+        
        return $bookings;
 
         return response()->json([
             'status'=> 1,
             'transactions' => $bookings
         ]);
+
+        
     }
 
     public function showAllTransaction()
@@ -199,4 +201,16 @@ class BookingController extends Controller
             'msg' => 'Booking has been finished'
         ]);        
     }
+
+    public function displaySchedule(Request $request){
+        //dd($request);
+        //return view('components.schedulerComponents.viewSchedule',compact('booking'));
+        
+        return response()->json([
+            'status' => 1,
+            'msg' => $request->all()
+        ]);
+    }
 }
+
+    

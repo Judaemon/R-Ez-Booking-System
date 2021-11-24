@@ -137,14 +137,29 @@ function renderCalendar() {
         },
         selectable: true,
         events: "getAllBooking",
-        eventDidMount: function(events,element) {
+        eventDidMount: function(info,element) {
         },
-        eventClick: function () {
-            
-            console.log('click test');       
+        eventClick: function (info,element) {
+            //$('#viewShedulerModal').modal('show');     
+            getInfo(info.event.title.charAt(0));           
         },
         eventColor: "",
     });
     calendar.render();
 }
 
+function getInfo(id){
+    $.ajax({
+        type: 'POST',
+        url: 'displaySchedule',
+        data: {id: id},
+        success: function (response) {
+          console.log(response);
+        //   $('#viewSchedulerForm').html(response);
+        },
+        error: function (response) {
+          console.log(response);
+            errorNotif();
+        },
+    });
+}

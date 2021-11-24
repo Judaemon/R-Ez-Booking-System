@@ -32,5 +32,23 @@
     </div>
 </div>
 
+
+<!-- View Modal -->
+<div class="modal fade " id="viewShedulerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Rental</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="viewSchedulerForm">
+                    {{-- Table Generated from scheduler.js --}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 @endsection
 
