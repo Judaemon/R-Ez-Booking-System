@@ -51,7 +51,7 @@
 
                     @elseif($booking->booking_status == "Booked")
                         <div class="col pt-2">
-                            <form method="POST" class="ongoingForm" action="{{route('ongoingBooking',$booking->id)}}" id="ongoingForm">
+                            <form method="POST" class="ongoingForm" action="{{route('ongoingBooking',$booking->id)}}" id="declineForm">
                                 @csrf
                                 @method('POST')
                                 <input hidden value='{{$booking->id}}' type='text' name='id' required>
@@ -61,7 +61,7 @@
                         </div>
                     @elseif($booking->booking_status == "On-going")
                         <div class="col pt-2">
-                            <form method="POST" class="finishForm" action="{{route('finishBooking',$booking->id)}}" id="finishForm">
+                            <form method="POST" class="finishForm" action="{{route('finishBooking',$booking->id)}}" id="declineForm">
                                 @csrf
                                 @method('POST')
                                 <input hidden value='{{$booking->id}}' type='text' name='id' required>
@@ -87,17 +87,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                
 
-            <div class="row">
-                <col>
-                <h3>First Name : Hanz Mark</h3>
-            </div>
-                <h1>{{$booking->id}}</h1>
-
-
-                @foreach ($booking->rooms as $room)
-                    <p>{{$room->room_type}}</p>
-                @endforeach
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

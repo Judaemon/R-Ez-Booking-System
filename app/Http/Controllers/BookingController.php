@@ -195,7 +195,7 @@ class BookingController extends Controller
     }
 
     public function getBookingTable(){
-        $bookings = Booking::with(['rooms', 'rentals', 'users'])->get();
+        $bookings = Booking::with(['rooms', 'rentals'])->get();
 
         // pamakita yung itsura
         // http://127.0.0.1:8000/admin/getBookingTable
@@ -204,6 +204,16 @@ class BookingController extends Controller
 
         
         return view('components.BookingComponents.bookingTable',compact('bookings'));
+    }
+
+    public function getUserBooking(){
+        $bookings = Booking::with(['rooms', 'rentals'])->get();
+
+        // pamakita yung itsura
+        // http://127.0.0.1:8000/admin/getBookingTable
+        
+        //dd($bookings);
+        return view('userbookings',compact('bookings'));
     }
 
     public function declineBooking(Request $request){
