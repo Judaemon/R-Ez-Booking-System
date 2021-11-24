@@ -26,8 +26,8 @@ class BookingController extends Controller
             'end' => 'required',
             'adult' => 'required|Numeric',
             'children' => 'Numeric',
-            'address' => 'required|string|max:100'
-            
+            'address' => 'required|string|max:250',
+            'room_id' => 'required|array'
         ]);
 
         if($validated->fails()){
@@ -37,9 +37,28 @@ class BookingController extends Controller
             ]);
         }
 
+        $booking = Booking::create($request->all());
+        
+        $rooms = collect($request->input('room_id', []));
+        $rentals = collect($request->input('rental_id', []));
+        
+     
+        // foreach (Booking::all() as $booking) {
+        //     # code...
+        // }
+        $booking->rooms()->sync(
+            $rooms
+        );
+
+        $booking->rentals()->sync(
+            $rentals
+        );
+
         return response()->json([
             'status' => 1,
-            'msg' => "Your booking is successfully created."
+            'msg' => $rentals
+            // 'msg' => $request->all()
+            // 'msg' => "Your booking is successfully created."
         ]);
 
     }
@@ -126,10 +145,10 @@ class BookingController extends Controller
         FROM `rooms` 
         LEFT JOIN (	SELECT rooms.id AS occupiedRoomsID, count(*) AS occupiedRoom
                 FROM `rooms`
-                LEFT JOIN `room_booking`
-                    ON rooms.id = room_booking.room_id
-                    WHERE (room_booking.start BETWEEN '".$checkIn."' AND '".$checkOut."') 
-                    OR (room_booking.end BETWEEN '".$checkIn."' AND '".$checkOut."')
+                LEFT JOIN `booking_room`
+                    ON rooms.id = booking_room.room_id
+                    WHERE (booking_room.start BETWEEN '".$checkIn."' AND '".$checkOut."') 
+                    OR (booking_room.end BETWEEN '".$checkIn."' AND '".$checkOut."')
                 GROUP BY rooms.room_type) AS t2
         ON rooms.id = t2.occupiedRoomsID");
 

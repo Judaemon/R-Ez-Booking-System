@@ -19,10 +19,6 @@ class Room extends Model
         'image_paths',
     ];
 
-    // protected $casts = [
-    //     'image_path',
-    // ];
-
     public function bookings() 
     {
         return $this->belongsToMany(Booking::class);
