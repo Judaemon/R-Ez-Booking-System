@@ -87,8 +87,17 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                
 
+            <div class="row">
+                <col>
+                <h3>First Name : Hanz Mark</h3>
+            </div>
+                <h1>{{$booking->id}}</h1>
+
+
+                @foreach ($booking->rooms as $room)
+                    <p>{{$room->room_type}}</p>
+                @endforeach
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

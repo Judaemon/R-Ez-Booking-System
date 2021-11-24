@@ -199,9 +199,7 @@ class BookingController extends Controller
         // pamakita yung itsura
         // http://127.0.0.1:8000/admin/getBookingTable
         
-        dd($bookings);
-
-        
+        //dd($bookings);
         return view('components.BookingComponents.bookingTable',compact('bookings'));
     }
 
