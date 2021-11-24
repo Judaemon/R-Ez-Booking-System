@@ -95,6 +95,9 @@ Route::group([
     Route::post('ongoingBooking', [BookingController::class, 'ongoingBooking'])->name('ongoingBooking');
     Route::post('finishBooking', [BookingController::class, 'finishBooking'])->name('finishBooking');
 
+    Route::post('displaySchedule', [BookingController::class, 'displaySchedule'])->name('displaySchedule');
+
+    
     //get Amenities
     Route::get('getAmenities', [RoomController::class, 'getAmenities'])->name('getAmenities');
 
