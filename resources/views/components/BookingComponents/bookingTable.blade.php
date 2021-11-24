@@ -74,27 +74,6 @@
                     </form>
                 </div>
                 @endif
-                    @elseif($booking->booking_status == "Booked")
-                        <div class="col pt-2">
-                            <form method="POST" class="ongoingForm" action="{{route('ongoingBooking',$booking->id)}}" id="ongoingForm">
-                                @csrf
-                                @method('POST')
-                                <input hidden value='{{$booking->id}}' type='text' name='id' required>
-                                <button booking_id="{{$booking->id}}" type='submit' class='btn btn-danger myButton w-100' 
-                                        id='bookingOngoingBtn' style="background-color: #eb7e30; color:#fff">On-Going</button>
-                            </form>
-                        </div>
-                    @elseif($booking->booking_status == "On-going")
-                        <div class="col pt-2">
-                            <form method="POST" class="finishForm" action="{{route('finishBooking',$booking->id)}}" id="finishForm">
-                                @csrf
-                                @method('POST')
-                                <input hidden value='{{$booking->id}}' type='text' name='id' required>
-                                <button booking_id="{{$booking->id}}" type='submit' class='btn btn-danger myButton w-100' 
-                                        id='bookingAcceptBtn' style="background-color: #a93790; color:#fff">Finish</button>
-                            </form>
-                        </div>
-                    @endif       
                 </div>
             </td>
         </tr>
