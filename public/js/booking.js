@@ -220,12 +220,14 @@ function updateBookedRoomList() {
     $.each(SelectedRoomList, function(key1, value1) {
         htmlCode += `<div class="form-group col-12 d-flex justify-content-between my-1">
         <input id="room_id`+value1[0]+`" rental_price="`+value1[3]+`" type="text" class="m-0 form-control" readonly 
-            value="`+value1[1]+`">
+            value="`+value1[1]+`">`
 
-        <input name="room_id[]" type="text" hidden class="m-0 form-control" 
-        value="`+value1[0]+`">
+        for (let i = 1; i <= value1[2]; i++) {
+            htmlCode += `<input name="room_id[]" type="text" hidden class="m-0 form-control" 
+            value="`+value1[0]+`">`
+        }
         
-        <a href="#viewingRental" room_id="`+value1[0]+`" room_name="`+value1[1]+`" room_price="`+value1[3]+`" class="btn btn-danger w-25 removeRoomBtn">Remove 1 of  `+value1[2]+`</a>
+        htmlCode += `<a href="#viewingRental" room_id="`+value1[0]+`" room_name="`+value1[1]+`" room_price="`+value1[3]+`" class="btn btn-danger w-25 removeRoomBtn">Remove 1 of  `+value1[2]+`</a>
     </div>`
     });
 
@@ -349,7 +351,6 @@ $(document).on('click', '.removeRentalBtn', function (event) {
 function updateTotalPrice() {
     $("#total_price").val(totalPrice)
 }
-
 
 $('#addBookingForm').on('submit', function (event) {
     event.preventDefault();

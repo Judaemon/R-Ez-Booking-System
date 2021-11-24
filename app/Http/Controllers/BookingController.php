@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 
+use function PHPUnit\Framework\isEmpty;
+
 class BookingController extends Controller
 {
     public function index()
@@ -23,6 +25,8 @@ class BookingController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
+        // dd($request->filled('rental_id'));
+    // dd(isEmpty($request->input('rental_id')));
 
         $validated = Validator::make($request->all(),[
             'start' => 'required',
@@ -46,9 +50,9 @@ class BookingController extends Controller
         
         $booking = Booking::create($request->all());
         
-        $rooms = $request->input('rental_id');
-        $finalRental = [];
-        
+        $rooms = $request->input('room_id');
+        $finalRooms = [];
+
         foreach ($rooms as $room) {
             $finalRooms[] = [
             "room_id" => $room,
@@ -57,23 +61,24 @@ class BookingController extends Controller
         }
 
         // dd($finalRooms);
-
         $rentals = $request->input('rental_id');
         $finalRental = [];
         
-        foreach ($rentals as $rental) {
-            $finalRental[] = [
-            "rental_id" => $rental,
-            "start" => $request->input('start'), 
-            "end" => $request->input('end')];   
+        if ($request->filled('rental_id')) {
+            foreach ($rentals as $rental) {
+                $finalRental[] = [
+                "rental_id" => $rental,
+                "start" => $request->input('start'), 
+                "end" => $request->input('end')];   
+            }
+
+            $booking->rentals()->sync(
+                $finalRental
+            );
         }
 
         $booking->rooms()->sync(
             $finalRooms
-        );
-
-        $booking->rentals()->sync(
-            $finalRental
         );
 
         return response()->json([
@@ -213,7 +218,7 @@ class BookingController extends Controller
         // pamakita yung itsura
         // http://127.0.0.1:8000/admin/getBookingTable
         
-
+        // dd($bookings);
         return view('components.BookingComponents.userbookingstable',compact('bookings'));
     }
 
