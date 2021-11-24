@@ -32,8 +32,8 @@ class RoomController extends Controller
             'description' => 'required|string',
             'price' => 'required|Numeric',
             'amenities' => 'array',
-            'recommended_capacity' => 'required|Numeric',
-            'maximum_capacity' => 'required|Numeric',
+            'recommended_capacity' => 'required|Numeric|min:1|',
+            'maximum_capacity' => 'required|Numeric|min:1',
             'image_paths' => 'required|array', 
         ]);
         

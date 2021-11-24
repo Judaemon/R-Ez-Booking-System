@@ -114,7 +114,11 @@
                             <div class="col-6">
                                 <h3><i class="bi bi-collection"></i> Amenities</h3>
                                     @foreach (json_decode($room->amenities) as $amenities)
-                                        <p class="ms-3"><i class="bi bi-nut"></i>{{$amenities}}</p>
+
+                                    @if (!is_null($amenities))
+                                    <p class="ms-3"><i class="bi bi-nut"></i>{{$amenities}}</p>
+                                    @endif
+
                                     @endforeach
                             </div> 
                         </div>

@@ -135,34 +135,13 @@ function renderCalendar() {
             center: 'title',
             right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
         },
-
         selectable: true,
-     
-        //events: events
         events: "getAllBooking",
-        
         eventDidMount: function(events,element) {
-            console.log(events.event.extendedProps.transaction_status);
-            //  if(events.event.extendedProps.transaction_status == "Finished") {
-            //      console.log('kung may Booked');
-            //      element.css('background-color', '#000');
-            //  }
         },
-        // eventDidMount: function(events, element) {
-        //     console.log(events.event.extendedProps.transaction_status);
-        //     if(events.event.extendedProps.transaction_status == "Booked") {
-        //         element.css('background-color', '#000');
-        //     }
-        // },
         eventClick: function () {
-            //info.jsEvent.preventDefault();
+            
             console.log('click test');       
-            // console.log(info.event.extendedProps.extraParams.info);
-        //     Swal.fire(
-        //         info.event.title,
-        //         'Start: ' + info.event.start + '<br>Info: ' + info.event.extendedProps
-        //         .extraParams.info,
-        //         'question')
         },
         eventColor: "",
     });
