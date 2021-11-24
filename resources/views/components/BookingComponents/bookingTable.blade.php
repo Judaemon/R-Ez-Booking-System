@@ -51,7 +51,7 @@
 
                     @elseif($booking->booking_status == "Booked")
                         <div class="col pt-2">
-                            <form method="POST" class="ongoingForm" action="{{route('ongoingBooking',$booking->id)}}" id="declineForm">
+                            <form method="POST" class="ongoingForm" action="{{route('ongoingBooking',$booking->id)}}" id="ongoingForm">
                                 @csrf
                                 @method('POST')
                                 <input hidden value='{{$booking->id}}' type='text' name='id' required>
@@ -61,7 +61,7 @@
                         </div>
                     @elseif($booking->booking_status == "On-going")
                         <div class="col pt-2">
-                            <form method="POST" class="finishForm" action="{{route('finishBooking',$booking->id)}}" id="declineForm">
+                            <form method="POST" class="finishForm" action="{{route('finishBooking',$booking->id)}}" id="finishForm">
                                 @csrf
                                 @method('POST')
                                 <input hidden value='{{$booking->id}}' type='text' name='id' required>
