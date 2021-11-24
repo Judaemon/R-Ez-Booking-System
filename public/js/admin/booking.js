@@ -38,7 +38,7 @@ function getBookingTable(page) {
         type: 'GET',
         url: 'getBookingTable',
         success: function (response) {
-            // console.log(response);
+            console.log(response);
             //console.log("Rental Table Loaded");
             $('#bookingTableContainer').html(response);
             $("#bookingTable").DataTable({

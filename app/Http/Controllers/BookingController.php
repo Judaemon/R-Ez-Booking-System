@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 
@@ -37,15 +38,14 @@ class BookingController extends Controller
             ]);
         }
 
+        $request->request->add(['user_id' => Auth()->id()]);
+        // dd($request->all());
+
         $booking = Booking::create($request->all());
         
         $rooms = collect($request->input('room_id', []));
         $rentals = collect($request->input('rental_id', []));
-        
-     
-        // foreach (Booking::all() as $booking) {
-        //     # code...
-        // }
+       
         $booking->rooms()->sync(
             $rooms
         );
@@ -56,9 +56,7 @@ class BookingController extends Controller
 
         return response()->json([
             'status' => 1,
-            'msg' => $rentals
-            // 'msg' => $request->all()
-            // 'msg' => "Your booking is successfully created."
+            'msg' => "Your booking is successfully created."
         ]);
 
     }
@@ -173,10 +171,17 @@ class BookingController extends Controller
     }
 
     public function getBookingTable(){
-        $bookings = DB::select("SELECT * FROM bookings WHERE booking_status = 'On-Going' OR booking_status = 'Booked' OR booking_status = 'Pending'");
+        $bookings = Booking::with(['rooms', 'rentals'])->get();
 
+        // pamakita yung itsura
+        // http://127.0.0.1:8000/admin/getBookingTable
+        
+        dd($bookings);
+
+        
         return view('components.BookingComponents.bookingTable',compact('bookings'));
     }
+
     public function declineBooking(Request $request){
         $query = DB::table('bookings')
         ->where('id', $request->id)
