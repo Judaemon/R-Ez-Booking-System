@@ -1,6 +1,6 @@
 <table id="bookingTable" class="table table-tripped table-hover table-light">
     <thead class="table-dark text-center">
-        <th>User Id</th>
+        <th>Booking Id</th>
         <th>Payment Method</th>
         <th>Amount Paid</th>
         <th>Total Price</th>
@@ -12,7 +12,7 @@
     <tbody>
         @foreach ($bookings as $booking)
         <tr>
-            <td> {{$booking->user_id}} </td>
+            <td> {{$booking->id}} </td>
             <td> {{$booking->payment_method}} </td>
             <td> {{$booking->amount_paid}} </td>
             <td> {{$booking->total_price}} </td>
