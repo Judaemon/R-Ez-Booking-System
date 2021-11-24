@@ -30,7 +30,7 @@ class BookingController extends Controller
             'adult' => 'required|Numeric',
             'children' => 'Numeric',
             'address' => 'required|string|max:250',
-            'payment_methods' => 'required|string|max:250',
+            'payment_method' => 'required|string|max:250',
             'room_id' => 'required|array'
         ]);
 
