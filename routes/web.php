@@ -59,6 +59,8 @@ Route::group([
     Route::get('/userbookings', [BookingController::class, 'getUserBooking'])->name('userbookings');
     Route::get('/getUserBookingTable', [BookingController::class, 'getUserBookingTable'])->name('getUserBookingTable');
 
+    //Table Action Buttons
+    Route::post('cancelBooking', [BookingController::class, 'cancelBooking'])->name('cancelBooking');
 });
 
 // for admin only links

@@ -242,6 +242,17 @@ class BookingController extends Controller
         ]);        
     }
 
+    public function cancelBooking(Request $request){
+        $query = DB::table('bookings')
+        ->where('id', $request->id)
+        ->update(['booking_status' => 'Canceled']);
+
+        return response()->json([
+            'status' => 1,
+            'msg' => 'Booking has been Canceled'
+        ]);        
+    }
+
     public function acceptBooking(Request $request){
         $query = DB::table('bookings')
         ->where('id', $request->id)
