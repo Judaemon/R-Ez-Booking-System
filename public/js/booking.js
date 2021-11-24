@@ -351,78 +351,78 @@ function updateTotalPrice() {
 }
 
 
-// $('#addBookingForm').on('submit', function (event) {
-//     event.preventDefault();
-//     console.log("test buton");
+$('#addBookingForm').on('submit', function (event) {
+    event.preventDefault();
+    console.log("test buton");
 
-//     swalWithBootstrapButtons.fire({
-//         title: 'Are you sure?',
-//         text: "This Booking information will be added from the database!",
-//         icon: 'warning',
-//         showCancelButton: true,
-//         confirmButtonText: 'Yes, Add it!',
-//         cancelButtonText: 'No, Cancel!',
-//         reverseButtons: true
+    swalWithBootstrapButtons.fire({
+        title: 'Are you sure?',
+        text: "This Booking information will be added from the database!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, Add it!',
+        cancelButtonText: 'No, Cancel!',
+        reverseButtons: true
 
-//     }).then((result) => {
-//         if (result.isConfirmed) {
-//             //console.log("Checking Add Form");
-//             const form = this;
-//             // console.log(form);
-//             $.ajax({
-//                 url: $(form).attr('action'),
-//                 method: $(form).attr('method'),
-//                 type: 'POST',
-//                 dataType: 'JSON',
-//                 data: new FormData(form),
-//                 processData: false,
-//                 contentType: false,
-//                 beforeSend: function () {
-//                     clearErrorText('addBookingForm');
-//                 },
-//                 success: function (response) {
-//                     //console.log(response);
-//                     if (response.status == 0) {
-//                         console.log(response);
-//                         $.each(response.error, function (prefix, val) {
-//                             if (prefix == "room_id") {
-//                                 swalWithBootstrapButtons.fire(
-//                                     'Invalid!',
-//                                     "You need at least 1 room to be able to book",
-//                                     'error'
-//                                 )
-//                             }
-//                             $('#addBookingForm #input_' + prefix).addClass('is-invalid')
-//                             $('#addBookingForm span.' + prefix + '_error').text(val)
-//                             console.log("may error");
-//                         })
-//                     }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            //console.log("Checking Add Form");
+            const form = this;
+            // console.log(form);
+            $.ajax({
+                url: $(form).attr('action'),
+                method: $(form).attr('method'),
+                type: 'POST',
+                dataType: 'JSON',
+                data: new FormData(form),
+                processData: false,
+                contentType: false,
+                beforeSend: function () {
+                    clearErrorText('addBookingForm');
+                },
+                success: function (response) {
+                    //console.log(response);
+                    if (response.status == 0) {
+                        console.log(response);
+                        $.each(response.error, function (prefix, val) {
+                            if (prefix == "room_id") {
+                                swalWithBootstrapButtons.fire(
+                                    'Invalid!',
+                                    "You need at least 1 room to be able to book",
+                                    'error'
+                                )
+                            }
+                            $('#addBookingForm #input_' + prefix).addClass('is-invalid')
+                            $('#addBookingForm span.' + prefix + '_error').text(val)
+                        })
+                    }
 
-//                     if (response.status == 1) {
-//                         console.log("walang error");
-//                         $(form)[0].reset();
-//                         swalWithBootstrapButtons.fire(
-//                             'Successful!',
-//                             response.msg,
-//                             'success'
-//                         )
-//                     }
-//                 },
-//                 error: function (response) {
-//                     errorWarning()
-//                 }
-//             });
-//         } else if (
-//             result.dismiss === Swal.DismissReason.cancel // click ayaw
-//         ) {
-//             swalWithBootstrapButtons.fire(
-//                 'Cancelled',
-//                 'Lets pretend that never happend >:)',
-//                 'error'
-//             )
-//         }
-//     })
-// });
+                    if (response.status == 1) {
+                        $(form)[0].reset();
+                        swalWithBootstrapButtons.fire(
+                            'Successful!',
+                            response.msg,
+                            'success'
+                        )
+
+                        resetBookList()
+                    }
+                },
+                error: function (response) {
+                    errorWarning()
+                }
+            });
+        } else if (
+            result.dismiss === Swal.DismissReason.cancel // click ayaw
+        ) {
+            swalWithBootstrapButtons.fire(
+                'Cancelled',
+                'Lets pretend that never happend >:)',
+                'error'
+            )
+        }
+    })
+});
 
 // adult and child input -----------------------------------------
 let AdultPrice = 100

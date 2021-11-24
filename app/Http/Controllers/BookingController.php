@@ -22,6 +22,8 @@ class BookingController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
+
         $validated = Validator::make($request->all(),[
             'start' => 'required',
             'end' => 'required',
@@ -39,19 +41,38 @@ class BookingController extends Controller
         }
 
         $request->request->add(['user_id' => Auth()->id()]);
-        // dd($request->all());
-
+        $request->request->add(['user_id' => Auth()->id()]);
+        
         $booking = Booking::create($request->all());
         
-        $rooms = collect($request->input('room_id', []));
-        $rentals = collect($request->input('rental_id', []));
-       
+        $rooms = $request->input('rental_id');
+        $finalRental = [];
+        
+        foreach ($rooms as $room) {
+            $finalRooms[] = [
+            "room_id" => $room,
+            "start" => $request->input('start'), 
+            "end" => $request->input('end')];   
+        }
+
+        // dd($finalRooms);
+
+        $rentals = $request->input('rental_id');
+        $finalRental = [];
+        
+        foreach ($rentals as $rental) {
+            $finalRental[] = [
+            "rental_id" => $rental,
+            "start" => $request->input('start'), 
+            "end" => $request->input('end')];   
+        }
+
         $booking->rooms()->sync(
-            $rooms
+            $finalRooms
         );
 
         $booking->rentals()->sync(
-            $rentals
+            $finalRental
         );
 
         return response()->json([
