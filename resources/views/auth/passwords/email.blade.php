@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container p-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -22,7 +22,14 @@
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="Email..." value="{{ old('email') }}" required autocomplete="email" autofocus>
-
+                                
+                                <div class="mt-3">
+                                    <a class="col-md-6" href="{{ route('contactnum') }}">
+                                        Recover using contact number
+                                    </a>
+                                </div>
+                                
+                                
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -31,7 +38,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row mb-0">
+                        <div class="form-group row mb-0"> 
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Send Password Reset Link') }}

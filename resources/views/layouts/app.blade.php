@@ -39,9 +39,17 @@
                         <li class="nav-item">
                             <a class="nav-link @if(Route::is('home')) active @endif" href="{{ route('home') }}">{{ __('Home') }}</a>
                         </li>
+                        @if (Auth::user()->account_type == 'user')
+                        <li class="nav-item">
+                            <a class="nav-link @if(Route::is('userbookings')) active @endif" href="{{ route('userbookings') }}">{{ __('user bookings') }}</a>
+                        </li>
+                        @endif
                         @if (Auth::user()->account_type == 'admin' || Auth::user()->account_type == 'employee' )
                             <li class="nav-item">
-                                <a class="nav-link @if(Route::is('transaction')) active @endif" href="{{ route('transaction') }}">{{ __('Transaction') }}</a>
+                                <a class="nav-link @if(Route::is('scheduler')) active @endif" href="{{ route('scheduler') }}">{{ __('Scheduler') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link @if(Route::is('booking')) active @endif" href="{{ route('booking') }}">{{ __('Booking') }}</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link @if(Route::is('room.index')) active @endif" href="{{ route('room.index') }}">{{ __('Rooms') }}</a>
@@ -49,6 +57,7 @@
                             <li class="nav-item">
                                 <a class="nav-link @if(Route::is('rental.index')) active @endif" href="{{ route('rental.index') }}">{{ __('Rentals') }}</a>
                             </li>
+                            
                             @if (Auth::user()->account_type == 'admin' )
                                 <li class="nav-item">
                                     <a class="nav-link @if(Route::is('user.index')) active @endif" href="{{ route('user.index') }}">{{ __('Users') }}</a>
@@ -79,10 +88,15 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->username }}
+                                    {{ Auth::user()->firstname }}
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('viewProfile')}}">
+                                        {{ __('Profile') }}
+                                    </a>
+                                    {{-- <a href="{{route('profile.edit',$user->id)}}" class="btn btn-info updateButton" style='width: 93px; margin: 2px;'>Edit</a>  --}}
+
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -100,9 +114,9 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <div>
             @yield('content')
-        </main>
+        </div>
 
         <div>
             @yield('script')

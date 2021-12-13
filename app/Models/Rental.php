@@ -10,9 +10,15 @@ class Rental extends Model
     use HasFactory;
     
     protected $fillable=[
-        'name',
+        'rental_type',
+        'rental_count',
         'price',
         'description',
-        'picture'
+        'image_paths',
     ];
+
+    public function bookings() 
+    {
+        return $this->belongsToMany(Booking::class);
+    }
 }
