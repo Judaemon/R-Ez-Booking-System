@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container p-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -13,17 +13,17 @@
 
                         <div class="form-group row mb-3">
                             <label for="login" class="col-sm-4 col-form-label text-md-right">
-                                {{ __('Username or Email') }}
+                                {{ __('Email') }}
                             </label>
 
                             <div class="col-md-6">
-                                <input id="login" type="text"
-                                    class="form-control{{ $errors->has('username') || $errors->has('email') ? ' is-invalid' : '' }}"
-                                    name="login" value="{{ old('username') ?: old('email') }}" required autofocus placeholder="Username or Email...">
+                                <input id="login" type="email"
+                                    class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
+                                    name="login" value="{{ old('email') }}"  autofocus placeholder="Email">
 
-                                @if ($errors->has('username') || $errors->has('email'))
+                                @if ($errors->has('email'))
                                 <span class="invalid-feedback">
-                                    <strong>{{ $errors->first('username') ?: $errors->first('email') }}</strong>
+                                    <strong>{{ $errors->first('email') }}</strong>
                                 </span>
                                 @endif
                             </div>
@@ -36,7 +36,7 @@
                             <div class="col-md-6">
                                 <input id="password" type="password"
                                     class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Password..."
-                                    required autocomplete="current-password">
+                                     autocomplete="current-password">
 
                                 @error('password')
                                 <span class="invalid-feedback" role="alert">
