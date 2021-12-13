@@ -1,21 +1,21 @@
 # R-Ez-Booking-System
 
-Software that you need to run
+### Software that you need to run
     XAMPP v3.3.0 and up
     VS CODE
 
 
-How To run
-Lunch your XAMPP
+### How To run
+## Lunch your XAMPP
     Start Apeche and MySQL
 
-Create a database 
+## Create a database 
     Name it "rez-booking-system"
 
-Configure .env file
+## Configure .env file
     copy the .env.example then rename the copy .env
 
-Running the system
+## Running the system
     Open the project in VS Code
     Start a new terminal
     Run this commands
