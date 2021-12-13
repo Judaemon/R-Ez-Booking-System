@@ -1,6 +1,6 @@
 # R-Ez-Booking-System
 
-### Software that you need to run
+## Software that you need to run
     XAMPP v3.3.0 and up
     VS CODE
 
