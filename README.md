@@ -4,8 +4,6 @@
     XAMPP v3.3.0 and up
     VS CODE
 
-
-### How To run
 ## Lunch your XAMPP
     Start Apeche and MySQL
 
